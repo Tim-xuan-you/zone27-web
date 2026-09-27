@@ -28,7 +28,7 @@
       "note": "比價站只查到蝦皮直營一家 2.75kg $279，而且已下架。等它回來再說。",
       "candidates": [
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "known": true,
           "soldOut": "2026-09-19 查：已下架",
@@ -40,7 +40,7 @@
       ],
       "failed": [
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "reason": "這個商品產不出分潤連結",
           "at": "2026-09-19"
         }
@@ -905,7 +905,7 @@
           "url": "https://shopee.tw/product/563414496/18279783057"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "known": true,
           "channel": "mall",
@@ -954,7 +954,7 @@
           "url": "https://shopee.tw/product/563414496/18279783057"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "known": true,
           "channel": "mall",
@@ -1666,7 +1666,7 @@
           "url": "https://shopee.tw/product/1655658654/48964536907"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "channel": "mall",
           "price": 46,
@@ -1891,7 +1891,7 @@
           "url": "https://shopee.tw/product/9271076/28806003857"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "known": true,
           "channel": "mall",
@@ -1926,7 +1926,7 @@
           "url": "https://shopee.tw/product/2675393/17195358065"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "known": true,
           "channel": "mall",
@@ -2019,7 +2019,7 @@
           "url": "https://shopee.tw/product/16208712/7577182335"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "known": true,
           "channel": "mall",
@@ -2187,7 +2187,7 @@
           "url": "https://shopee.tw/product/188277742/40767418311"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "channel": "mall",
           "price": 590,
@@ -2252,7 +2252,7 @@
           "url": "https://shopee.tw/product/188277742/40718338725"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "channel": "mall",
           "price": 1790,
@@ -2276,7 +2276,7 @@
           "url": "https://shopee.tw/product/188277742/47554522087"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "channel": "mall",
           "price": 1290,
@@ -2341,7 +2341,7 @@
       "checkedAt": "2026-09-26",
       "candidates": [
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "channel": "mall",
           "price": 1790,
@@ -2373,7 +2373,7 @@
           "url": "https://shopee.tw/product/116309859/48461355042"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "channel": "mall",
           "price": 2990,
@@ -2576,7 +2576,7 @@
           "url": "https://shopee.tw/product/1322591005/44032940096"
         },
         {
-          "shop": "蝦皮直營（官方直營）",
+          "shop": "蝦皮直營 _ 生活超市",
           "shopId": "50662979",
           "channel": "mall",
           "price": 599,

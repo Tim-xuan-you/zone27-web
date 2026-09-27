@@ -270,7 +270,8 @@
             "affiliateUrl": "https://s.shopee.tw/3qNQreEibb?share_channel_code=6",
             "anchor": "value",
             "soldOut": true,
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           }
         ]
       },
