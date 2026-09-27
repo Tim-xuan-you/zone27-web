@@ -444,10 +444,20 @@
       "checkedAt": "2026-09-27",
       "price": {
         "unit": "1 顆",
-        "checkedAt": "2026-09-27",
-        "merchants": []
+        "checkedAt": "2026-09-28",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "KINYO官方旗艦店_3C館",
+            "unit": "1顆",
+            "amount": 1280,
+            "note": "規格選「KPB2800B 輕效商務極速充」",
+            "affiliateUrl": "https://s.shopee.tw/8fSgtruPpI?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-28"
+          }
+        ]
       },
-      "awaitingLink": true,
       "listPrice": 1280
     },
     {

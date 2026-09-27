@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 191,
+  "total": 192,
   "bad": 13,
   "rows": [
     {
@@ -2674,6 +2674,20 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/1322591005/29780416923",
       "item": "1322591005/29780416923",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "pb-08",
+      "brand": "KINYO",
+      "name": "PD 30W 輕效商務極速充 14400mAh",
+      "merchantId": "m1",
+      "label": "KINYO官方旗艦店_3C館",
+      "url": "https://s.shopee.tw/8fSgtruPpI?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/1322591005/41511441589",
+      "item": "1322591005/41511441589",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""
