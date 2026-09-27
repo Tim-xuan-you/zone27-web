@@ -163,6 +163,29 @@
             "note": "一箱 24 罐，口味選「羊肉嫩雞*24」",
             "affiliateUrl": "https://s.shopee.tw/40gr3XOiwS?share_channel_code=6",
             "anchor": "safe",
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
+          },
+          {
+            "id": "m2",
+            "label": "【 RBB ！】寵物生活館",
+            "unit": "82g",
+            "amount": 53,
+            "note": "一頁多口味，規格選「羊肉佐嫩雞82G」",
+            "affiliateUrl": "https://s.shopee.tw/4B0HFqO5bV?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m3",
+            "label": "【 RBB ！】寵物生活館",
+            "unit": "165g",
+            "amount": 89,
+            "note": "一頁多口味，規格選「羊肉佐嫩雞165G」",
+            "affiliateUrl": "https://s.shopee.tw/4B0HFqO5bV?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
             "checkedAt": "2026-09-27"
           }
         ]

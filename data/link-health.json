@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-19",
   "filledAt": "2026-09-27",
-  "total": 176,
+  "total": 178,
   "bad": 0,
   "rows": [
     {
@@ -2289,6 +2289,32 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/344160076/23931006334",
       "item": "344160076/23931006334",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "dw-02",
+      "brand": "怪獸部落",
+      "name": "犬2肉主食罐 羊雞肉",
+      "merchantId": "m2",
+      "label": "【 RBB ！】寵物生活館",
+      "url": "https://s.shopee.tw/4B0HFqO5bV?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/20186300/18970210826",
+      "item": "20186300/18970210826",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "dw-02",
+      "brand": "怪獸部落",
+      "name": "犬2肉主食罐 羊雞肉",
+      "merchantId": "m3",
+      "label": "【 RBB ！】寵物生活館",
+      "url": "https://s.shopee.tw/4B0HFqO5bV?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/20186300/18970210826",
+      "item": "20186300/18970210826",
       "verdict": "ok",
       "note": ""
     }
