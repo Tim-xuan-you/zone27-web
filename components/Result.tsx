@@ -998,11 +998,11 @@ function whereOf(store: { label: string; options: { unit: string; amount: number
  * 還沒決定就不想按。改成「去蝦皮看這一包」：平台大家都熟，
  * 「看」比「買」容易按下去，決定是到了蝦皮才做的。賣家名字移到按鈕下面。
  */
-function buyLabel(m: Pick<Merchant, "label" | "affiliateUrl">, short?: boolean, p?: Product): string {
+function buyLabel(m: Pick<Merchant, "label" | "affiliateUrl" | "unit">, short?: boolean, p?: Product): string {
   const where = platformOf(m.affiliateUrl);
   if (!where) return `去${m.label.replace(/（.*/, "")}看`;
-  // 罐頭講「這一罐」，餐包講「這一包」
-  const unit = p && formOf(p) === "wet" ? canWord(p) : "包";
+  // 罐頭講「這一罐」，餐包講「這一包」；賣場賣整箱（80g×24）就講「這一箱」，不然讀者以為點進去是一罐
+  const unit = p && formOf(p) === "wet" ? (/[×x]\s*\d/.test(m.unit ?? "") ? "箱" : canWord(p)) : "包";
   return short ? `去${where}看` : `去${where}看這一${unit}`;
 }
 
