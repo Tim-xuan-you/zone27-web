@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { catalogOf } from "@/lib/catalog";
-import { anchorOf, buyable, cansOf, canWord, formOf, pricePerKg, unitOf } from "@/lib/engine";
+import { anchorOf, inStock, cansOf, canWord, formOf, pricePerKg, unitOf } from "@/lib/engine";
 import { productHref } from "@/lib/labels";
 import { STAMP } from "@/lib/chicken";
 import { statusOf } from "@/lib/check";
@@ -34,7 +34,7 @@ const perOf = (p: Product): { n: number; label: string } | null => {
 
 export default function CheapestCard({ species, form }: { species: Species; form: Form }) {
   const rows = catalogOf(species, form)
-    .filter((p) => buyable(p) && !p.referenceOnly)
+    .filter((p) => inStock(p) && !p.referenceOnly) // 「只看價錢」列有貨的，賣完的不擠進來
     .map((p) => ({ p, per: perOf(p) }))
     .filter((x): x is { p: Product; per: { n: number; label: string } } => x.per !== null)
     .sort((a, b) => a.per.n - b.per.n)

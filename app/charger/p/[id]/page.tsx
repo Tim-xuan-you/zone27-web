@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
+import SoldHint from "@/components/SoldHint";
 import { readerNotes } from "@/lib/notes";
 import ChargerPair from "@/components/ChargerPair";
 import {
@@ -81,6 +82,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       {m ? (
         <div style={S.buyRow}>
           <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一顆 · ${m.amount.toLocaleString()}</a>
+          <SoldHint m={m} />
           <p style={S.buyNote}>{[m.label, ...readerNotes(m.note, { keepVariant: true })].join(" · ")}</p>
           {/* 其他賣場也列出來：有的是組合（像多附一條 60W 的線），貴一點但可能剛好是讀者要的 */}
           {live.length > 1 && (

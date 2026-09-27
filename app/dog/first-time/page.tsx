@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import Stamp from "@/components/Stamp";
 import { S } from "@/components/styles";
+import SoldHint from "@/components/SoldHint";
 import { parse } from "@/lib/parse";
 import { catalog, catalogOf, constraintsFor } from "@/lib/catalog";
 import { adjudicate, cansOf, dailyGrams, FRESH_DAYS, kgOf, KCAL_PER_KG, mer, pricePerKg, stageForAge, unitOf } from "@/lib/engine";
@@ -263,6 +264,7 @@ function Pick({ p, m, kicker, why, quiet = false }: {
           去蝦皮看這一包
         </a>
       )}
+      {m && <SoldHint m={m} />}
     </div>
   );
 }

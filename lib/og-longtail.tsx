@@ -31,7 +31,7 @@ export function longtailParams(segments: 1 | 2, sp: Species = "dog") {
 }
 
 export async function longtailCard(slug: string[], sp: Species = "dog") {
-  const kicker = `${categoryOf(sp).zh}裁決器`;
+  const kicker = `${categoryOf(sp).zh}怎麼挑`;
   const p = resolve(slug, sp);
   if (!p) {
     return ogCard({

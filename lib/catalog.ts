@@ -45,8 +45,8 @@ export function byId(id: string): Product | undefined {
 export function merchantFor(sku: string, merchantId: string): Merchant | undefined {
   const all: { id: string; price: Price }[] = [...catalog, ...litters, ...treatsOf("cat"), ...treatsOf("dog"), ...chargers];
   const m = all.find((p) => p.id === sku)?.price.merchants.find((x) => x.id === merchantId);
-  // 售完的不送人過去，點進去看到缺貨比沒有連結更糟
-  return m && !m.soldOut ? m : undefined;
+  // 售完的也送過去（2026-09-27 起）：連結是好的，可能已經補貨；頁面上會先寫「上次看是賣完的」
+  return m;
 }
 
 /**

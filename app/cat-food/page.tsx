@@ -55,7 +55,7 @@ export default function Page() {
             {all.length} 款的成分表我們一款一款讀完了。購買連結補好 {ready} 款，補到 {MIN_LIVE} 款就開放推薦。
           </p>
           <p style={{ margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-            在那之前裁決器先不推薦。推一款你點進去買不到的東西，比不推更糟。讀到的東西先攤開在下面。
+            在那之前先不推薦。推一款你點進去買不到的東西，比不推更糟。讀到的東西先攤開在下面。
           </p>
         </div>
       )}

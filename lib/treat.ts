@@ -1,5 +1,6 @@
 import type { Merchant, Price, ProteinSource, Species } from "./types";
 import { dedupeMerchants, mer } from "./engine";
+import { showable } from "./stock";
 import treat from "../data/cat-treat.json";
 import dogTreat from "../data/dog-treat.json";
 
@@ -172,7 +173,7 @@ export function pureeSpread(): { plain: TreatProduct; complete: TreatProduct } |
 
 /** 還買得到的賣場 */
 export const liveOf = (p: TreatProduct): Merchant[] =>
-  dedupeMerchants(p.price.merchants.filter((m) => !m.dead && !m.soldOut));
+  dedupeMerchants(showable(p.price.merchants).filter((m) => !m.dead));
 export const buyableTreat = (p: TreatProduct): boolean => liveOf(p).length > 0;
 
 /** 卡片上那一家：最便宜的 */

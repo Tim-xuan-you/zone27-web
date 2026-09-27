@@ -1,5 +1,6 @@
 import data from "@/data/charger.json";
 import type { Merchant, Price } from "./types";
+import { showable } from "./stock";
 
 /**
  * 充電器。2026-09-26 開的第八個類目，第一個不是寵物的。
@@ -331,7 +332,7 @@ export function rank(devices: Device[], together = true): Fit[] {
     .sort((a, b) =>
       b.score - a.score || b.fast - a.fast ||
       (a.fast === all ? 0 : b.watts - a.watts) ||
-      (liveCharger(a.charger).length > 0 ? 0 : 1) - (liveCharger(b.charger).length > 0 ? 0 : 1) ||
+      (inStockCharger(a.charger) ? 0 : 1) - (inStockCharger(b.charger) ? 0 : 1) ||
       priceOf(a.charger) - priceOf(b.charger));
 }
 
@@ -342,7 +343,10 @@ const priceOf = (c: Charger): number => anchorCharger(c)?.amount ?? c.listPrice 
 /* 買得到嗎                                                             */
 /* ------------------------------------------------------------------ */
 
-export const liveCharger = (c: Charger): Merchant[] => c.price.merchants.filter((m) => !m.dead && !m.soldOut);
+/** 讀者看得到的賣場：有貨的優先；全部賣完就給賣完的（畫面會寫上次看是賣完的，2026-09-27 起） */
+export const liveCharger = (c: Charger): Merchant[] => showable(c.price.merchants).filter((m) => !m.dead);
+/** 現在有貨。排順序時有貨的在前 */
+export const inStockCharger = (c: Charger): boolean => c.price.merchants.some((m) => !m.dead && !m.soldOut);
 export const buyableCharger = (c: Charger): boolean => liveCharger(c).length > 0;
 /** 同一顆最便宜的那一家 */
 export function anchorCharger(c: Charger): Merchant | undefined {

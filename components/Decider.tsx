@@ -542,27 +542,23 @@ export default function Decider({
         </div>
       )}
 
+      {/*
+        2026-09-27 Tim 打了一款零食，以前這裡回「這款我們讀過，不過它不走裁決器，裁決器是給正餐用的⋯⋯」，
+        他說完全看不懂。讀者打品名就是想知道這一款怎麼樣，所以跟飼料一樣，直接給那一款的答案。
+      */}
       {others.length > 0 && (
-        <div id="others" style={{ ...S.emptyBox, background: "var(--surface)", borderColor: "var(--line)" }}>
-          <p style={{ margin: 0, fontWeight: 700 }}>
-            這{others.length > 1 ? "幾" : ""}款我們讀過，不過它{others.length > 1 ? "們" : ""}不走裁決器
-          </p>
-          <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15.5, lineHeight: 1.85 }}>
-            裁決器是給正餐用的（過敏原、年紀、體型）。
-            {others[0].kindZh === "貓砂"
-              ? "貓砂看的是材質、能不能沖馬桶、一個月多少錢。"
-              : "零食看的是一天可以給多少、佔掉多少額度。"}
-            那幾件事在它自己的頁面上。
-          </p>
-          <div style={{ marginTop: 12 }}>
+        <div id="others" style={{ marginTop: 28 }}>
+          {mentions.length === 0 && <p style={S.lbl}>你提到的</p>}
+          <div style={{ display: "grid", gap: 10, marginTop: mentions.length ? 10 : 0 }}>
             {others.map((o) => (
-              <a key={o.id} href={o.href} style={otherRow}>
-                <span style={{ minWidth: 0 }}>
-                  <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{o.brand} · {o.kindZh}</span>
-                  <span style={{ fontWeight: 700 }}>{o.name}</span>
+              <Link key={o.id} href={o.href} style={mentionRow}>
+                <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{o.brand} · {o.kindZh}</span>
+                <span style={{ display: "block", fontSize: 17, fontWeight: 700, lineHeight: 1.5 }}>{o.name}</span>
+                <span style={{ display: "block", marginTop: 4, fontSize: 14, lineHeight: 1.7, color: o.warn ? "var(--cut)" : "var(--ink)", fontWeight: o.warn ? 700 : 400 }}>
+                  {o.line}
                 </span>
-                <span aria-hidden style={{ color: "var(--accent)", fontWeight: 700 }}>看這一款 ›</span>
-              </a>
+                <span style={{ display: "block", marginTop: 4, fontSize: 12.5, color: "var(--accent)" }}>看這一款 →</span>
+              </Link>
             ))}
           </div>
         </div>
@@ -578,7 +574,7 @@ export default function Decider({
           {CONTACT.email && (
             <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.85 }}>
               <a
-                href={`mailto:${CONTACT.email}?subject=${encodeURIComponent("裁決器讀不懂這句")}&body=${encodeURIComponent(text)}`}
+                href={`mailto:${CONTACT.email}?subject=${encodeURIComponent("這句讀不懂")}&body=${encodeURIComponent(text)}`}
                 style={{ color: "var(--accent)", fontWeight: 600 }}
               >
                 把這句寄給我們 →
@@ -641,12 +637,6 @@ function judge(p: Product, v: Verdict, species: Species, form: Form): Mention {
   if (cut && cut.tag !== "通路") return { p, text: `照你講的條件，這款會被刪：${cut.why}。`, tone: "cut" };
   return { p, text: p.referenceOnly ? "這款我們不推薦，放進來是為了比較。" : "這款的購買連結還在補。", tone: "faint" };
 }
-
-const otherRow: React.CSSProperties = {
-  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
-  padding: "12px 0", borderTop: "1px solid var(--line)",
-  textDecoration: "none", color: "inherit", fontSize: 15.5,
-};
 
 const pickWrap: React.CSSProperties = { marginTop: 14 };
 /* 反問框：放在答案最上面，跟答案同一個框裡，看得出是在問這個答案 */

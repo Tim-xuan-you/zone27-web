@@ -1,5 +1,6 @@
 import type { Merchant, Price } from "./types";
 import { dedupeMerchants } from "./engine";
+import { showable } from "./stock";
 import litter from "../data/cat-litter.json";
 
 /**
@@ -165,7 +166,7 @@ export function unitPriceOf(p: LitterProduct, m: Merchant): { n: number; unit: s
 
 /** 還買得到的賣場 */
 export const liveOf = (p: LitterProduct): Merchant[] =>
-  dedupeMerchants(p.price.merchants.filter((m) => !m.dead && !m.soldOut));
+  dedupeMerchants(showable(p.price.merchants).filter((m) => !m.dead));
 export const buyableLitter = (p: LitterProduct): boolean => liveOf(p).length > 0;
 
 /**

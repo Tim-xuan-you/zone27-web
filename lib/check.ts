@@ -39,6 +39,8 @@ export interface CheckItem {
   alias?: string;
   /** 能買才有：/go/ 的通路 id */
   buyId?: string;
+  /** 那一家上次看是賣完的（全部賣完才會給，按鈕旁要講） */
+  buySold?: boolean;
   /** 有雞的：同一類不含雞、能買的幾款 */
   alts?: { id: string; brand: string; name: string; href: string; per: number | null }[];
 }
@@ -108,6 +110,7 @@ export function checkItems(): CheckItem[] {
       ...(p.chicken?.verdict ? { verdict: p.chicken.verdict } : {}),
       href: productHref(p),
       ...(buy ? { buyId: buy.id } : {}),
+      ...(buy?.soldOut ? { buySold: true } : {}),
       ...(status !== "clean" ? { alts: altsFor({ id: p.id, species: p.species, brand: p.brand, form: formOf(p) === "wet" ? "wet" : "dry", stage: p.spec.lifeStage }) } : {}),
     };
   });

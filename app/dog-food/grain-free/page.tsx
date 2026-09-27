@@ -173,7 +173,7 @@ export default function Page() {
           <p style={S.lbl}>我們自己推的那款也在名單上</p>
           <div style={{ ...box, borderColor: "var(--accent)", borderWidth: 2 }}>
             <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
-              我們的裁決器目前最常推的是 <b>{gfPulses[0].brand}｜{gfPulses[0].name}</b>。
+              照我們的條件挑，目前最常出現的答案是 <b>{gfPulses[0].brand}｜{gfPulses[0].name}</b>。
               它的成分表裡<b>鷹嘴豆和扁豆都排在前八項</b>。
             </p>
             <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
@@ -226,7 +226,7 @@ export default function Page() {
             我們不會因為一款是無穀就加分，那個欄位在排序裡不佔任何權重。
           </p>
         </div>
-        <Link style={S.btn} href="/dog-food">去裁決器</Link>
+        <Link style={S.btn} href="/dog-food">開始挑</Link>
       </div>
 
       <p style={S.lbl}>相關的</p>

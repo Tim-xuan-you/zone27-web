@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import Stamp from "@/components/Stamp";
 import { S } from "@/components/styles";
+import SoldHint from "@/components/SoldHint";
 import { parse } from "@/lib/parse";
 import { catalog, constraintsFor } from "@/lib/catalog";
 import { adjudicate, dailyGrams, FRESH_DAYS, kgOf, pricePerKg, stageForAge, unitOf } from "@/lib/engine";
@@ -280,6 +281,7 @@ function Pick({ p, m, kicker, why, quiet = false }: {
           去蝦皮看這一包
         </a>
       )}
+      {m && <SoldHint m={m} />}
     </div>
   );
 }
@@ -318,6 +320,7 @@ function LitterPick({ p, m, month, mineral, cheapest }: {
       <a href={`/go/${m.id}/${p.id}`} rel="nofollow sponsored" style={{ ...S.buy, marginTop: 14, padding: "11px 22px", fontSize: 15.5 }}>
         去蝦皮看這一箱
       </a>
+      <SoldHint m={m} />
       {trial && (
         <p style={{ margin: "14px 0 0", fontSize: 14, lineHeight: 1.85, color: "var(--muted)" }}>
           想先買一包讓貓試試看：{trial.unit ?? p.price.unit} ${trial.amount}

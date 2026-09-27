@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
+import SoldHint from "@/components/SoldHint";
 import { readerNotes } from "@/lib/notes";
 import { TIER_TONE, anchorCharger, chargerById, chargers, deviceById, fit, rank, splitBuy, tierZh } from "@/lib/charger";
 import ChargerSplit from "@/components/ChargerSplit";
@@ -77,6 +78,7 @@ export default function Page() {
               去蝦皮看 {top.charger.brand} 那一顆
             </a>
             <p style={S.buyNote}>{[m.label, "$" + m.amount.toLocaleString(), ...readerNotes(m.note, { keepVariant: true })].join(" · ")}</p>
+            <SoldHint m={m} />
           </div>
         )}
       </div>

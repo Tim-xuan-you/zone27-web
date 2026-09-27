@@ -2,6 +2,7 @@ import type {
   Constraint, Cut, Form, Merchant, Product, ProteinSource, Situation, Species, Stop, Verdict,
 } from "./types";
 import { daysBetween, todayTW } from "./date";
+import { showable } from "./stock";
 import { categoryOf, MIN_LIVE } from "./categories";
 
 /**
@@ -84,11 +85,10 @@ export function checkedOf(p: Product, m?: Merchant): string {
  * 不是例外。所以「死掉的賣場」是資料模型的一部分，不是靠人記得去刪。
  */
 export function liveMerchants(p: Product): Merchant[] {
-  const live = p.price.merchants.filter((m) => !m.dead && !m.soldOut);
-  // 全死了就回原陣列，讓上層自己判斷要不要整款拿掉；
-  // 這裡回空陣列會讓一堆 [0] 變成 undefined，反而更難查。
-  return dedupeMerchants(live.length > 0 ? live : p.price.merchants);
+  return dedupeMerchants(showable(p.price.merchants));
 }
+
+export { showable } from "./stock";
 
 /**
  * 同一家、同規格、同價錢的連結，畫面上只出現一次。
@@ -115,6 +115,12 @@ export function dedupeMerchants(ms: Merchant[]): Merchant[] {
  * 讀者點下去會被 /go/ 轉回首頁（那一段有擋售完）。飼料以前沒標過售完，所以一直沒發現
  */
 export function buyable(p: Product): boolean {
+  // 賣完的也算：連結是好的，讀者點進去可能已經補貨（畫面會寫上次看是賣完的）
+  return p.price.merchants.some((m) => !m.dead);
+}
+
+/** 現在有貨（至少一家沒賣完）。挑答案時有貨的優先；類目開不開張也只算有貨的 */
+export function inStock(p: Product): boolean {
   return p.price.merchants.some((m) => !m.dead && !m.soldOut);
 }
 
@@ -460,7 +466,7 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
   }
 
   // 類目還沒開張。放在醫療停止之後：「還在上架」不能蓋掉「先去看醫生」。
-  const ready = pool.filter(recommendable).length;
+  const ready = pool.filter((p) => recommendable(p) && inStock(p)).length;
   if (ready < MIN_LIVE) {
     return {
       startCount, cuts, survivors: [], pick: null, pickReason: "",
@@ -469,8 +475,11 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
     };
   }
 
-  const { pick, reason } = choose(alive, situation);
-  const alt = pick ? altPick(alive, pick, situation) : undefined;
+  // 有貨的優先：留下來的裡面只要有一款有貨，就從有貨的裡面挑。全部賣完才從賣完的挑（畫面會寫上次看是賣完的）
+  const stocked = alive.filter(inStock);
+  const choosePool = stocked.length > 0 ? stocked : alive;
+  const { pick, reason } = choose(choosePool, situation);
+  const alt = pick ? altPick(choosePool, pick, situation) : undefined;
 
   // 貓不愛喝水：乾糧怎麼挑都補不了水，罐頭可以。這一句一定要講
   const notices: string[] = [];
@@ -909,7 +918,8 @@ export function unitPrice(p: Product, unit: string, amount: number): string | nu
 export function wetMonthly(p: Product, kcalPerDay: number): number | null {
   if (!p.spec.kcal) return null;
   let best: number | null = null;
-  for (const m of p.price.merchants.filter((x) => !x.dead && !x.soldOut)) {
+  for (const m of showable(p.price.merchants)) {
+    if (m.dead) continue;
     const kg = kgOf(unitOf(p, m));
     if (!kg) continue;
     const monthly = (m.amount / (kg * p.spec.kcal)) * kcalPerDay * 30;
@@ -985,6 +995,8 @@ export interface StoreOption {
   affiliateUrl: string;
   /** 這一家哪天查的價 */
   checkedAt: string;
+  /** 上次看是賣完的（全部賣完才會列出來，見 lib/stock.ts） */
+  soldOut?: boolean;
 }
 
 export interface Store {
@@ -1035,6 +1047,7 @@ export function storesOf(p: Product): Store[] {
           note: m.note,
           affiliateUrl: m.affiliateUrl,
           checkedAt: checkedOf(p, m),
+          ...(m.soldOut ? { soldOut: true } : {}),
         };
       })
       .sort((a, b) => a.amount - b.amount);

@@ -1,7 +1,7 @@
 import type { Product, Species } from "./types";
 import { catalog } from "./catalog";
-import { litters } from "./litter";
-import { treats } from "./treat";
+import { FLUSH, MATERIAL_ZH, anchorLitter, litters, monthlyCost, type LitterProduct } from "./litter";
+import { DEFAULT_KG, anchorTreat, budgetShare, dailyLimit, hiddenChicken, treats, type TreatProduct } from "./treat";
 
 /**
  * 這句話裡提到了哪一款。
@@ -88,6 +88,43 @@ export interface OtherHit {
   href: string;
   /** 畫面上那一句「這是貓砂」「這是貓零食」 */
   kindZh: string;
+  /**
+   * 直接回答的那一句。
+   * 2026-09-27 Tim 打了一款零食，畫面回「這款我們讀過，不過它不走裁決器」，他說完全看不懂。
+   * 讀者打品名，要的是這一款怎麼樣，不是我們網站怎麼分工。所以直接講那一款最重要的兩三件事。
+   */
+  line: string;
+  /** 有要小心的（名字沒寫雞、其實有雞）就用紅字 */
+  warn: boolean;
+}
+
+/** 零食：有沒有藏雞、一天可以給多少、一包多少錢 */
+function treatAnswer(p: TreatProduct): { line: string; warn: boolean } {
+  const kg = DEFAULT_KG[p.species];
+  const who = `${kg} 公斤的${p.species === "dog" ? "狗" : "貓"}`;
+  const parts: string[] = [];
+  const warn = hiddenChicken(p);
+  if (warn) parts.push("名字沒寫雞，成分裡有雞");
+  if (p.species === "dog") {
+    const share = budgetShare(p, kg);
+    if (share !== null) parts.push(`${who}吃一支，佔掉一天零食額度的 ${share}%`);
+  } else {
+    const lim = dailyLimit(p);
+    parts.push(lim ? `${who}一天最多 ${lim.label}` : "品牌沒公布熱量");
+  }
+  const m = anchorTreat(p);
+  parts.push(m ? (m.soldOut ? "上次看是賣完的" : `一包 ${m.amount.toLocaleString()}`) : "購買連結還在補");
+  return { line: parts.join("，"), warn };
+}
+
+/** 貓砂：什麼材質、能不能沖、一個月多少錢 */
+function litterAnswer(p: LitterProduct): { line: string; warn: boolean } {
+  const m = anchorLitter(p);
+  const mc = m ? monthlyCost(p, m) : null;
+  const parts = [MATERIAL_ZH[p.spec.material], FLUSH[p.spec.flushable].zh];
+  parts.push(mc ? `一隻貓一個月大約 ${mc.cost.toLocaleString()}` : m ? `一包 ${m.amount.toLocaleString()}` : "購買連結還在補");
+  if (m?.soldOut) parts.push("上次看是賣完的");
+  return { line: parts.join("，"), warn: false };
 }
 
 interface Simple {
@@ -123,16 +160,18 @@ export function mentionedOthers(text: string, species?: Species): OtherHit[] {
   const t = norm(text);
   if (!t) return [];
 
-  const pool: { s: Simple; href: string; kindZh: string }[] = [
+  const pool: { s: Simple; href: string; kindZh: string; answer: () => { line: string; warn: boolean } }[] = [
     ...litters.map((p) => ({
       s: { id: p.id, brand: p.brand, name: p.name, species: "cat" as Species },
       href: `/cat-litter/p/${p.id}`,
       kindZh: "貓砂",
+      answer: () => litterAnswer(p),
     })),
     ...treats.map((p) => ({
       s: { id: p.id, brand: p.brand, name: p.name, species: p.species },
       href: p.species === "dog" ? `/dog-treat/p/${p.id}` : `/cat-treat/p/${p.id}`,
       kindZh: p.species === "dog" ? "狗零食" : "貓零食",
+      answer: () => treatAnswer(p),
     })),
   ];
 
@@ -151,5 +190,5 @@ export function mentionedOthers(text: string, species?: Species): OtherHit[] {
   return hits
     .filter((h) => h.line === best)
     .slice(0, 4)
-    .map((h) => ({ id: h.s.id, brand: h.s.brand, name: h.s.name, href: h.href, kindZh: h.kindZh }));
+    .map((h) => ({ id: h.s.id, brand: h.s.brand, name: h.s.name, href: h.href, kindZh: h.kindZh, ...h.answer() }));
 }

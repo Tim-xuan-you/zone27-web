@@ -18,7 +18,7 @@ import SiteHeader from "@/components/SiteHeader";
 export const metadata: Metadata = {
   title: "這個問題該問誰",
   description:
-    "出貨缺貨退換問賣場、生病問獸醫、成分規格用裁決器、我們寫錯了寄信給我們。問對人才省時間。",
+    "出貨缺貨退換問賣場、生病問獸醫、成分規格在網站上查、我們寫錯了寄信給我們。問對人才省時間。",
   alternates: { canonical: "/ask" },
 };
 
@@ -54,7 +54,7 @@ export default function Page() {
         why="這四類是我們唯一比別人強的地方：查得到、算得出來、你可以自己驗證。"
         tone="keep"
         actions={[
-          { href: "/", label: "用裁決器問" },
+          { href: "/", label: "回首頁挑" },
           { href: "/dog-food/hidden-chicken", label: "成分表裡有雞" },
         ]}
       />
