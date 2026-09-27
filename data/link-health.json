@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 185,
+  "total": 186,
   "bad": 13,
   "rows": [
     {
@@ -2590,6 +2590,20 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/757695607/23516144726",
       "item": "757695607/23516144726",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cw-05",
+      "brand": "Wellness 寵物健康",
+      "name": "全方位 鮮肉主食餐包 厚切肉塊 鮭魚＋鮪魚",
+      "merchantId": "m1",
+      "label": "蕎逸寵物",
+      "url": "https://s.shopee.tw/3qNR4okpxM?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/36595891/5735057308",
+      "item": "36595891/5735057308",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""

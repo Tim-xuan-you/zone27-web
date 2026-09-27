@@ -356,12 +356,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "蕎逸寵物",
+            "unit": "85g",
+            "amount": 53,
+            "note": "一頁多口味，規格選「餐包-鮭魚+鮪魚(厚切肉塊)85g」",
+            "affiliateUrl": "https://s.shopee.tw/3qNR4okpxM?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m2",
             "label": "蕎逸官方站",
             "unit": "85g",
             "amount": 53,
             "note": "一頁多口味，規格選「[厚切肉塊]鮭魚+鮪魚」",
             "affiliateUrl": "https://s.shopee.tw/2gBTgfpHK7?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-27"
           }
         ]
