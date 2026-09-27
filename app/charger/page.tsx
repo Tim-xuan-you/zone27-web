@@ -56,7 +56,7 @@ export default function Page() {
               <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.5 }}>{c.name}</span>
               <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 2 }}>{c.back}</span>
             </span>
-            <span className="mono" style={{ fontSize: 14, fontWeight: 700, whiteSpace: "nowrap" }}>{anchorCharger(c) ? `${anchorCharger(c)!.amount.toLocaleString()}` : `${c.totalW}W`}</span>
+            <span className="mono" style={{ fontSize: 14, fontWeight: 700, whiteSpace: "nowrap" }}>{anchorCharger(c) ? "$" + anchorCharger(c)!.amount.toLocaleString() : `${c.totalW}W`}</span>
           </Link>
         ))}
       </div>
