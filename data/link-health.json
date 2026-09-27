@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 195,
+  "total": 196,
   "bad": 0,
   "rows": [
     {
@@ -2730,6 +2730,20 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/381728354/26679336202",
       "item": "381728354/26679336202",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "ct-04",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 長盈虱目魚",
+      "merchantId": "m3",
+      "label": "汪喵星球官方商城",
+      "url": "https://s.shopee.tw/5fp5O6Kwdg?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/329265193/6963023829",
+      "item": "329265193/6963023829",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""

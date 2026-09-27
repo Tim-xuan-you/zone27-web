@@ -164,6 +164,12 @@ const others = (map: Map<string, Set<string>>, id: string, c: Candidate) =>
   [...(map.get(pageOf(c.url) ?? "") ?? [])].filter((x) => x !== id);
 /** 同一頁已經產得出來的別款 */
 const pageWorks = (id: string, c: Candidate) => others(PAGE_OK, id, c);
+/**
+ * 這一款在這一頁已經有連結了（賣完的也算）。
+ * 2026-09-28 Tim 又產了一次長盈虱目魚：維護台把 9/27 已經產過的兩頁（官方商城、毛孩）照樣列成候選，
+ * 他點進去還是賣完，就再產一條。同一頁再產一條沒有用，補貨了原本那條就買得到。
+ */
+const linkedHere = (id: string, c: Candidate) => PAGE_OK.get(pageOf(c.url) ?? "")?.has(id) ?? false;
 
 /** 這一款在這一家試過產不出來？（同一家在別款不受影響；同一頁別款產不出來的，這一款也當作不行） */
 const failedFor = (id: string, c: Candidate): Pair | undefined => {
@@ -179,13 +185,13 @@ export const parkedWhy = (id: string): string | undefined => HUNT.get(id)?.parke
 /** 這一款有沒有「同一頁已經產得出來」的候選（還沒賣完的）。維護台把這種排到最上面：最不會白試 */
 export function pageProven(id: string): boolean {
   const t = HUNT.get(id);
-  return Boolean(t?.candidates.some((c) => !c.soldOut && !failedFor(id, c) && pageWorks(id, c).length > 0));
+  return Boolean(t?.candidates.some((c) => !c.soldOut && !linkedHere(id, c) && !failedFor(id, c) && pageWorks(id, c).length > 0));
 }
 
 /** 這一款還有幾家可以試（試過產不出來的、已經知道賣完的都不算）。維護台用來決定要不要另外給搜尋按鈕、要不要移到「看補貨」 */
 export function openPicks(id: string): number {
   const t = HUNT.get(id);
-  return t ? t.candidates.filter((c) => !failedFor(id, c) && !c.soldOut).length : 0;
+  return t ? t.candidates.filter((c) => !failedFor(id, c) && !c.soldOut && !linkedHere(id, c)).length : 0;
 }
 
 export default function HuntPicks({ id }: { id: string }) {
@@ -194,7 +200,7 @@ export default function HuntPicks({ id }: { id: string }) {
   // 整家不行的直接不列（Tim 說過那家的任何商品都產不出連結）
   // 售完的排最後（補貨了還是要回去找，所以不刪掉）
   const open = t.candidates
-    .filter((c) => !failedFor(id, c))
+    .filter((c) => !failedFor(id, c) && !linkedHere(id, c))
     .sort(
       (a, b) =>
         // 售完的一律排最後（2026-09-26：生活超市產得出 Apple 40W 但賣完了，卻因為「這個牌子在這家產出過」排第一）
@@ -216,6 +222,8 @@ export default function HuntPicks({ id }: { id: string }) {
       .filter((c) => !PAIRS.some((x) => x.productId === id && ((c.shopId && x.shopId === c.shopId) || x.shop === c.shop)))
       .flatMap((c) => { const x = failedFor(id, c); return x ? [`${c.shop}（${x.note}）`] : []; }),
   ];
+  // 已經產過的那幾頁：寫一行就好，不再當成要做的事
+  const done = [...new Set(t.candidates.filter((c) => linkedHere(id, c)).map((c) => c.shop))];
   // 一家一列。最值得先試的排前面，只攤開 3 家，其他收起來（2026-09-24：一張卡片 6 家太長）
   const pick = (c: Candidate) => {
     // 「同一頁產得出來」最強，有它就不用再疊「用過」「這個牌子產出過」「這家幾成幾敗」（同一件事講四次）
@@ -292,6 +300,11 @@ export default function HuntPicks({ id }: { id: string }) {
           <summary style={{ cursor: "pointer", fontSize: 12.5, color: "var(--muted)", padding: "8px 0 0" }}>再看 {open.length - 3} 家</summary>
           {open.slice(3).map(pick)}
         </details>
+      )}
+      {done.length > 0 && (
+        <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
+          已經產過，不用重產：{done.join("、")}
+        </p>
       )}
       {gone.length > 0 && (
         <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>

@@ -20,7 +20,7 @@ import { CHARGER_SUB_ID, DEVICES, chargers, fit, itemHref } from "@/lib/charger"
 import { POWERBANK_SUB_ID, powerbanks } from "@/lib/powerbank";
 import HuntPicks, { openPicks, pageProven, parkedWhy } from "@/components/HuntPicks";
 import huntData from "@/data/hunt-candidates.json";
-import { daysBetween, todayTW } from "@/lib/date";
+import { addDays, daysBetween, fmtShort, todayTW } from "@/lib/date";
 
 /** 我查過候選賣場的（不管成敗）。沒在這裡的就是我還沒找 */
 const HUNT_TRIED = new Set((huntData.targets as { id: string; candidates: unknown[] }[]).filter((t) => t.candidates.length > 0).map((t) => t.id));
@@ -280,9 +280,18 @@ export default function Page() {
     }));
 
   /* ── 2. 有連結但賣完了：連結是好的，補貨就能開 ── */
-  const soldOut = everything
+  const soldAll = everything
     .map((x) => ({ ...x, sold: x.ms.filter((m) => m.soldOut) }))
-    .filter((x) => x.sold.length > 0 && live(x).length === 0 && !tasks.has(x.id)); // 已經在「等你產連結」的不重複列
+    .filter((x) => x.sold.length > 0 && live(x).length === 0 && !tasks.has(x.id)) // 已經在「等你產連結」的不重複列
+    .map((x) => {
+      const seen = x.sold.map((m) => m.checkedAt ?? "").filter(Boolean).sort().at(-1);
+      return { ...x, seen, age: seen ? daysBetween(seen, todayTW()) : 99 };
+    });
+  // 2026-09-28 Tim 隔天又去看了長盈虱目魚，還是賣完，又產了一條。一天看一次太多：
+  // 看過還是賣完的，7 天內不叫他再看（補貨的話讀者點進去本來就買得到，不用等我們）
+  const SOLD_RECHECK_DAYS = 7;
+  const soldOut = soldAll.filter((x) => x.age >= SOLD_RECHECK_DAYS);
+  const soldRecent = soldAll.filter((x) => x.age < SOLD_RECHECK_DAYS);
 
   /* ── 3. 賣場名字還沒跟 Tim 核對的 ── */
   const links = linkIndex();
@@ -319,6 +328,35 @@ export default function Page() {
     { n: soldOut.length, zh: "賣完了，看補貨了沒", href: "#sold-out" },
     { n: links.unchecked.length, zh: "賣場名字要核對", href: "#names", unit: "家" },
   ].filter((x) => x.n > 0);
+
+  /** 賣完的那幾行。同一家、同規格、同價錢的只列一行：那是同一頁產了好幾條連結（2026-09-27 Tim：「這有甚麼差別？」沒有差別） */
+  const soldRows = (list: typeof soldAll) => (
+    <div style={{ ...box, padding: "6px 22px" }}>
+      {list.flatMap((p) => {
+        const groups = new Map<string, typeof p.sold>();
+        for (const m of p.sold) {
+          const k = `${m.label}|${m.unit ?? ""}|${m.amount}`;
+          groups.set(k, [...(groups.get(k) ?? []), m]);
+        }
+        // 同一頁好幾條的，日期寫最近看的那一次
+        return [...groups.values()].map((ms) => ({ p, m: ms[0], n: ms.length, at: ms.map((x) => x.checkedAt ?? "").sort().at(-1) || p.seen }));
+      }).map(({ p, m, n, at }, i) => (
+        <div key={p.id + m.id} style={{ ...line, borderTop: i ? "1px solid var(--line)" : 0 }}>
+          <div style={{ flex: 1, minWidth: 180 }}>
+            <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.brand} · {m.label}{n > 1 ? ` · 同一頁 ${n} 條連結` : ""}</span>
+            {p.name}
+            {at && (
+              <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)" }}>
+                {fmtShort(at)} 看過還是賣完{p.seen && p.age < SOLD_RECHECK_DAYS ? `，${fmtShort(addDays(p.seen, SOLD_RECHECK_DAYS))} 再看` : ""}
+              </span>
+            )}
+          </div>
+          <span className="mono" style={{ fontSize: 12.5, whiteSpace: "nowrap" }}>{m.unit} · ${m.amount}</span>
+          <a href={m.affiliateUrl} target="_blank" rel="noopener nofollow" style={openLink}>開連結 ↗</a>
+        </div>
+      ))}
+    </div>
+  );
 
   const card = (t: Task) => (
     <div key={t.id} style={box}>
@@ -474,28 +512,17 @@ export default function Page() {
       {soldOut.length > 0 && (
         <>
           <H id="sold-out" n={soldOut.length}>賣完了，看補貨了沒</H>
-          <p style={lead}>這幾款每一家都賣完了。讀者照樣點得到，網站不寫賣完（庫存天天在變，點進去蝦皮自己會顯示）。看到補貨跟我說一聲。</p>
-          <div style={{ ...box, padding: "6px 22px" }}>
-            {/* 同一家、同規格、同價錢的只列一行：那是同一頁產了好幾條連結（2026-09-27 Tim：「這有甚麼差別？」沒有差別） */}
-            {soldOut.flatMap((p) => {
-              const groups = new Map<string, typeof p.sold>();
-              for (const m of p.sold) {
-                const k = `${m.label}|${m.unit ?? ""}|${m.amount}`;
-                groups.set(k, [...(groups.get(k) ?? []), m]);
-              }
-              return [...groups.values()].map((ms) => ({ p, m: ms[0], n: ms.length }));
-            }).map(({ p, m, n }, i) => (
-              <div key={p.id + m.id} style={{ ...line, borderTop: i ? "1px solid var(--line)" : 0 }}>
-                <div style={{ flex: 1, minWidth: 180 }}>
-                  <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.brand} · {m.label}{n > 1 ? ` · 同一頁 ${n} 條連結` : ""}</span>
-                  {p.name}
-                </div>
-                <span className="mono" style={{ fontSize: 12.5, whiteSpace: "nowrap" }}>{m.unit} · ${m.amount}</span>
-                <a href={m.affiliateUrl} target="_blank" rel="noopener nofollow" style={openLink}>開連結 ↗</a>
-              </div>
-            ))}
-          </div>
+          <p style={lead}>這幾款每一家都賣完了，上次看已經是 {SOLD_RECHECK_DAYS} 天以前。讀者照樣點得到，網站不寫賣完（庫存天天在變，點進去蝦皮自己會顯示）。看到補貨跟我說一聲；還是賣完也說一聲，不用再產新連結。</p>
+          {soldRows(soldOut)}
         </>
+      )}
+
+      {soldRecent.length > 0 && (
+        <details style={{ ...more, marginTop: 24 }}>
+          <summary style={moreSum}>最近看過、還是賣完的（{soldRecent.length} 款），{SOLD_RECHECK_DAYS} 天內不用再看</summary>
+          <p style={{ ...lead, marginTop: 12 }}>補貨的話讀者點進去就買得到，連結不用重產。日期到了會自己回到上面。</p>
+          {soldRows(soldRecent)}
+        </details>
       )}
 
       {links.unchecked.length > 0 && (
