@@ -352,12 +352,22 @@
       },
       "price": {
         "unit": "85g",
-        "checkedAt": "2026-09-12",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "蕎逸官方站",
+            "unit": "85g",
+            "amount": 53,
+            "note": "一頁多口味，規格選「[厚切肉塊]鮭魚+鮪魚」",
+            "affiliateUrl": "https://s.shopee.tw/2gBTgfpHK7?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的貓對雞過敏。名字寫鮭魚＋鮪魚，第一項是雞湯、第三項是雞肉，都排在鮭魚前面。",
       "knownIssues": "成分照 Wellness 台灣官網。還有雞肝、蛋、乾燥馬鈴薯。一包只有 57 大卡，4 公斤的貓全吃這款一天要四包左右。蛋白質寫的是「4% 以上」這種保證值，實際通常比較高。包裝沒寫灰分，碳水算不出來。標示沒寫適用年齡，我們先當成貓用。",
-      "awaitingLink": true,
       "searchAs": "Wellness 全方位 鮮肉主食餐包 鮭魚 鮪魚 85g",
       "chicken": {
         "status": "hidden",
