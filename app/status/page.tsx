@@ -17,8 +17,11 @@ import { channelStats } from "@/lib/channel-stats";
 import { litters } from "@/lib/litter";
 import { treats } from "@/lib/treat";
 import { CHARGER_SUB_ID, DEVICES, chargers, fit } from "@/lib/charger";
-import HuntPicks, { openPicks, pageProven } from "@/components/HuntPicks";
+import HuntPicks, { openPicks, pageProven, parkedWhy } from "@/components/HuntPicks";
 import huntData from "@/data/hunt-candidates.json";
+
+/** 我查過候選賣場的（不管成敗）。沒在這裡的就是我還沒找 */
+const HUNT_TRIED = new Set((huntData.targets as { id: string; candidates: unknown[] }[]).filter((t) => t.candidates.length > 0).map((t) => t.id));
 import { productHref } from "@/lib/labels";
 
 /**
@@ -257,7 +260,21 @@ export default function Page() {
       keyword: x ? huntFrom(x.brand, x.name, x.searchAs) : t.label, shops: x ? shopsFor(x.brand) : [],
     });
   }
-  const make = [...tasks.values()].sort((a, b) => b.rank - a.rank);
+  const sorted = [...tasks.values()].sort((a, b) => b.rank - a.rank);
+  /*
+   * 2026-09-27 Tim 列了 14 款問：「這些都處理好了？怎麼都沒給我連結？」
+   * 那 14 款要嘛是查過、確定現在沒得買（先不找），要嘛是候選全試完了，只剩搜尋按鈕。
+   * 跟真的要做的混在同一張清單，看起來就像我漏做。
+   * 所以待辦只放「有我查好、還沒試過的賣場」的；其他收進最下面「先不用做的」，一款一行寫原因。
+   */
+  const make = sorted.filter((t) => openPicks(t.id) > 0 && !t.huntNote && !parkedWhy(t.id));
+  const notNow = sorted
+    .filter((t) => !make.includes(t))
+    .map((t) => ({
+      t,
+      why: t.huntNote ?? parkedWhy(t.id) ??
+        (HUNT_TRIED.has(t.id) ? "我查到的賣場都試完了，都產不出來。找到新的會放回上面" : "我還在找有賣的賣場，找到會放回上面"),
+    }));
 
   /* ── 2. 有連結但賣完了：連結是好的，補貨就能開 ── */
   const soldOut = everything
@@ -394,6 +411,27 @@ export default function Page() {
             </details>
           )}
         </>
+      )}
+
+      {/* 查過、現在沒得做的。一款一行寫原因，讓人一眼知道是處理過的，不是漏掉 */}
+      {notNow.length > 0 && (
+        <details style={more}>
+          <summary style={moreSum}>先不用做的 {notNow.length} 款（查過了，原因寫在裡面）</summary>
+          <div style={{ ...box, padding: "4px 18px", marginTop: 14 }}>
+            {notNow.map(({ t, why: w }, i) => (
+              <div key={t.id} style={{ padding: "12px 0", borderTop: i ? "1px solid var(--line)" : 0 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+                  <b style={{ fontSize: 15, lineHeight: 1.6 }}>
+                    <span style={{ fontWeight: 400, color: "var(--muted)", fontSize: 12.5, marginRight: 6 }}>{catZh(t.id)}</span>
+                    {t.brand} {t.name}
+                  </b>
+                  <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)", whiteSpace: "nowrap" }}>{t.id}</span>
+                </div>
+                <p style={{ margin: "2px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.8 }}>{w}</p>
+              </div>
+            ))}
+          </div>
+        </details>
       )}
 
       {stale.length > 0 && (

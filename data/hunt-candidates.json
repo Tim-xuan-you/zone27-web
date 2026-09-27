@@ -17,7 +17,9 @@
       "label": "Sanicat 強力凝結礦砂（貓砂第二批）",
       "why": "礦砂裡粉塵評價比較好的一款",
       "note": "比價站在蝦皮查不到這個牌子，可能沒進台灣蝦皮。先放著，礦砂已經有藍鑽撐著。",
-      "candidates": []
+      "candidates": [],
+      "parked": "2026-09-27 再查一次：蝦皮上的 Sanicat 只有松木砂和「高效凝結白砂」，找不到強力凝結礦砂。名字不一樣，不能當成同一款。",
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "cl-05",
@@ -42,7 +44,9 @@
           "reason": "這個商品產不出分潤連結",
           "at": "2026-09-19"
         }
-      ]
+      ],
+      "parked": "2026-09-27 再查一次：蝦皮上只有蝦皮直營那一頁（產不出連結、已下架），其他都是 200g 的貓砂伴侶，不是這款。",
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "cl-02",
@@ -153,8 +157,42 @@
       "id": "cl-11",
       "label": "BOXCAT 貓家 環保松木砂（貓砂第一批）",
       "why": "木屑砂的代表款。很多人以為松木砂可以沖馬桶，它其實不行，正好是這個類目要講的事",
-      "candidates": [],
-      "note": "三家都產不出這一款（罐罐星球、沛茲、大毛家）。BOXCAT 在蝦皮的分潤覆蓋很差，先放著當資料款；木屑砂要能買的話改收別的牌子。"
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "國際貓家貓奴網",
+          "shopId": "27658670",
+          "price": 450,
+          "unit": "黃標 精裝組 6.8kg 一箱",
+          "url": "https://shopee.tw/product/27658670/2666458394"
+        },
+        {
+          "channel": "seller",
+          "shop": "Pet Market",
+          "shopId": "215972077",
+          "price": 460,
+          "unit": "黃標 7.7kg",
+          "url": "https://shopee.tw/product/215972077/3353199041"
+        },
+        {
+          "channel": "seller",
+          "shop": "🐾寵麻吉🐾",
+          "shopId": "175721182",
+          "price": 350,
+          "unit": "黃標 17lb（7.7kg）",
+          "url": "https://shopee.tw/product/175721182/2791133329"
+        },
+        {
+          "channel": "seller",
+          "shop": "圓價屋寵物用品示範店",
+          "shopId": "76690809",
+          "price": null,
+          "unit": "一頁很多標，選「黃標」",
+          "url": "https://shopee.tw/product/76690809/1450324926"
+        }
+      ],
+      "note": "黃標就是松木砂。沛茲、罐罐星球、大毛家產不出來。國際貓家貓奴網是品牌自己的店，先試。",
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "cf-12",
@@ -218,8 +256,42 @@
       "id": "df-16",
       "label": "Blackwood 柏萊富 功能性全齡 護膚亮毛（羊肉＋糙米）",
       "why": "查藏雞頁「沒有雞」的一款，狗這邊對雞過敏的選擇不多",
-      "note": "蝦皮上這一款本來就少，町町和招財貓又整家產不出連結。先放著，用上面的賣場搜尋按鈕碰運氣就好。",
-      "candidates": []
+      "note": "認清楚是「功能性全齡 護膚亮毛配方（羊肉＋糙米）」。同牌子「特調全齡犬（羊肉＋糙米＋雞肉）」有雞，別選到。即期、短效期的沒收。",
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "萬倍富寵物用品店（蝦皮商城）",
+          "shopId": "8730825",
+          "price": 1120,
+          "unit": "護膚亮毛 羊肉＋糙米，比價站寫 2.2KG，點開看是不是新包裝 2kg",
+          "url": "https://shopee.tw/product/8730825/273268240"
+        },
+        {
+          "channel": "mall",
+          "shop": "酷狗寵物網",
+          "shopId": "4147419",
+          "price": 1050,
+          "unit": "4.5 磅（2kg），規格選「功能性全齡犬-護膚亮毛配方【羊肉+糙米】」",
+          "url": "https://shopee.tw/product/4147419/295318244"
+        },
+        {
+          "channel": "seller",
+          "shop": "興利寵物家族精品店",
+          "shopId": "270336211",
+          "price": 1050,
+          "unit": "4.5 磅（2kg）",
+          "url": "https://shopee.tw/product/270336211/4340546447"
+        },
+        {
+          "channel": "seller",
+          "shop": "喵吉寵物網",
+          "shopId": "372967113",
+          "price": 1050,
+          "unit": "4.5 磅（2kg）",
+          "url": "https://shopee.tw/product/372967113/15155896903"
+        }
+      ],
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "ct-01",
@@ -845,15 +917,83 @@
       "id": "dt-03",
       "label": "Greenies 健綠 潔牙骨 11-22kg 中型犬（狗零食）",
       "why": "一支 88 大卡，最多人買的尺寸，11 公斤的狗一支 129%",
-      "note": "先停手。台灣蝦皮上健綠的 11-22kg 跟 22-45kg 很難找：3oz 袋裝只有 2-7kg 跟 7-11kg（蝦皮直營、Cesar 都驗證過），Cesar 的 12oz 盒裝也只有那兩個尺寸（2026-09-20 Tim 截圖）。查到有這尺寸的兩家一般賣家都產不出連結。這兩款先當資料款放著，類目頁照樣列，只是沒有購買按鈕。有連結的款數不受影響。",
-      "candidates": []
+      "note": "台灣蝦皮上 11-22kg 很少有 340g 袋裝，常見的是 27oz 盒裝（765g，約 27 支），一盒也可以收。先確認規格是 11-22kg 那一格再產。",
+      "candidates": [
+        {
+          "channel": "seller",
+          "shop": "【寵物市集】隨貨附發票",
+          "shopId": "319619623",
+          "price": 1029,
+          "unit": "27oz 盒裝，選「11-22kg」那一格",
+          "url": "https://shopee.tw/product/319619623/4488355010"
+        },
+        {
+          "channel": "seller",
+          "shop": "yushimind",
+          "shopId": "86105378",
+          "price": 1120,
+          "unit": "27oz 盒裝，看有沒有「11-22kg」",
+          "url": "https://shopee.tw/product/86105378/8786460319"
+        },
+        {
+          "channel": "seller",
+          "shop": "💚小福袋寵物💚",
+          "shopId": "9961900",
+          "price": 919,
+          "unit": "27oz 盒裝，看有沒有「11-22kg」",
+          "url": "https://shopee.tw/product/9961900/1612195813"
+        },
+        {
+          "channel": "seller",
+          "shop": "晴空sky",
+          "shopId": "742205",
+          "price": 750,
+          "unit": "盒裝，頁面寫迷你到大型都有，選「11-22kg」",
+          "url": "https://shopee.tw/product/742205/43713560940"
+        }
+      ],
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "dt-04",
       "label": "Greenies 健綠 潔牙骨 22-45kg 大型犬（狗零食）",
       "why": "一支 142 大卡，大型犬額度大，反而是四款裡最不容易超標的",
-      "note": "先停手。台灣蝦皮上健綠的 11-22kg 跟 22-45kg 很難找：3oz 袋裝只有 2-7kg 跟 7-11kg（蝦皮直營、Cesar 都驗證過），Cesar 的 12oz 盒裝也只有那兩個尺寸（2026-09-20 Tim 截圖）。查到有這尺寸的兩家一般賣家都產不出連結。這兩款先當資料款放著，類目頁照樣列，只是沒有購買按鈕。有連結的款數不受影響。",
-      "candidates": []
+      "note": "台灣蝦皮上 22kg 以上 很少有 340g 袋裝，常見的是 27oz 盒裝（765g，約 17 支），一盒也可以收。先確認規格是 22kg 以上 那一格再產。",
+      "candidates": [
+        {
+          "channel": "seller",
+          "shop": "【寵物市集】隨貨附發票",
+          "shopId": "319619623",
+          "price": 1029,
+          "unit": "27oz 盒裝，選「22kg 以上」那一格",
+          "url": "https://shopee.tw/product/319619623/4488355010"
+        },
+        {
+          "channel": "seller",
+          "shop": "yushimind",
+          "shopId": "86105378",
+          "price": 1120,
+          "unit": "27oz 盒裝，看有沒有「22kg 以上」",
+          "url": "https://shopee.tw/product/86105378/8786460319"
+        },
+        {
+          "channel": "seller",
+          "shop": "💚小福袋寵物💚",
+          "shopId": "9961900",
+          "price": 919,
+          "unit": "27oz 盒裝，看有沒有「22kg 以上」",
+          "url": "https://shopee.tw/product/9961900/1612195813"
+        },
+        {
+          "channel": "seller",
+          "shop": "晴空sky",
+          "shopId": "742205",
+          "price": 750,
+          "unit": "盒裝，頁面寫迷你到大型都有，選「22kg 以上」",
+          "url": "https://shopee.tw/product/742205/43713560940"
+        }
+      ],
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "ct-06",
@@ -1868,23 +2008,90 @@
       "why": "",
       "note": "2026-09-24 查過：這是好市多的貨，蝦皮上都是代購、分裝重新包的，沒有原廠或正常賣場。不值得花時間，礦砂已經有藍鑽。",
       "candidates": [],
-      "checkedAt": "2026-09-24"
+      "checkedAt": "2026-09-27",
+      "parked": "2026-09-27 查過：蝦皮上只有好市多代購，而且標 $1 的佔位價，其他都是除臭粉。沒有能連的。"
     },
     {
       "id": "cl-10",
       "label": "Scoop Away 礦砂（貓砂）",
       "why": "",
-      "note": "2026-09-24 查過：好市多的貨，蝦皮上都是代購拆箱單包賣（4.76kg），一單限一包。可以產，但不優先，礦砂已經有藍鑽。",
-      "candidates": [],
-      "checkedAt": "2026-09-24"
+      "note": "只有好市多代購在賣，一箱四包拆開賣。選寫「全新」「單包」的，寫破包、分裝的不要。",
+      "candidates": [
+        {
+          "channel": "seller",
+          "shop": "有顆蕃茄暢貨中心",
+          "shopId": "6338018",
+          "price": 130,
+          "unit": "4.76kg 單包",
+          "url": "https://shopee.tw/product/6338018/53965350134"
+        },
+        {
+          "channel": "seller",
+          "shop": "美式生活百貨",
+          "shopId": "81427421",
+          "price": 145,
+          "unit": "4.76kg 單包",
+          "url": "https://shopee.tw/product/81427421/25054882435"
+        },
+        {
+          "channel": "seller",
+          "shop": "台日美生活用品➋",
+          "shopId": "8888039",
+          "price": 150,
+          "unit": "4.76kg 一包",
+          "url": "https://shopee.tw/product/8888039/55613314558"
+        },
+        {
+          "channel": "seller",
+          "shop": "【酷市選好物.好市多代購.零售】",
+          "shopId": "22199009",
+          "price": 199,
+          "unit": "4.76kg，規格選「全新完整」",
+          "url": "https://shopee.tw/product/22199009/18454654855"
+        }
+      ],
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "cl-12",
       "label": "Unicharm 嬌聯 消臭抗菌沸石砂（貓砂）",
       "why": "",
-      "note": "2026-09-24 查過：比價站上蝦皮幾乎沒人賣，只有一筆 $1 的佔位商品。先放著當資料款。",
-      "candidates": [],
-      "checkedAt": "2026-09-24"
+      "note": "日本進口，都是一般賣家。選「消臭抗菌沸石砂 2L」（4L 也可以），不要選到尿墊、消臭粒、過期品。",
+      "candidates": [
+        {
+          "channel": "seller",
+          "shop": "小川萌寵2店",
+          "shopId": "763004",
+          "price": 119,
+          "unit": "一頁多款，選沸石砂 2L",
+          "url": "https://shopee.tw/product/763004/12943373173"
+        },
+        {
+          "channel": "seller",
+          "shop": "貓狗一家親",
+          "shopId": "781203447",
+          "price": 110,
+          "unit": "一頁多款，選沸石砂 2L 或 4L",
+          "url": "https://shopee.tw/product/781203447/16976079430"
+        },
+        {
+          "channel": "seller",
+          "shop": "喵咪小天地",
+          "shopId": "490144995",
+          "price": 114,
+          "unit": "一頁多款，選沸石砂 2L 或 4L",
+          "url": "https://shopee.tw/product/490144995/10764677605"
+        },
+        {
+          "channel": "seller",
+          "shop": "小扁臉老闆（平台代開發票）",
+          "shopId": "9254146",
+          "price": 122,
+          "unit": "一頁多款，選沸石砂",
+          "url": "https://shopee.tw/product/9254146/16587903946"
+        }
+      ],
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "ch-01",

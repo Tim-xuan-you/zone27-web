@@ -36,7 +36,8 @@ type Candidate = {
 };
 type Failed = { shop: string; reason: string; at: string };
 /* checkedAt：這一款是哪一天查的。沒寫就用整份檔案的日期（2026-09-24 起每一款各記各的） */
-type Target = { id: string; label: string; why: string; note?: string; checkedAt?: string; candidates: Candidate[]; failed?: Failed[] };
+/* parked：查過、確定現在沒得買，寫原因。維護台收進「先不用做的」，不佔待辦（2026-09-27 Tim：「這些都處理好了？怎麼都沒給我連結」） */
+type Target = { id: string; label: string; why: string; note?: string; parked?: string; checkedAt?: string; candidates: Candidate[]; failed?: Failed[] };
 
 const HUNT = new Map((huntData.targets as Target[]).map((t) => [t.id, t]));
 
@@ -170,6 +171,9 @@ const failedFor = (id: string, c: Candidate): Pair | undefined => {
   const same = others(PAGE_FAIL, id, c).filter((x) => !pageWorks(id, c).length);
   return same.length ? { productId: id, shop: c.shop, shopId: c.shopId, note: `同一頁的${same.map((x) => NAME.get(x) ?? x).join("、")}產不出來` } : undefined;
 };
+
+/** 查過、確定沒得買的原因（沒有就是 undefined） */
+export const parkedWhy = (id: string): string | undefined => HUNT.get(id)?.parked;
 
 /** 這一款有沒有「同一頁已經產得出來」的候選（還沒賣完的）。維護台把這種排到最上面：最不會白試 */
 export function pageProven(id: string): boolean {

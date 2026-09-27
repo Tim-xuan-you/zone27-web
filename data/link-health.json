@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-19",
   "filledAt": "2026-09-27",
-  "total": 156,
+  "total": 157,
   "bad": 0,
   "rows": [
     {
@@ -2029,6 +2029,19 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/329265193/6963023829",
       "item": "329265193/6963023829",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "dw-07",
+      "brand": "陪心寵糧",
+      "name": "SUPER小白主食罐 雞鵪鶉＋黑木耳",
+      "merchantId": "m1",
+      "label": "『㊆㊆犬貓館』",
+      "url": "https://s.shopee.tw/7ptZFaiJ6j?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/22742792/41451676133",
+      "item": "22742792/41451676133",
       "verdict": "ok",
       "note": ""
     }

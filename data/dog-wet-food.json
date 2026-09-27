@@ -77,17 +77,6 @@
             "anchor": "value",
             "soldOut": true,
             "checkedAt": "2026-09-27"
-          },
-          {
-            "id": "m3",
-            "label": "【 RBB ！】寵物生活館",
-            "unit": "82g",
-            "amount": 53,
-            "note": "一頁多口味，規格選「清蒸鴨肉82G」",
-            "affiliateUrl": "https://s.shopee.tw/8AWPdawO8F?share_channel_code=6",
-            "anchor": "value",
-            "soldOut": true,
-            "checkedAt": "2026-09-27"
           }
         ]
       },
@@ -456,12 +445,22 @@
       },
       "price": {
         "unit": "80g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "『㊆㊆犬貓館』",
+            "unit": "80g",
+            "amount": 41,
+            "note": "一頁多口味，規格選「雞鵪鶉 x 黑木耳,單罐」",
+            "affiliateUrl": "https://s.shopee.tw/7ptZFaiJ6j?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。第一項是雞肉，後面還有雞肝、雞心、雞油。",
       "knownIssues": "除了雞還有鵪鶉肉和鵪鶉蛋，鵪鶉我們沒有另外開分類，要避開禽類的請直接看成分表。標的是最低值和最高值，不是實測。成分裡有寒天與蒟蒻。",
-      "awaitingLink": true,
       "searchAs": "陪心寵糧 SUPER小白主食罐 雞鵪鶉 黑木耳 80g",
       "chicken": {
         "status": "chicken"
