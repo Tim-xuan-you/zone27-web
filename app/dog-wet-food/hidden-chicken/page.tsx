@@ -5,6 +5,7 @@ import { S } from "@/components/styles";
 import data from "@/data/dog-wet-hidden-chicken.json";
 import Checked from "@/components/Checked";
 import { catalogOf, shopLink } from "@/lib/catalog";
+import { NAME_HAS_CHICKEN } from "@/lib/chicken";
 
 /**
  * 狗罐頭版的「名字寫別的肉，成分表裡有雞」。
@@ -31,13 +32,21 @@ const CASES = data.cases;
 const CLEAN = data.clean;
 const PATH = "/dog-wet-food/hidden-chicken";
 const READ = catalogOf("dog", "wet").length;
+/*
+ * 頁首那一句用算的（2026-09-27 以前寫在資料檔裡，新增牛肉、火雞、黑豬肉以後數字全錯）。
+ * 「雞排在第一或第二項」看的是逐筆核對記下的前兩項。
+ */
+const NO_NAME = catalogOf("dog", "wet").filter((p) => !NAME_HAS_CHICKEN.test(p.name));
+const HIDDEN = NO_NAME.filter((p) => p.chicken?.status === "hidden");
+const TOP2 = HIDDEN.filter((p) => (p.chicken?.found ?? []).some((x) => /^第 [12] 項/.test(x) && /雞/.test(x.replace(/火雞/g, "")))).length;
+const TALLY = `我們讀的 ${READ} 款狗主食罐裡，名字沒寫雞的有 ${NO_NAME.length} 款；其中 ${HIDDEN.length} 款成分表裡有雞，而且 ${TOP2} 款的雞排在第一或第二項。整張成分表真的找不到雞的，只有 ${CLEAN.length} 款。`;
 
 const TITLE = "名字寫鹿肉、鱉肉的狗罐頭，第一二項是雞";
 
 export const metadata: Metadata = {
   title: TITLE,
   description:
-    `${data._meta.tally}逐筆核對台灣通路的中文標示，附查核日期。`,
+    `${TALLY}逐筆核對台灣通路的中文標示，附查核日期。`,
   alternates: { canonical: PATH },
   openGraph: { title: TITLE, type: "article" },
 };
@@ -52,7 +61,7 @@ export default function Page() {
         name: "狗罐頭寫鹿肉口味，就代表沒有雞肉嗎？",
         acceptedAnswer: {
           "@type": "Answer",
-          text: `不代表。${data._meta.tally}商品名上的肉是口味標籤，不是成分清單。要確認只能翻到背面，看成分表的前五項。`,
+          text: `不代表。${TALLY}商品名上的肉是口味標籤，不是成分清單。要確認只能翻到背面，看成分表的前五項。`,
         },
       },
       {
@@ -96,7 +105,7 @@ export default function Page() {
       <p style={S.lbl}>我們讀到的</p>
       <div style={box}>
         <p style={{ margin: 0, fontSize: 17, lineHeight: 1.9, fontWeight: 700 }}>
-          {data._meta.tally}
+          {TALLY}
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>
           {data._meta.why}
@@ -149,7 +158,7 @@ export default function Page() {
       <p style={S.lbl}>名字跟內容對得上的，長這樣</p>
       <div style={box}>
         <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.9 }}>
-          我們讀的 {READ} 款裡，整張成分表真的找不到雞的只有這一款：
+          我們讀的 {READ} 款裡，整張成分表真的找不到雞的只有{CLEAN.length > 1 ? `這 ${CLEAN.length} 款` : "這一款"}：
         </p>
         <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 15.5, lineHeight: 1.95 }}>
           {CLEAN.map((g) => {

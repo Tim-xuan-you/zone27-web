@@ -36,11 +36,14 @@ import type { Product } from "@/lib/types";
  */
 
 const TITLE = "狗主食罐怎麼選";
+const WET_NO_NAME = catalogOf("dog", "wet").filter((p) => !NAME_HAS_CHICKEN.test(p.name));
+const WET_HIDDEN = WET_NO_NAME.filter((p) => p.chicken?.status === "hidden");
 
 export const metadata: Metadata = {
   title: TITLE,
   description:
-    "我們一款一款讀過台灣架上的狗罐頭標示。名字沒寫雞的 5 款裡，4 款成分表裡有雞，而且都是鹿肉、鱉肉、四種鮮魚這種稀有蛋白的名字。每一款都寫清楚什麼時候不要買、一罐幾大卡、一天要幾罐。",
+    // 數字用算的：2026-09-27 新增牛肉、火雞兩款以後，原本寫死的「5 款裡 4 款」就不對了
+    `我們一款一款讀過台灣架上的狗罐頭標示。名字沒寫雞的 ${WET_NO_NAME.length} 款裡，${WET_HIDDEN.length} 款成分表裡有雞，名字寫的是鹿肉、牛肉、火雞、鱉肉、四種鮮魚。每一款都寫清楚什麼時候不要買、一罐幾大卡、一天要幾罐。`,
   alternates: { canonical: "/dog-wet-food" },
   openGraph: { title: TITLE, type: "website" },
 };

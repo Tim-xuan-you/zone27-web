@@ -3,7 +3,7 @@
     "category": "dog-wet-food",
     "note": "由 data/dog-wet-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
     "generatedAt": "2026-09-27",
-    "count": 13,
+    "count": 16,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
@@ -539,12 +539,23 @@
       },
       "price": {
         "unit": "80g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "毛孩寵物鋪",
+            "unit": "80g",
+            "amount": 48,
+            "note": "一頁多款，品項選「95%鮮肉罐放牧鹿」、規格選 80G",
+            "affiliateUrl": "https://s.shopee.tw/LnYcOHnHV?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。名字寫鹿肉，成分表第二項就是雞肉，後面還有雞心肝、雞軟骨、雞蛋黃。",
       "knownIssues": "紐西蘭放牧草飼鹿肉排第一，這是真的。但第二項開始是雞肉、雞心肝、雞軟骨、雞蛋黃，四項都是雞。鹿肉是稀有蛋白，要拿來排查過敏原的話這一罐不行。標示 AAFCO／NRC 成幼犬。",
-      "awaitingLink": true,
       "searchAs": "汪喵星球 犬用 Fantastic 95% 鮮肉主食罐 鹿肉 80g",
       "chicken": {
         "status": "hidden",
@@ -940,7 +951,201 @@
       "knownIssues": "成分表的肉只有黑豬肉一種，找不到雞，跟同系列的鴨肉一樣適合對雞過敏的狗。販售頁把碳水化合物寫成 52%，但其他數字加起來只剩不到 2%，應該是打錯，我們用算的。磷沒有標。標示 AAFCO 成幼犬。",
       "searchAs": "怪獸部落 犬1肉主食罐 黑豬肉 82g",
       "chicken": {
-        "status": "clean"
+        "status": "clean",
+        "found": [
+          "肉只有黑豬肉一種，整張成分表找不到雞"
+        ]
+      }
+    },
+    {
+      "id": "dw-14",
+      "species": "dog",
+      "form": "wet",
+      "brand": "汪喵星球",
+      "name": "犬用 Fantastic 95% 鮮肉主食罐 草飼牛肉",
+      "spec": {
+        "protein": 53.4,
+        "fat": 32.8,
+        "carb": 6.9,
+        "omega3": 0.3,
+        "phosphorus": 1.2,
+        "complete": true,
+        "moisture": 71,
+        "asFed": {
+          "protein": 15.5,
+          "fat": 9.5,
+          "fiber": 0.5,
+          "ash": 2,
+          "phosphorus": 0.35,
+          "carb": 2
+        },
+        "carbBasis": "published",
+        "proteinSources": [
+          "beef",
+          "chicken"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1400
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "80g",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。名字寫牛肉，成分表第二項就是雞肉，後面還有雞心、雞軟骨、雞蛋黃。",
+      "knownIssues": "紐西蘭草飼牛肉排第一，但第二項開始是雞肉、雞心、雞軟骨、雞蛋黃，名字上一個字都沒提。營養分析是毛孩市集 165g 那一頁讀的。販售頁沒寫適用年齡，我們先當成成犬。",
+      "awaitingLink": true,
+      "searchAs": "汪喵星球 犬用 Fantastic 95% 鮮肉主食罐 草飼牛肉 80g",
+      "chicken": {
+        "status": "hidden",
+        "found": [
+          "第 1 項：紐西蘭草飼牛肉",
+          "第 2 項：雞肉",
+          "第 3 項：雞心",
+          "第 4 項：雞軟骨",
+          "第 5 項：雞蛋黃"
+        ],
+        "verdict": "牛肉確實排第一，但第二項到第五項全部是雞。 跟同系列的鹿肉一樣的寫法：名字只講第一項，後面連著四項雞。"
+      }
+    },
+    {
+      "id": "dw-15",
+      "species": "dog",
+      "form": "wet",
+      "brand": "汪喵星球",
+      "name": "犬用 Fantastic 95% 鮮肉主食罐 田園火雞",
+      "spec": {
+        "protein": 56.5,
+        "fat": 29.5,
+        "carb": 7,
+        "omega3": 0.4,
+        "phosphorus": 1.2,
+        "complete": true,
+        "moisture": 71.5,
+        "asFed": {
+          "protein": 16.1,
+          "fat": 8.4,
+          "fiber": 0.5,
+          "ash": 2,
+          "phosphorus": 0.34,
+          "carb": 2
+        },
+        "carbBasis": "published",
+        "proteinSources": [
+          "turkey",
+          "chicken"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1330
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "80g",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。名字寫火雞，成分表第二項開始是雞心肝、雞軟骨、雞蛋黃。",
+      "knownIssues": "火雞肉排第一。火雞跟雞是不同的肉，但這一罐第二項開始是雞心肝、雞軟骨、雞蛋黃，不是只有火雞。營養分析是毛孩市集 165g 那一頁讀的。販售頁沒寫適用年齡，我們先當成成犬。",
+      "awaitingLink": true,
+      "searchAs": "汪喵星球 犬用 Fantastic 95% 鮮肉主食罐 田園火雞 80g",
+      "chicken": {
+        "status": "hidden",
+        "found": [
+          "第 1 項：火雞肉",
+          "第 2 項：雞心肝",
+          "第 3 項：雞軟骨",
+          "第 4 項：雞蛋黃"
+        ],
+        "verdict": "火雞排第一，第二項開始是雞心肝、雞軟骨、雞蛋黃。 火雞跟雞是不同的肉，對雞過敏的狗常被建議換火雞。這一罐換過去，還是會吃到三項雞。"
+      }
+    },
+    {
+      "id": "dw-16",
+      "species": "dog",
+      "form": "wet",
+      "brand": "汪喵星球",
+      "name": "犬用 Fantastic 95% 鮮肉主食罐 鱉蛋雞肉",
+      "spec": {
+        "protein": 55.3,
+        "fat": 30.6,
+        "carb": 7,
+        "omega3": 0.5,
+        "phosphorus": 1.2,
+        "complete": true,
+        "moisture": 71.6,
+        "asFed": {
+          "protein": 15.7,
+          "fat": 8.7,
+          "fiber": 0.5,
+          "ash": 2,
+          "phosphorus": 0.34,
+          "carb": 2
+        },
+        "carbBasis": "published",
+        "proteinSources": [
+          "chicken"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1340
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "80g",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。第一項就是雞肉，名字也寫了。",
+      "knownIssues": "名字誠實，雞寫在標題上：雞肉、雞心肝、雞軟骨排前三項，鱉蛋排第四。販售頁沒寫適用年齡，我們先當成成犬。",
+      "awaitingLink": true,
+      "searchAs": "汪喵星球 犬用 Fantastic 95% 鮮肉主食罐 鱉蛋雞肉 80g",
+      "chicken": {
+        "status": "chicken"
       }
     }
   ]
