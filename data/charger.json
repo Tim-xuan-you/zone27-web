@@ -624,9 +624,20 @@
       "price": {
         "unit": "1 顆",
         "checkedAt": "2026-09-27",
-        "merchants": []
-      },
-      "awaitingLink": true
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "台達電子Innergie官方旗艦店",
+            "unit": "1顆",
+            "amount": 2490,
+            "note": "",
+            "affiliateUrl": "https://s.shopee.tw/AUuKvPI3HW?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27",
+            "soldOut": true
+          }
+        ]
+      }
     }
   ]
 }

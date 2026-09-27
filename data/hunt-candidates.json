@@ -2867,7 +2867,7 @@
       "label": "台達電 Innergie C10 Duo 100W 摺疊版（充電器）",
       "why": "MacBook Air、MacBook Pro 14 吋插它都充最快，比 Apple 便宜、多一個孔",
       "checkedAt": "2026-09-27",
-      "note": "要摺疊版（C10 Duo II），不是轉換版。一般賣家開一千出頭的比官方便宜四成以上、有的寫近全新，不收；商城和官方旗艦店不受「便宜兩成」的限制。",
+      "note": "要摺疊版（C10 Duo II），不是轉換版。一般賣家開一千出頭的比官方便宜四成以上、有的寫近全新，不收；商城和官方旗艦店不受「便宜兩成」的限制。 2026-09-27：官方旗艦店產得出來但售完、好買好物產不出來，再加兩家一般賣家（官方價 $2,490 的八折以上）。",
       "candidates": [
         {
           "shop": "好買好物",
@@ -2883,7 +2883,24 @@
           "channel": "mall",
           "price": 2490,
           "unit": "官方旗艦店，摺疊版",
-          "url": "https://shopee.tw/product/992256455/25028042203"
+          "url": "https://shopee.tw/product/992256455/25028042203",
+          "soldOut": "2026-09-27 Tim 產了連結，售完"
+        },
+        {
+          "channel": "seller",
+          "shop": "qwert1357",
+          "shopId": "70632131",
+          "price": 2115,
+          "unit": "寫正公司貨、GaN 摺疊版",
+          "url": "https://shopee.tw/product/70632131/43914868950"
+        },
+        {
+          "channel": "seller",
+          "shop": "小松鼠 Little squirrel",
+          "shopId": "59983609",
+          "price": 2490,
+          "unit": "寫全新，摺疊版",
+          "url": "https://shopee.tw/product/59983609/55952523923"
         }
       ]
     },
