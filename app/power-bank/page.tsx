@@ -25,6 +25,10 @@ export const metadata: Metadata = {
 
 export default function Page() {
   const ready = powerbanks.filter(buyableCharger).length;
+  // 買得到的排前面，其他照價錢。小米那三顆整條線產不出連結，放最上面只會讓人點進去買不到
+  const listed = [...powerbanks].sort(
+    (a, b) => Number(buyableCharger(b)) - Number(buyableCharger(a)) || (a.listPrice ?? 9e9) - (b.listPrice ?? 9e9),
+  );
   return (
     <main style={S.page}>
       <SiteHeader current="power-bank" />
@@ -56,7 +60,7 @@ export default function Page() {
 
       <p style={S.lbl}>我們讀過的 {powerbanks.length} 顆</p>
       <div style={wrap}>
-        {powerbanks.map((p, i) => (
+        {listed.map((p, i) => (
           <Link key={p.id} href={itemHref(p.id)} style={{ ...row, borderTop: i ? "1px solid var(--line)" : 0 }}>
             <span style={{ flex: 1, minWidth: 0 }}>
               <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.brand} · {p.cellMah.toLocaleString()}mAh · {p.cellWh}Wh</span>

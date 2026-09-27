@@ -3118,6 +3118,96 @@
           "url": "https://shopee.tw/product/67574794/45315145549"
         }
       ]
+    },
+    {
+      "id": "pb-05",
+      "label": "威剛 C100 行動電源 10000mAh 20W（行動電源）",
+      "why": "iPhone 16 以前充最快、四百多塊，生活超市有賣",
+      "note": "只挑已經產得出連結的賣場（生活超市、KINYO 旗艦店以前都產過）。行動電源照充電器的規矩：官方、商城、寫公司貨開發票的才收。",
+      "checkedAt": "2026-09-27",
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "known": true,
+          "price": 479,
+          "unit": "選顏色",
+          "url": "https://shopee.tw/product/50662979/26930660110"
+        }
+      ]
+    },
+    {
+      "id": "pb-06",
+      "label": "KINYO 自帶線輕儲能 10000mAh KPB2530（行動電源）",
+      "why": "自帶 USB-C、Lightning 兩條線，七百塊",
+      "note": "只挑已經產得出連結的賣場（生活超市、KINYO 旗艦店以前都產過）。行動電源照充電器的規矩：官方、商城、寫公司貨開發票的才收。",
+      "checkedAt": "2026-09-27",
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "KINYO官方旗艦店_3C館",
+          "shopId": "1322591005",
+          "known": true,
+          "price": 699,
+          "unit": "規格選 10000mAh（標題寫 20000，同一頁有兩種）",
+          "url": "https://shopee.tw/product/1322591005/29780416923"
+        }
+      ]
+    },
+    {
+      "id": "pb-07",
+      "label": "KINYO 自帶線輕儲能 20000mAh KPB2550（行動電源）",
+      "why": "兩萬毫安、74Wh 可以帶上飛機，九百塊",
+      "note": "只挑已經產得出連結的賣場（生活超市、KINYO 旗艦店以前都產過）。行動電源照充電器的規矩：官方、商城、寫公司貨開發票的才收。",
+      "checkedAt": "2026-09-27",
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "KINYO官方旗艦店_3C館",
+          "shopId": "1322591005",
+          "known": true,
+          "price": 899,
+          "unit": "規格選 20000mAh（跟 KPB2530 同一頁）",
+          "url": "https://shopee.tw/product/1322591005/29780416923"
+        }
+      ]
+    },
+    {
+      "id": "pb-08",
+      "label": "KINYO PD 30W 14400mAh KPB2800（行動電源）",
+      "why": "30W，平板、小筆電救急",
+      "note": "只挑已經產得出連結的賣場（生活超市、KINYO 旗艦店以前都產過）。行動電源照充電器的規矩：官方、商城、寫公司貨開發票的才收。",
+      "checkedAt": "2026-09-27",
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "KINYO官方旗艦店_3C館",
+          "shopId": "1322591005",
+          "known": true,
+          "price": 1280,
+          "unit": "1 顆",
+          "url": "https://shopee.tw/product/1322591005/41511441589"
+        }
+      ]
+    },
+    {
+      "id": "pb-09",
+      "label": "KINYO PD 65W 19200mAh KPB2802（行動電源）",
+      "why": "S26 Ultra 插它充最快（PPS 60W），也充得動筆電",
+      "note": "只挑已經產得出連結的賣場（生活超市、KINYO 旗艦店以前都產過）。行動電源照充電器的規矩：官方、商城、寫公司貨開發票的才收。",
+      "checkedAt": "2026-09-27",
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "KINYO官方旗艦店_3C館",
+          "shopId": "1322591005",
+          "known": true,
+          "price": 1580,
+          "unit": "四孔那款",
+          "url": "https://shopee.tw/product/1322591005/25389007655"
+        }
+      ]
     }
   ]
 }

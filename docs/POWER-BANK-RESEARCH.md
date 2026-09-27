@@ -56,3 +56,27 @@ v1 先做有線（引擎直接沿用充電器那一套）；磁吸的無線速�
 1. 請 Tim 在蝦皮分潤後台搜「行動電源」，看列得出來的是哪些牌子、哪幾家店（列得出來的才產得出連結）
 2. 從那些牌子挑官網有完整規格的，照同一套讀規格
 3. 已經證明產得出充電器連結的店先看：3C SHOP 數位生活、ONPRO官方旗艦館、KINYO官方旗艦店_3C館、Anker 品牌旗艦館、蝦皮直營 _ 生活超市
+
+## 第二批（2026-09-27）：只挑產得出連結的店有賣的
+
+比價站撈行動電源，只留 okshops（以前產得出連結的 45 家）賣的，再去官網讀規格：
+
+| 款 | Wh | 背面額定（5V） | 單孔最高 | 一起插 | 其他 |
+|---|---|---|---|---|---|
+| 威剛 C100 10000 | 37Wh | 6500mAh | C 20W（PD）；A1、A2 各 18W | 兩孔以上總共 5V⎓3A（15W），沒寫怎麼分 | 210g；沒寫 PPS；生活超市 $479 |
+| KINYO KPB2530 自帶線輕儲能 10000 | 37Wh | 6000mAh | C 孔 20W、PPS 5–9V⎓2A；自帶 USB-C 線 18W；A1 18W；A2 15W；Lightning、Micro 線 10W | 怎麼插都是總共 5V⎓3A | BSMI R4A106；官網沒寫重量；KINYO 旗艦店 $699 |
+| KINYO KPB2550 同款 20000 | 74Wh | 12000mAh | 同上 | 同上 | 跟 KPB2530 同一個蝦皮頁，選規格；$899 |
+| KINYO KPB2800 PD 30W 14400 | 53.28Wh | 8500mAh | C 30W、PPS 5–20V⎓1.5A；A 18W | C＋A 總共 15W | 272g；$1,280 |
+| KINYO KPB2802 PD 65W 19200 | 71.04Wh | 11200mAh | C1 65W、PPS 5–20V⎓3A；C2 24W；A1、A2 各 18W | C1＋C2 45＋24；C1＋A2 45＋18；C2＋A1 24＋18；A1＋A2 18＋18 | S26 Ultra 單插充最快；$1,580 |
+
+KINYO 官網（kinyo.tw）規格是文字，讀得到；威剛官網規格在頁面資料裡（spec name/value）。
+KINYO 官方寫 PPS「5–9V⎓2A（20W MAX）」，9V×2A 是 18W，資料填 18。
+
+沒收的：
+- 飛利浦 DLP1811、KINYO KPB2303、威剛 T10000：只有 5V⎓2.1A（約 10W），iPhone 15 以後插它都很慢
+- ONPRO MagReact M1：Lightning 輸入的舊款，而且主打磁吸無線，引擎還沒有無線
+- AnOne、WONDER 旺德（生活超市有賣）：沒找到官網規格
+
+來源：
+- https://www.adata.com/tw/consumer/category/power-banks/power-bank-c100/
+- https://www.kinyo.tw/products/kpb-2530 、kpb-2550、kpb-2800、kpb-2802

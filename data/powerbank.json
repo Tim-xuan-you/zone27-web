@@ -222,6 +222,296 @@
           }
         ]
       }
+    },
+    {
+      "id": "pb-05",
+      "brand": "威剛 ADATA",
+      "name": "C100 行動電源 10000mAh 20W",
+      "model": "C100",
+      "totalW": 20,
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 20
+        },
+        {
+          "id": "A1",
+          "kind": "A",
+          "w": 18
+        },
+        {
+          "id": "A2",
+          "kind": "A",
+          "w": 18
+        }
+      ],
+      "combos": [],
+      "cellMah": 10000,
+      "cellV": 3.7,
+      "cellWh": 37,
+      "rated5vMah": 6500,
+      "input": "USB-C 或 Micro USB 最高 18W",
+      "weightG": 210,
+      "sizeMm": "140 × 67.5 × 16",
+      "back": "寫 10000mAh，背面寫手機拿得到的是 6500mAh（5V）；兩台以上一起充，總共只剩 15W",
+      "dealbreaker": "你的手機是 iPhone 17 或 S26 Ultra，想充最快：USB-C 最多 20W；常常兩台一起充也不適合，總共只有 15W",
+      "knownIssues": "官方寫的：3.7V／37Wh，額定容量 5V⎓6500mAh、9V⎓3300mAh、12V⎓2500mAh，210 公克。USB-C 最高 20W（9V⎓2.22A，USB PD），兩個 USB-A 各最高 18W。兩個以上一起插，總共 5V⎓3A（15W），沒寫怎麼分。沒寫 PPS。自己充電 USB-C 或 Micro USB 最高 18W。",
+      "searchAs": "威剛 C100 10000mAh 20W",
+      "refs": [
+        "https://www.adata.com/tw/consumer/category/power-banks/power-bank-c100/"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true,
+      "listPrice": 479
+    },
+    {
+      "id": "pb-06",
+      "brand": "KINYO",
+      "name": "超能充 自帶線輕儲能行動電源 10000mAh",
+      "model": "KPB2530",
+      "totalW": 20,
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 20,
+          "pps": 18
+        },
+        {
+          "id": "自帶線",
+          "kind": "C",
+          "w": 18
+        },
+        {
+          "id": "A1",
+          "kind": "A",
+          "w": 18
+        },
+        {
+          "id": "A2",
+          "kind": "A",
+          "w": 15
+        }
+      ],
+      "combos": [],
+      "cellMah": 10000,
+      "cellV": 3.7,
+      "cellWh": 37,
+      "rated5vMah": 6000,
+      "cable": "自帶 USB-C、Lightning、Micro USB 三條線，另外一條 USB-A 線給它自己充電",
+      "input": "USB-C 或 Micro USB 最高 18W；自帶的 USB-A 線 5V⎓2A",
+      "bsmi": "R4A106",
+      "back": "寫 10000mAh，背面寫手機拿得到的是 6000mAh（5V）；兩台以上一起插，總共只剩 15W",
+      "dealbreaker": "你的手機是 iPhone 17 或 S26 Ultra，想充最快：USB-C 孔最多 20W，自帶的 USB-C 線 18W；常常兩台一起充也不適合，總共只有 15W",
+      "knownIssues": "官方寫的：10000mAh（3.7V）／37Wh，額定容量 5V⎓6000mAh、9V⎓3000mAh、12V⎓2400mAh。USB-C 孔最高 20W（9V⎓2.22A），PPS 5–9V⎓2A（官方寫 20W MAX，9V×2A 算起來是 18W）。自帶 USB-C 線最高 18W（9V⎓2A），Lightning 線、Micro USB 線 5V⎓2A。USB-A1 最高 18W，USB-A2 5V⎓3A。兩個以上一起插，怎麼插都是總共 5V⎓3A，沒寫怎麼分。官網沒寫重量。",
+      "searchAs": "KINYO KPB2530 自帶線輕儲能 10000mAh",
+      "refs": [
+        "https://www.kinyo.tw/products/kpb-2530"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true,
+      "listPrice": 799
+    },
+    {
+      "id": "pb-07",
+      "brand": "KINYO",
+      "name": "超能充 自帶線輕儲能行動電源 20000mAh",
+      "model": "KPB2550",
+      "totalW": 20,
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 20,
+          "pps": 18
+        },
+        {
+          "id": "自帶線",
+          "kind": "C",
+          "w": 18
+        },
+        {
+          "id": "A1",
+          "kind": "A",
+          "w": 18
+        },
+        {
+          "id": "A2",
+          "kind": "A",
+          "w": 15
+        }
+      ],
+      "combos": [],
+      "cellMah": 20000,
+      "cellV": 3.7,
+      "cellWh": 74,
+      "rated5vMah": 12000,
+      "cable": "自帶 USB-C、Lightning、Micro USB 三條線，另外一條 USB-A 線給它自己充電",
+      "input": "USB-C 或 Micro USB 最高 18W；自帶的 USB-A 線 5V⎓2A",
+      "bsmi": "R4A106",
+      "back": "寫 20000mAh，背面寫手機拿得到的是 12000mAh（5V）；兩台以上一起插，總共只剩 15W",
+      "dealbreaker": "你的手機是 iPhone 17 或 S26 Ultra，想充最快：USB-C 孔最多 20W；自己充飽也慢，最高 18W 要充一個晚上",
+      "knownIssues": "官方寫的：20000mAh（3.7V）／74Wh，額定容量 5V⎓12000mAh、9V⎓6000mAh、12V⎓4800mAh。USB-C 孔最高 20W（9V⎓2.22A），PPS 5–9V⎓2A（官方寫 20W MAX，9V×2A 算起來是 18W）。自帶 USB-C 線最高 18W（9V⎓2A），Lightning 線、Micro USB 線 5V⎓2A。USB-A1 最高 18W，USB-A2 5V⎓3A。兩個以上一起插，怎麼插都是總共 5V⎓3A，沒寫怎麼分。官網沒寫重量。",
+      "searchAs": "KINYO KPB2550 自帶線輕儲能 20000mAh",
+      "refs": [
+        "https://www.kinyo.tw/products/kpb-2550"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true,
+      "listPrice": 990
+    },
+    {
+      "id": "pb-08",
+      "brand": "KINYO",
+      "name": "PD 30W 輕效商務極速充 14400mAh",
+      "model": "KPB2800",
+      "totalW": 30,
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 30,
+          "pps": 30
+        },
+        {
+          "id": "A",
+          "kind": "A",
+          "w": 18
+        }
+      ],
+      "combos": [],
+      "cellMah": 14400,
+      "cellV": 3.7,
+      "cellWh": 53.28,
+      "rated5vMah": 8500,
+      "input": "USB-C 最高 30W",
+      "weightG": 272,
+      "sizeMm": "51 × 150 × 25",
+      "bsmi": "R4A106",
+      "back": "寫 14400mAh，背面寫手機拿得到的是 8500mAh（5V）；USB-C 跟 USB-A 一起插，總共只剩 15W",
+      "dealbreaker": "你要充 MacBook Air：這顆最高 30W，蘋果寫 35W 以上才是正常充；或是 iPhone 17 想充最快（要 40W）",
+      "knownIssues": "官方寫的：4800mAh（3.7V）× 3／53.28Wh，額定容量 5V⎓8500mAh、9V⎓4800mAh、12V⎓3600mAh、15V⎓2800mAh、20V⎓2100mAh，272 公克。USB-C 最高 30W（20V⎓1.5A），PPS 5–20V⎓1.5A（30W）。USB-A 最高 18W。兩個一起插，總共 5V⎓3A（15W），沒寫怎麼分。自己充電 USB-C 最高 30W。",
+      "searchAs": "KINYO KPB2800 PD 30W 14400mAh",
+      "refs": [
+        "https://www.kinyo.tw/products/kpb-2800"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true,
+      "listPrice": 1280
+    },
+    {
+      "id": "pb-09",
+      "brand": "KINYO",
+      "name": "PD 65W 大容量商務極速充 19200mAh",
+      "model": "KPB2802",
+      "totalW": 65,
+      "ports": [
+        {
+          "id": "C1",
+          "kind": "C",
+          "w": 65,
+          "pps": 60
+        },
+        {
+          "id": "C2",
+          "kind": "C",
+          "w": 24
+        },
+        {
+          "id": "A1",
+          "kind": "A",
+          "w": 18
+        },
+        {
+          "id": "A2",
+          "kind": "A",
+          "w": 18
+        }
+      ],
+      "combos": [
+        {
+          "use": [
+            "C1",
+            "C2"
+          ],
+          "w": {
+            "C1": 45,
+            "C2": 24
+          }
+        },
+        {
+          "use": [
+            "C1",
+            "A2"
+          ],
+          "w": {
+            "C1": 45,
+            "A2": 18
+          }
+        },
+        {
+          "use": [
+            "C2",
+            "A1"
+          ],
+          "w": {
+            "C2": 24,
+            "A1": 18
+          }
+        },
+        {
+          "use": [
+            "A1",
+            "A2"
+          ],
+          "w": {
+            "A1": 18,
+            "A2": 18
+          }
+        }
+      ],
+      "cellMah": 19200,
+      "cellV": 3.7,
+      "cellWh": 71.04,
+      "rated5vMah": 11200,
+      "input": "USB-C1 最高 65W",
+      "bsmi": "R4A106",
+      "back": "寫 65W，兩個 USB-C 一起插，大的那個只剩 45W；背面寫手機拿得到的是 11200mAh（5V）",
+      "dealbreaker": "你要充 MacBook Air 最快（要 70W，這顆最高 65W）；或是 iPhone 18 Pro 想充最快（官網沒寫 AVS）",
+      "knownIssues": "官方寫的：19200mAh（3.7V）／71.04Wh，額定容量 5V⎓11200mAh、9V⎓6400mAh、12V⎓4800mAh、15V⎓3800mAh、20V⎓2800mAh。USB-C1 最高 65W（20V⎓3.25A），PPS 5–20V⎓3A；USB-C2 最高 24W（12V⎓2A）；兩個 USB-A 各最高 18W。一起插：C1＋C2 是 45W＋24W，C1＋A2 是 45W＋18W，C2＋A1 是 24W＋18W，A1＋A2 各 18W；C1＋A1、C2＋A2 總共 5V⎓3A，四個一起 5V⎓6A，這幾種沒寫怎麼分。沒寫一起插的時候 PPS 剩多少。官網沒寫重量。",
+      "searchAs": "KINYO KPB2802 PD 65W 19200mAh",
+      "refs": [
+        "https://www.kinyo.tw/products/kpb-2802"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true,
+      "listPrice": 1780
     }
   ]
 }
