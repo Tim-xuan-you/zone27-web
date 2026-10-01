@@ -13,7 +13,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * 清乾淨之後（Search Console 顯示這些網址都退出索引）這個檔案就可以刪。
  */
 const GONE = new Set([
-  "about", "audit", "auth", "badminton", "basketball", "brief",
+  "audit", "auth", "badminton", "basketball", "brief",
   "calibration", "changelog", "corrections", "coverage", "engines",
   "eth", "ethics", "faq", "feedback", "founders", "glossary",
   "how-we-grade", "lab", "ladder", "learn", "login", "markets",

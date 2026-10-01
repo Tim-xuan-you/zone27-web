@@ -42,7 +42,8 @@ function forbiddenHosts(): Set<string> {
   const add = (u: string) => {
     try { hosts.add(new URL(u).hostname.replace(/^www\./, "")); } catch { /* 不是網址就跳過 */ }
   };
-  for (const f of readdirSync(join(ROOT, "data"))) {
+  // 只讀 data/ 底下的檔案（data/worksheets/ 這種子資料夾跳過，2026-10-01）
+  for (const f of readdirSync(join(ROOT, "data"), { withFileTypes: true }).filter((d) => d.isFile()).map((d) => d.name)) {
     const text = readFileSync(join(ROOT, "data", f), "utf8");
     if (f.endsWith(".csv")) {
       // CSV 裡的 twSource：那是別家通路的上架頁

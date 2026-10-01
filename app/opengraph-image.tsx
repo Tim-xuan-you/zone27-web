@@ -1,15 +1,15 @@
 import { ogCard, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og";
 
-export const alt = "ZONE 27：先刪掉不適合的，剩下的才給你看";
+export const alt = "ZONE 27：陪孩子動腦的益智學習單";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
 export default function Image() {
   return ogCard({
-    // 開了貓飼料、貓罐頭之後，這裡還寫「狗飼料裁決器」，養貓的人看到預覽就不會點
-    kicker: "狗飼料・貓飼料・貓罐頭",
-    headline: "點一下牠的年紀和狀況，先刪掉不適合的",
-    sub: "每一款都寫清楚什麼時候不要買",
+    // 2026-10-01 網站改成孩子的學習單。家長在班級群組看到的就是這張
+    kicker: "免費・A4・印了就能寫",
+    headline: "陪孩子動腦的益智學習單",
+    sub: "說明都有注音，答案用畫的，卡住了有提示",
     tone: "accent",
   });
 }

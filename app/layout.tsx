@@ -19,11 +19,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   metadataBase: new URL("https://zone27.com.tw"),
   title: {
-    default: "ZONE 27 · 幫你刪掉不適合的",
+    default: "ZONE 27 · 陪孩子動腦的益智學習單",
     template: "%s · ZONE 27",
   },
   description:
-    "先選你要買的：狗的、貓的、充電器。每一款的包裝背面我們都讀過，先刪掉不適合你的，剩下的才給你看；每一款都寫清楚什麼時候不要買。",
+    "免費的益智學習單，A4 印了就能寫。說明都有注音，答案用畫的不用寫字，卡住了有一段一段的提示。一個大班生的爸爸做的。",
   openGraph: { type: "website", locale: "zh_TW", siteName: "ZONE 27" },
   robots: { index: true, follow: true },
 };

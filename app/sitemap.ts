@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // 2026-10-01 學習單：免費、會被轉傳，是之後的主軸
     { url: `${BASE}/worksheets`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     { url: `${BASE}/worksheets/acorn`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
+    { url: `${BASE}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/dog-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/dog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/cat`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },

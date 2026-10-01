@@ -1,5 +1,7 @@
 import { catalogOf, isLive, liveCount } from "@/lib/catalog";
 import { cansOf, mer, recommendable } from "@/lib/engine";
+import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
+import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
 
 /**
  * /llms.txt，給大型語言模型讀的網站說明。
@@ -45,8 +47,18 @@ export function GET() {
 
   const body = `# ZONE 27
 
-> 台灣的購物決策工具：狗飼料、貓飼料、主食罐、貓砂、零食，還有充電器、行動電源。我們讀每一款的包裝背面與官方規格，
-> 先把不適合的刪掉，並寫清楚每一款被刪的理由與「什麼時候不要買」。
+> 免費的益智學習單（2026-10 起的主軸），由一個大班生的爸爸製作。A4 印了就能寫，說明都有注音，答案用畫的不用寫字，
+> 卡住了可以掃 QR code 一段一段看提示。網站也保留了早期做的狗貓飼料、充電器、行動電源比較。
+
+## 學習單
+
+- 撿松果回家（${BASE}/worksheets/acorn）：迷宮題，每一顆松果都要撿到、每個格子只能走一次。${ACORN_LEVELS.length} 個關卡，每關 ${ACORN_SHEETS.filter((x) => x.level === 1).length} 張固定編號的學習單，適合 5 歲以上
+- 每一題都用程式窮舉所有走法，確認只有一個答案；直接走最短的路一定會漏掉松果，孩子要先規劃路線
+- 說明文字全部加注音，字型為芫荽（Iansui，依教育部標準字形調整）
+- 題目全部自行出題，不改編市售評量或益智書
+- 正在製作：注音猜猜看（看注音圈出是哪一個東西，點子來自作者的孩子）、連連看、數字松果
+
+## 早期內容：寵物飼料與 3C
 
 ## 方法
 

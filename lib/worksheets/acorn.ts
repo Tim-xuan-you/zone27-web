@@ -257,3 +257,78 @@ export const ACORN_EXAMPLE: AcornPuzzle = {
   answer: [0, 1, 2, 5, 4, 3, 6, 7, 8],
   shortestLen: 5,
 };
+
+/* ------------------------------------------------------------------ */
+/* 挑題：程式出很多題，只留好的（2026-10-01）                           */
+/*                                                                    */
+/* Tim 的決定：家長看到的是固定編號的那幾張，不是隨機。程式退到後台出候選， */
+/* 這裡幫每一題打分數、把「太平」的濾掉，scripts/worksheets-acorn.ts      */
+/* 照分數挑，Tim 看過總覽、孩子試寫過才上線。                            */
+/* ------------------------------------------------------------------ */
+
+export interface AcornStats {
+  len: number;
+  acorns: number;
+  /** 答案轉了幾個彎 */
+  turns: number;
+  /** 答案經過幾個岔路口（要做決定的地方） */
+  branches: number;
+  /** 直接走最近的路會漏掉幾顆 */
+  missed: number;
+  /** 答案裡同一段直線上最多連著幾顆松果 */
+  straightRun: number;
+  /** 松果有幾顆貼著外牆 */
+  onEdge: number;
+  /** 難度分數：越高越要動腦 */
+  score: number;
+  /** 太平了，不要用 */
+  dull: boolean;
+}
+
+export function acornStats(p: AcornPuzzle): AcornStats {
+  const { W, H } = p;
+  const open = new Set(p.open);
+  const deg = (i: number) => {
+    const x = i % W, y = Math.floor(i / W);
+    let d = 0;
+    if (x > 0 && open.has(edgeKey(i, i - 1))) d++;
+    if (x < W - 1 && open.has(edgeKey(i, i + 1))) d++;
+    if (y > 0 && open.has(edgeKey(i, i - W))) d++;
+    if (y < H - 1 && open.has(edgeKey(i, i + W))) d++;
+    return d;
+  };
+  const a = p.answer;
+  const dir = (k: number) => a[k + 1] - a[k];
+  let turns = 0;
+  for (let k = 1; k < a.length - 1; k++) if (dir(k) !== dir(k - 1)) turns++;
+  const branches = a.slice(0, -1).filter((c) => deg(c) >= 3).length;
+  const g = makeGrid(W, H);
+  const sp = shortest(g, open, p.S, p.E);
+  const missed = p.acorns.filter((x) => !sp.includes(x)).length;
+  // 同一段直線（方向不變）上連著幾顆松果
+  const ac = new Set(p.acorns);
+  let straightRun = 0;
+  let k = 0;
+  while (k < a.length) {
+    let j = k;
+    while (j + 1 < a.length && (j === k || dir(j) === dir(j - 1))) j++;
+    straightRun = Math.max(straightRun, a.slice(k, j + 1).filter((c) => ac.has(c)).length);
+    k = j === k ? k + 1 : j;
+  }
+  const onEdge = p.acorns.filter((c) => { const x = c % W, y = Math.floor(c / W); return x === 0 || y === 0 || x === W - 1 || y === H - 1; }).length;
+  const score = turns + 2 * branches + 2 * missed;
+  // 一直線上連著三顆，或松果幾乎都貼著牆：順著邊走就撿完了（Tim 家孩子幾秒就解完的那一題）
+  const dull = straightRun >= 3 || onEdge / p.acorns.length > 0.6;
+  return { len: a.length, acorns: p.acorns.length, turns, branches, missed, straightRun, onEdge, score, dull };
+}
+
+/** 上線的一張：固定編號、固定題目 */
+export interface AcornSheet {
+  /** acorn-3-2：第 3 關第 2 張。編號一旦上線就不能改，印出去的 QR code 指的就是它 */
+  id: string;
+  level: number;
+  n: number;
+  puzzles: [AcornPuzzle, AcornPuzzle];
+  /** 哪一天給孩子試寫過（沒寫過就是空的，頁面不會說寫過） */
+  tested?: string;
+}

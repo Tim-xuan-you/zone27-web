@@ -51,7 +51,7 @@ export default function Page() {
   return (
     <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ) }} />
-      <SiteHeader />
+      <SiteHeader current="check" />
 
       <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px" }}>
         你家那包飼料，<br />有沒有藏雞？

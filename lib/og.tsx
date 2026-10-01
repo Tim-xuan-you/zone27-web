@@ -21,7 +21,8 @@ export const OG_CONTENT_TYPE = "image/png";
 const INK = "#1C1A17";
 const MUTED = "#6B655C";
 const GROUND = "#FBFAF7";
-const ACCENT = "#1F6F5C";
+// 2026-10-01 主色改成蔚藍（網站改成孩子的學習單）
+const ACCENT = "#1A6FBF";
 const CUT = "#A4432F";
 const WARN = "#9A6A12";
 // 分享卡上的章（圖片裡不能用 CSS 變數，照網站淺色主題的顏色寫死）

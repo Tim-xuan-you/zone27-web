@@ -55,6 +55,18 @@ export const houseIcon = (x: number, y: number, s: number): string => `
 <rect x="${r2(x + 0.06 * s)}" y="${r2(y + 0.06 * s)}" width="${r2(0.12 * s)}" height="${r2(0.12 * s)}" fill="${WS.sky}"/>
 </g>`;
 
+/**
+ * 小松鼠的腳印。腳趾朝走的方向（deg：0 往上、90 往右、180 往下、270 往左）。
+ * 2026-10-01 Tim 家的孩子問「每一格是什麼？」：例子裡每走一格就留一個腳印，一看就懂「一格一格走、踩過了」
+ */
+export const pawIcon = (x: number, y: number, s: number, deg: number): string => `
+<g transform="translate(${r2(x)} ${r2(y)}) rotate(${deg})" fill="#8A5A33">
+<ellipse cx="0" cy="${r2(0.09 * s)}" rx="${r2(0.15 * s)}" ry="${r2(0.12 * s)}"/>
+<circle cx="${r2(-0.15 * s)}" cy="${r2(-0.09 * s)}" r="${r2(0.055 * s)}"/>
+<circle cx="0" cy="${r2(-0.16 * s)}" r="${r2(0.055 * s)}"/>
+<circle cx="${r2(0.15 * s)}" cy="${r2(-0.09 * s)}" r="${r2(0.055 * s)}"/>
+</g>`;
+
 /** 右向的小三角（入口、出口的箭頭） */
 const arrowRight = (x: number, y: number, k: number, fill: string) =>
   `<path d="M ${r2(x)} ${r2(y - k)} L ${r2(x + k * 1.3)} ${r2(y)} L ${r2(x)} ${r2(y + k)} Z" fill="${fill}"/>`;
@@ -62,6 +74,8 @@ const arrowRight = (x: number, y: number, k: number, fill: string) =>
 export interface MazeOpts {
   /** 要畫的路線（提示、答案） */
   path?: number[];
+  /** 路線畫成一格一個腳印（「小松鼠這樣走」那個例子） */
+  paws?: boolean;
   color?: string;
   /** 左右留給松鼠、房子的空間（格子的倍數） */
   side?: number;
@@ -74,7 +88,7 @@ export interface MazeOpts {
  * 2026-10-01 Tim 抓到：第一版右下角也封起來了，走到房子前面進不去。
  */
 export function mazeSvg(p: AcornPuzzle, c: number, opts: MazeOpts = {}): { svg: string; w: number; h: number } {
-  const { path, color = WS.emerald, side = 1.15, icon = 0.95 } = opts;
+  const { path, paws = false, color = WS.emerald, side = 1.15, icon = 0.95 } = opts;
   const { W, H } = p;
   const open = new Set(p.open);
   const ml = c * side, mr = c * side, mt = c * 0.2, mb = c * 0.35;
@@ -83,7 +97,6 @@ export function mazeSvg(p: AcornPuzzle, c: number, opts: MazeOpts = {}): { svg: 
   const Y = (i: number) => mt + (Math.floor(i / W) + 0.5) * c;
   const x0 = ml, y0 = mt, x1 = ml + W * c, y1 = mt + H * c;
   const walls: string[] = [];
-  const dashes: string[] = [];
   for (let i = 0; i < W * H; i++) {
     const x = i % W, y = Math.floor(i / W);
     const nbrs: [number, number, number, number, number][] = [];
@@ -91,16 +104,34 @@ export function mazeSvg(p: AcornPuzzle, c: number, opts: MazeOpts = {}): { svg: 
     if (y < H - 1) nbrs.push([i + W, x0 + x * c, y0 + (y + 1) * c, x0 + (x + 1) * c, y0 + (y + 1) * c]);
     for (const [j, ax, ay, bx, by] of nbrs) {
       const key = i < j ? `${i}-${j}` : `${j}-${i}`;
-      (open.has(key) ? dashes : walls).push(`M ${r2(ax)} ${r2(ay)} L ${r2(bx)} ${r2(by)}`);
+      if (!open.has(key)) walls.push(`M ${r2(ax)} ${r2(ay)} L ${r2(bx)} ${r2(by)}`);
     }
   }
-  let g = `<rect x="${r2(x0)}" y="${r2(y0)}" width="${r2(W * c)}" height="${r2(H * c)}" rx="${r2(c * 0.1)}" fill="${WS.sky}"/>`;
-  g += `<path d="${dashes.join(" ")}" stroke="#B7CCDC" stroke-width="${r2(c * 0.025)}" stroke-dasharray="${r2(c * 0.07)} ${r2(c * 0.07)}"/>`;
+  /*
+   * 格子畫成一塊一塊的地磚，磚跟磚之間留白縫（2026-10-01）。
+   * 第一版只有淡淡的虛線，孩子看到的是一大片藍色空地，問「每一格是什麼？」
+   * 地磚黑白印出來是淺灰配白縫，一樣分得出一塊一塊。
+   */
+  const gap = c * 0.06;
+  let g = `<rect x="${r2(x0)}" y="${r2(y0)}" width="${r2(W * c)}" height="${r2(H * c)}" fill="#FFFFFF"/>`;
+  for (let i = 0; i < W * H; i++) {
+    const tx = x0 + (i % W) * c + gap, ty = y0 + Math.floor(i / W) * c + gap;
+    g += `<rect x="${r2(tx)}" y="${r2(ty)}" width="${r2(c - 2 * gap)}" height="${r2(c - 2 * gap)}" rx="${r2(c * 0.14)}" fill="#D7E9F8"/>`;
+  }
   // 外框：左邊第一列是入口、右邊最後一列是出口，兩個地方都不畫牆
   g += `<path d="M ${r2(x0)} ${r2(y0 + c)} L ${r2(x0)} ${r2(y1)} L ${r2(x1)} ${r2(y1)} M ${r2(x0)} ${r2(y0)} L ${r2(x1)} ${r2(y0)} L ${r2(x1)} ${r2(y1 - c)}" fill="none" stroke="${WS.iron}" stroke-width="${r2(c * 0.1)}" stroke-linecap="round" stroke-linejoin="round"/>`;
   if (walls.length) g += `<path d="${walls.join(" ")}" stroke="${WS.iron}" stroke-width="${r2(c * 0.1)}" stroke-linecap="round"/>`;
   // 路線畫在松果下面，才不會把松果蓋掉
-  if (path && path.length > 1) {
+  if (path && paws) {
+    // 每一格一個腳印，腳趾朝下一格的方向；最後一格朝出口
+    path.forEach((cell, k) => {
+      const next = path[k + 1];
+      const dx = next === undefined ? 1 : Math.sign(X(next) - X(cell));
+      const dy = next === undefined ? 0 : Math.sign(Y(next) - Y(cell));
+      const deg = dx === 1 ? 90 : dx === -1 ? 270 : dy === 1 ? 180 : 0;
+      g += pawIcon(X(cell), Y(cell), c * 0.78, deg);
+    });
+  } else if (path && path.length > 1) {
     // 走到終點的話，線畫到房子門口：一看就知道回到家了
     const pts = path.map((i) => `${r2(X(i))},${r2(Y(i))}`);
     if (path[path.length - 1] === p.E) pts.push(`${r2(x1 + c * 0.02)},${r2(Y(p.E))}`);

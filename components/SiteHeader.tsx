@@ -3,52 +3,51 @@ import {
   ANIMALS, animalHref, categoriesOf, categoryBySlug, type CategorySlug,
 } from "@/lib/categories";
 import type { Species } from "@/lib/types";
+import { Squirrel } from "@/components/worksheets/Mascot";
 
 /**
  * 全站頁首。
  *
- * 以前每一頁各寫一份，導覽列掛的是狗飼料的四篇文章。
- * 有了第二個類目之後那排字就塞不下了，而且貓飼料的讀者點進來，
- * 看到「成分表裡有雞」「排除飲食法」會以為走錯站。
+ * 2026-10-01 網站改成孩子的學習單網站（Tim 決定）。頁首只剩兩個：學習單、關於我們。
+ * 以前的狗、貓、充電器、行動電源沒有刪，頁面都還在、搜尋引擎也還找得到，
+ * 只是不放在頁首。從 Google 直接點進那些頁面的人，頁首下面會多一排「其他分類」，
+ * 讓他在那幾區之間走得到，不會迷路。
  *
- * 所以頂層只放「狗」「貓」，類目收進第二排。
- * 類目會一直加（貓乾糧、貓罐頭，以後可能有貓砂、零食），
- * 導覽列要是每加一個類目就多一個字，到第五個類目手機上就斷成三行。
- * 先分動物、再分類目，這一排永遠是四個字加兩個連結。
- *
- * 第二排只有在那個動物有兩個以上的類目時才出現。
+ * logo 換成小松鼠：學習單上的那一隻，家長在紙上、在網站上看到的是同一個角色。
  */
 
-type Current = CategorySlug | Species | "charger" | "power-bank" | "how-we-choose" | "ask" | "worksheets";
+type Legacy = CategorySlug | Species | "charger" | "power-bank" | "how-we-choose" | "ask" | "check";
+type Current = Legacy | "worksheets" | "about";
+
+const KIDS = new Set<Current>(["worksheets", "about"]);
 
 export default function SiteHeader({ current }: { current?: Current }) {
-  // 現在在哪一個動物底下：類目頁算那個類目的動物，動物頁算自己
+  const legacy = current !== undefined && !KIDS.has(current);
+  // 以前的分類：現在在哪一個動物底下
   const cat = current ? categoryBySlug(current) : undefined;
   const species: Species | undefined =
     cat?.species ?? (current === "dog" || current === "cat" ? current : undefined);
   const subs = species ? categoriesOf(species) : [];
 
-  const items: { href: string; label: string; on: boolean }[] = [
-    // 2026-10-01 學習單開工，Tim 要它當主軸，放第一個
+  const items = [
     { href: "/worksheets", label: "學習單", on: current === "worksheets" },
+    { href: "/about", label: "關於我們", on: current === "about" },
+  ];
+  const old = [
     ...ANIMALS.map((a) => ({ href: animalHref(a.species), label: a.zh, on: species === a.species })),
-    // 2026-09-26 第一個不是寵物的類目。跟狗、貓並排：先選你要買的是哪一種東西
     { href: "/charger", label: "充電器", on: current === "charger" },
     { href: "/power-bank", label: "行動電源", on: current === "power-bank" },
     { href: "/how-we-choose", label: "我們怎麼挑", on: current === "how-we-choose" },
-    { href: "/ask", label: "問我們", on: current === "ask" },
   ];
 
   return (
-    <header style={{ marginBottom: 40 }}>
+    <header style={{ marginBottom: 36 }}>
       <div style={bar}>
-        <Link href="/" style={logo}>
-          <span style={dot} />
-          {/* 一句話講完這個站在做什麼：朋友問「那是什麼網站」，講這句就好（2026-09-13）
-              2026-09-23 從「成分表才算數」改成「背面才算數」。這個站不會只做吃的：貓砂看材質、零食看熱量，以後家電看規格表、保養品看全成分，全都印在包裝背面。IG／Threads 的自介用同一句，站跟帳號講的是同一件事 */}
+        <Link href="/" style={logo} aria-label="ZONE 27 首頁">
+          <Squirrel size={38} />
           <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.25 }}>
             <span>ZONE 27</span>
-            <span style={tagline}>名字不算數，背面才算數</span>
+            <span style={tagline}>陪孩子動腦的學習單</span>
           </span>
         </Link>
         <nav aria-label="主選單" style={nav}>
@@ -65,7 +64,23 @@ export default function SiteHeader({ current }: { current?: Current }) {
         </nav>
       </div>
 
-      {subs.length > 1 && (
+      {legacy && (
+        <nav aria-label="其他分類" style={oldBar}>
+          <span style={{ color: "var(--faint)" }}>其他分類</span>
+          {old.map((it) => (
+            <Link
+              key={it.href}
+              href={it.href}
+              aria-current={it.on ? "page" : undefined}
+              style={it.on ? { ...oldLink, color: "var(--ink)", fontWeight: 700 } : oldLink}
+            >
+              {it.label}
+            </Link>
+          ))}
+        </nav>
+      )}
+
+      {legacy && subs.length > 1 && (
         <nav aria-label={`${ANIMALS.find((a) => a.species === species)?.zh}的類目`} style={subBar}>
           {subs.map((c) => {
             const on = cat?.slug === c.slug;
@@ -88,19 +103,22 @@ export default function SiteHeader({ current }: { current?: Current }) {
 
 const bar: React.CSSProperties = {
   display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap",
-  gap: "10px 14px", padding: "28px 0 20px", borderBottom: "1px solid var(--line)",
+  gap: "10px 14px", padding: "22px 0 18px", borderBottom: "1px solid var(--line)",
 };
 const logo: React.CSSProperties = {
-  display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 17,
+  display: "flex", alignItems: "center", gap: 10, fontWeight: 900, fontSize: 17,
   color: "inherit", textDecoration: "none", whiteSpace: "nowrap",
 };
-const dot: React.CSSProperties = { width: 9, height: 9, borderRadius: 2, background: "var(--accent)", alignSelf: "flex-start", marginTop: 6 };
-const tagline: React.CSSProperties = { fontSize: 12.5, fontWeight: 600, color: "var(--muted)", letterSpacing: ".02em" };
+const tagline: React.CSSProperties = { fontSize: 12.5, fontWeight: 600, color: "var(--muted)", letterSpacing: ".04em" };
 const nav: React.CSSProperties = {
-  display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: "6px 18px",
-  fontSize: 14, color: "var(--muted)",
+  display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: "6px 20px", fontSize: 15.5,
 };
 const link: React.CSSProperties = { color: "var(--muted)", textDecoration: "none", whiteSpace: "nowrap" };
+
+const oldBar: React.CSSProperties = {
+  display: "flex", flexWrap: "wrap", alignItems: "center", gap: "4px 14px", padding: "10px 0 0", fontSize: 14,
+};
+const oldLink: React.CSSProperties = { color: "var(--muted)", textDecoration: "none", whiteSpace: "nowrap" };
 
 const subBar: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", gap: 8, padding: "12px 0 0",

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { G, R, S, T } from "@/components/styles";
 import { acornHints, acornLevel, sheetPuzzles, type AcornPuzzle } from "@/lib/worksheets/acorn";
+import { acornSheetById, acornSheetsOf } from "@/lib/worksheets/acorn-sheets";
 import { WS, mazeSvg } from "@/lib/worksheets/draw";
 
 /**
@@ -48,34 +49,50 @@ function Puzzle({ p, k }: { p: AcornPuzzle; k: number }) {
   );
 }
 
+type Q = { level: number; n?: number; puzzles: [AcornPuzzle, AcornPuzzle]; back: string } | null | "bad";
+
 export default function AcornHints() {
-  const [q, setQ] = useState<{ level: number; seed: number } | null | "bad">(null);
+  const [q, setQ] = useState<Q>(null);
   useEffect(() => {
     const u = new URLSearchParams(window.location.search);
+    const sheet = acornSheetById(u.get("id") ?? "");
+    if (sheet) {
+      setQ({ level: sheet.level, n: sheet.n, puzzles: sheet.puzzles, back: `/worksheets/acorn?id=${sheet.id}` });
+      return;
+    }
+    // 2026-10-01 改成固定編號以前印的（?l=關&s=號碼），只有 Tim 家印過，留著讓舊的 QR code 還掃得到
     const level = acornLevel(Number(u.get("l")) || 1).n;
     const seed = Number(u.get("s"));
-    setQ(Number.isInteger(seed) && seed >= 100000 && seed <= 999999 ? { level, seed } : "bad");
+    if (Number.isInteger(seed) && seed >= 100000 && seed <= 999999) {
+      setQ({ level, puzzles: sheetPuzzles(level, seed), back: `/worksheets/acorn?l=${level}` });
+      return;
+    }
+    setQ("bad");
   }, []);
 
   if (q === null) return <p style={S.hint}>題目載入中...</p>;
   if (q === "bad") {
     return (
       <p style={{ fontSize: T.md, lineHeight: 1.9 }}>
-        這個網址少了題目的號碼。請掃學習單右下角的 QR code，或是<Link href="/worksheets/acorn" style={{ color: "var(--accent)" }}>回去印一張新的</Link>。
+        這個網址少了學習單的編號。請掃學習單右下角的 QR code，或是<Link href="/worksheets/acorn" style={{ color: "var(--accent)" }}>回去挑一張</Link>。
       </p>
     );
   }
-  const puzzles = sheetPuzzles(q.level, q.seed);
+  const next = acornSheetsOf(Math.min(q.level + 1, 6))[0];
   return (
     <div>
       <p style={{ color: "var(--muted)", fontSize: T.md, lineHeight: 1.9, margin: 0 }}>
-        第 {q.level} 關，學習單號碼 {q.seed}。
+        第 {q.level} 關{q.n ? `第 ${q.n} 張` : ""}。提示一次只開一段，看完把手機拿開，讓孩子接著畫。
       </p>
-      {puzzles.map((p, i) => <Puzzle key={`${q.seed}-${i}`} p={p} k={i + 1} />)}
+      {q.puzzles.map((p, i) => <Puzzle key={i} p={p} k={i + 1} />)}
       <p style={{ marginTop: G.xl, fontSize: T.md, lineHeight: 2 }}>
-        <Link href={`/worksheets/acorn?l=${q.level}&s=${q.seed}`} style={link}>再印一張一樣的</Link>
-        <span style={{ color: "var(--faint)", margin: `0 ${G.sm}px` }}>·</span>
-        <Link href={`/worksheets/acorn?l=${Math.min(q.level + 1, 6)}`} style={link}>寫得很順？試下一關</Link>
+        <Link href={q.back} style={link}>回到這一張</Link>
+        {q.level < 6 && next && (
+          <>
+            <span style={{ color: "var(--faint)", margin: `0 ${G.sm}px` }}>·</span>
+            <Link href={`/worksheets/acorn?id=${next.id}`} style={link}>寫得很順？試第 {q.level + 1} 關</Link>
+          </>
+        )}
       </p>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CONTACT, pageReport } from "@/lib/contact";
 
@@ -17,6 +18,30 @@ export default function PageReport() {
   if (path.startsWith("/status")) return null;
   const href = pageReport(path);
   if (!href) return null;
+
+  /*
+   * 2026-10-01 網站改成孩子的學習單：學習單這幾頁講的是「注音標錯、題目有問題」，
+   * 以前的狗貓飼料、充電器收在這裡一行，頁面都還在，從這裡、從搜尋引擎都找得到。
+   * 學習單頁沒有購買連結，所以不放聯盟行銷那一句。
+   */
+  const kids = path === "/" || path.startsWith("/worksheets") || path.startsWith("/about");
+  if (kids) {
+    return (
+      <div style={wrap}>
+        <p style={line}>
+          注音標錯、題目有兩個答案、哪一關太難？
+          <a href={href} style={link}>寫信跟我說</a>
+          ，收到會改。
+          <span style={addr}>{CONTACT.email}</span>
+          <span style={{ display: "block", marginTop: 8 }}>
+            以前做的：
+            <Link href="/dog" style={link}>狗</Link>、<Link href="/cat" style={link}>貓</Link>、
+            <Link href="/charger" style={link}>充電器</Link>、<Link href="/power-bank" style={link}>行動電源</Link>
+          </span>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div style={wrap}>

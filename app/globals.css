@@ -1,78 +1,79 @@
 @import "tailwindcss";
 
 /*
-  ZONE 27 設計系統 · v2
+  ZONE 27 設計系統 · v3（2026-10-01 改成孩子的學習單網站）
 
-  第一版走「儀表板」美學：暗底、高密度、全灰階。
-  邏輯是從商業模式推的（我們不是商店，是工具），但那推錯了對象。
+  v2 是給擔心狗一直抓癢的飼主：暖調中性、深青主色、宋體標題。
+  2026-10-01 Tim 決定網站往孩子的學習單發展，來的人變成大班、小學孩子的爸媽和老師。
 
-  真正的使用者是擔心狗一直抓癢的飼主 —— 多半是媽媽、是把狗當家人的人。
-  他們要的不是冷靜的儀表板，是「這裡有人懂，而且在乎」。
-
-  所以 v2 走「專業但溫暖」：
-    · 淺色為主（多數人在白天用手機看，不是深夜開著暗色主題）
-    · 暖調中性色，不用純灰 —— 純灰讀起來像沒調過
-    · 襯線標題：同時給到權威感與人味
-    · 主色是帶綠的深青，健康、可信，不是科技藍
-    · 留白慷慨。密度換成層次
-
-  參考座標：Wirecutter 的嚴謹排版、Ritual 的柔和科學感。
+  v3 的方向：
+    · 顏色從 Tim 偏愛的顏色裡挑（memory: tim-preferred-colors）：主色蔚藍、強調橘色、答對翡翠綠、文字鐵灰
+    · 一頁只用一個主色加一個強調色，其他是中性色。孩子的東西很容易做得花花綠綠，那樣家長反而覺得不專業
+    · 小字的藍要比按鈕的藍深一點，白底上才讀得清楚（#1A6FBF 對白底約 5:1）
+    · 標題用楷書（芫荽 Iansui），跟學習單、課本上的字同一種，看起來像同一套東西
+    · 黑白印、深色模式都要看得清楚
 */
 
 :root {
-  /* 暖調中性 —— 底色帶一點點黃，比純白柔和 */
-  --ground:   #FBFAF7;
+  --ground:   #F7F9FC;
   --surface:  #FFFFFF;
-  --sunken:   #F4F2ED;
-  --raise:    #FDFCFA;
+  --sunken:   #EEF3F8;
+  --raise:    #FBFCFE;
 
-  --ink:      #1C1A17;
-  --muted:    #5E5850;
-  --faint:    #8F8880;
+  --ink:      #262B31;
+  --muted:    #565E68;
+  --faint:    #858D97;
 
-  /* 主色：帶綠的深青。健康、可信，不是科技藍 */
-  --accent:      #1F6F5C;
+  /* 主色：蔚藍 */
+  --accent:      #1A6FBF;
   --accent-ink:  #FFFFFF;
-  --accent-soft: #E4F0EC;
+  --accent-soft: #E6F1FB;
+  /* 強調：橘色（印出來、下一步這種要人按的地方） */
+  --pop:      #E8781A;
+  --pop-ink:  #FFFFFF;
+  --pop-soft: #FDEEDF;
 
-  --keep:      #1F6F5C;
-  --keep-soft: #E4F0EC;
-  --cut:       #A83E2B;
-  --cut-soft:  #FAEAE5;
-  --warn:      #8A5A15;
-  --warn-soft: #FBF0DC;
+  --keep:      #1B8A5C;
+  --keep-soft: #E3F4EC;
+  --cut:       #B8323A;
+  --cut-soft:  #FBE9EA;
+  --warn:      #9A5B13;
+  --warn-soft: #FCF1DE;
 
-  --line: #E7E3DC;
-  --rule: #D5CFC5;
+  --line: #E1E7EE;
+  --rule: #CBD4DF;
 
-  --sh: 0 1px 2px rgba(28,26,23,.04), 0 8px 24px -14px rgba(28,26,23,.16);
-  --sh-lift: 0 2px 4px rgba(28,26,23,.05), 0 14px 32px -16px rgba(28,26,23,.2);
+  --sh: 0 1px 2px rgba(30,45,70,.05), 0 8px 24px -14px rgba(30,45,70,.18);
+  --sh-lift: 0 2px 4px rgba(30,45,70,.06), 0 14px 32px -16px rgba(30,45,70,.22);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --ground:   #16150F;
-    --surface:  #1E1D16;
-    --sunken:   #24231B;
-    --raise:    #26251D;
+    --ground:   #12161B;
+    --surface:  #1A2028;
+    --sunken:   #202833;
+    --raise:    #222B36;
 
-    --ink:      #F0EDE4;
-    --muted:    #A8A196;
-    --faint:    #7B756B;
+    --ink:      #EDF1F5;
+    --muted:    #A6B0BC;
+    --faint:    #7A8592;
 
-    --accent:      #6FC0A6;
-    --accent-ink:  #10201B;
-    --accent-soft: #16332B;
+    --accent:      #6CB4F2;
+    --accent-ink:  #0C1B2A;
+    --accent-soft: #15293D;
+    --pop:      #F5A35A;
+    --pop-ink:  #24160A;
+    --pop-soft: #3A2614;
 
-    --keep:      #6FC0A6;
-    --keep-soft: #16332B;
-    --cut:       #E08B72;
-    --cut-soft:  #35190F;
-    --warn:      #D6A758;
-    --warn-soft: #33270F;
+    --keep:      #5CC69A;
+    --keep-soft: #133227;
+    --cut:       #EE8A8F;
+    --cut-soft:  #3A1A1D;
+    --warn:      #E0AE62;
+    --warn-soft: #33260F;
 
-    --line: #322F26;
-    --rule: #464236;
+    --line: #2C3540;
+    --rule: #3E4957;
 
     --sh: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -14px rgba(0,0,0,.6);
     --sh-lift: 0 2px 4px rgba(0,0,0,.5), 0 14px 32px -16px rgba(0,0,0,.7);
@@ -80,13 +81,14 @@
 }
 
 :root[data-theme="dark"] {
-  --ground:#16150F; --surface:#1E1D16; --sunken:#24231B; --raise:#26251D;
-  --ink:#F0EDE4; --muted:#A8A196; --faint:#7B756B;
-  --accent:#6FC0A6; --accent-ink:#10201B; --accent-soft:#16332B;
-  --keep:#6FC0A6; --keep-soft:#16332B;
-  --cut:#E08B72; --cut-soft:#35190F;
-  --warn:#D6A758; --warn-soft:#33270F;
-  --line:#322F26; --rule:#464236;
+  --ground:#12161B; --surface:#1A2028; --sunken:#202833; --raise:#222B36;
+  --ink:#EDF1F5; --muted:#A6B0BC; --faint:#7A8592;
+  --accent:#6CB4F2; --accent-ink:#0C1B2A; --accent-soft:#15293D;
+  --pop:#F5A35A; --pop-ink:#24160A; --pop-soft:#3A2614;
+  --keep:#5CC69A; --keep-soft:#133227;
+  --cut:#EE8A8F; --cut-soft:#3A1A1D;
+  --warn:#E0AE62; --warn-soft:#33260F;
+  --line:#2C3540; --rule:#3E4957;
   --sh: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -14px rgba(0,0,0,.6);
   --sh-lift: 0 2px 4px rgba(0,0,0,.5), 0 14px 32px -16px rgba(0,0,0,.7);
 }
@@ -107,11 +109,11 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* 標題用襯線。同時給到權威感與人味 —— 純無襯線讀起來太像後台。 */
+/* 標題用楷書（芫荽），跟學習單、課本上的字同一種。楷書不加粗，加粗會糊（2026-10-01） */
 h1, h2, h3, .serif {
-  font-family: var(--font-serif), "Noto Serif TC", Georgia, "Times New Roman", serif;
-  font-weight: 700;
-  letter-spacing: -.01em;
+  font-family: var(--font-kai), "Iansui", "DFKai-SB", "BiauKai", var(--font-serif), serif;
+  font-weight: 400;
+  letter-spacing: .01em;
   text-wrap: balance;
   /* 中文標題只在標點和空白處換行，「火雞」不會被拆成「火／雞」。
      整段太長、中間沒有標點的時候，overflow-wrap 才出來強制斷，不會撐破版面。 */

@@ -1,4 +1,4 @@
-import { ACORN_EXAMPLE, ACORN_LEVELS, acornHints, acornLevel, sheetPuzzles, type AcornPuzzle } from "./acorn";
+import { ACORN_EXAMPLE, ACORN_LEVELS, acornHints, acornLevel, sheetPuzzles, type AcornPuzzle, type AcornSheet } from "./acorn";
 import { WS, acornIcon, mazeSvg, qrSvg } from "./draw";
 import { zyLine } from "./zhuyin";
 
@@ -12,7 +12,7 @@ import { zyLine } from "./zhuyin";
  */
 
 const SITE = "https://zone27.com.tw";
-export const acornHintUrl = (level: number, seed: number) => `${SITE}/worksheets/acorn/hint?l=${level}&s=${seed}`;
+export const acornHintUrl = (id: string) => `${SITE}/worksheets/acorn/hint?id=${id}`;
 
 const SANS = "'Noto Sans TC', 'Noto Sans TC Fallback', sans-serif";
 const r2 = (n: number) => Math.round(n * 100) / 100;
@@ -58,7 +58,7 @@ function header(title: string, tag: string, titleSize: number, level?: number): 
 }
 
 /** 第 1 頁：給孩子寫 */
-function page1(level: number, seed: number, puzzles: [AcornPuzzle, AcornPuzzle]): string {
+function page1(level: number, n: number, hintUrl: string, puzzles: [AcornPuzzle, AcornPuzzle]): string {
   let g = header("撿松果回家", "益智題・路線", 10.5, level);
   // 名字、日期
   for (const [label, y] of [["名字", 20], ["日期", 29]] as const) {
@@ -68,14 +68,18 @@ function page1(level: number, seed: number, puzzles: [AcornPuzzle, AcornPuzzle])
   // 規則：一句只講一件事，說可以怎麼做（2026-10-01 Tim 改過用詞）
   g += `<rect x="14" y="37" width="182" height="33" rx="3" fill="${WS.lilac}"/>`;
   g += zyLine("幫小松鼠回家。", 19, 44.5, 6.4).svg;
-  for (const [k, line, y] of [[1, "每一顆松果都要撿到。", 54.5], [2, "每一格只能走一次。", 64]] as const) {
+  // 2026-10-01 孩子問「每一格是什麼？」：用他自己會講的「格子」（跳格子），格子也畫成一塊一塊的地磚
+  for (const [k, line, y] of [[1, "每一顆松果都要撿到。", 54.5], [2, "每個格子只能走一次。", 64]] as const) {
     g += `<circle cx="22" cy="${y}" r="3.1" fill="${WS.orange}"/>` + text(22, y + 0.1, 4, String(k), { fill: "#FFFFFF", weight: 800, anchor: "middle" });
     g += zyLine(line, 27.5, y, 6.4).svg;
   }
   // 右邊：小松鼠這樣走（看一題做好的，規則不用讀也懂）
-  g += zyLine("小松鼠這樣走", 146, 42, 3.6).svg;
-  const ex = mazeSvg(ACORN_EXAMPLE, 6.4, { path: ACORN_EXAMPLE.answer, color: WS.emerald });
-  g += `<g transform="translate(${r2(147)} 45)">${ex.svg}</g>`;
+  // 例子：每走一格留一個腳印，一看就懂「一格一格走，走過的不能再踩」
+  const ex = mazeSvg(ACORN_EXAMPLE, 7, { path: ACORN_EXAMPLE.answer, paws: true });
+  const exX = 196.5 - ex.w;
+  const capW = zyLine("小松鼠這樣走", 0, 0, 3.6).width;
+  g += zyLine("小松鼠這樣走", exX + ex.w / 2 - capW / 2, 41.5, 3.6).svg;
+  g += `<g transform="translate(${r2(exX)} 44.6)">${ex.svg}</g>`;
 
   // 兩題，上下平均分配
   const L = acornLevel(level);
@@ -95,15 +99,17 @@ function page1(level: number, seed: number, puzzles: [AcornPuzzle, AcornPuzzle])
   g += text(18, 260.8, 3.6, "家長看這裡", { fill: WS.taupe, weight: 700 });
   const lines = [
     "這張在練：先把路線想好再下筆，一邊走一邊記住哪幾顆松果撿過了。",
-    "卡住的時候可以問：「哪一顆松果最難拿到？先想想怎麼走過去。」",
-    "還是不會：掃右邊的 QR code 看提示，一次只看一段，看完再讓孩子自己畫。",
+    "開始前可以說：「像跳格子一樣，一格一格走，走過的格子不能再踩。」",
+    "卡住了先問：「哪一顆松果最難拿到？」還是不會，掃右邊的 QR code 看提示。",
     `太難就印前一關，太簡單就印下一關（這是第 ${level} 關，一共 ${ACORN_LEVELS.length} 關）。`,
   ];
   lines.forEach((l, k) => { g += text(18, 266.2 + k * 4.7, 3.05, l); });
   // QR code：掃了看這一張的提示
-  g += qrSvg(acornHintUrl(level, seed), 172.5, 255, 22);
-  g += text(183.5, 279.6, 2.7, "掃這裡看提示", { weight: 700, anchor: "middle" });
-  g += text(183.5, 283.4, 2.4, "zone27.com.tw", { fill: WS.taupe, anchor: "middle" });
+  g += qrSvg(hintUrl, 172.5, 255, 22);
+  g += text(183.5, 279.4, 2.7, "掃這裡看提示", { weight: 700, anchor: "middle" });
+  // 編號：老師可以說「今天印第 3 關第 2 張」，大家印到的都一樣
+  if (n) g += text(183.5, 283.2, 2.5, `第 ${level} 關第 ${n} 張`, { fill: WS.taupe, anchor: "middle" });
+  g += text(183.5, n ? 286.8 : 283.2, 2.4, "zone27.com.tw", { fill: WS.taupe, anchor: "middle" });
   return svgPage(g);
 }
 
@@ -138,7 +144,14 @@ function page2(level: number, puzzles: [AcornPuzzle, AcornPuzzle]): string {
 }
 
 /** 這一張的兩頁（第 2 頁要不要印，由畫面上的勾選決定） */
-export function acornSheetPages(level: number, seed: number): { page1: string; page2: string; puzzles: [AcornPuzzle, AcornPuzzle] } {
-  const puzzles = sheetPuzzles(level, seed);
-  return { page1: page1(level, seed, puzzles), page2: page2(level, puzzles), puzzles };
+export function acornSheetPages(sheet: AcornSheet): { page1: string; page2: string } {
+  return {
+    page1: page1(sheet.level, sheet.n, acornHintUrl(sheet.id), sheet.puzzles),
+    page2: page2(sheet.level, sheet.puzzles),
+  };
+}
+
+/** 2026-10-01 改成固定編號以前印出去的（網址是 ?l=關&s=號碼）。只有 Tim 家印過，留著讓舊的 QR code 還掃得到 */
+export function acornLegacyPuzzles(level: number, seed: number): [AcornPuzzle, AcornPuzzle] {
+  return sheetPuzzles(level, seed);
 }
