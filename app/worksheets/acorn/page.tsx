@@ -44,6 +44,10 @@ export default function Page() {
         ))}
       </div>
 
+      <p style={{ marginTop: G.xl, fontSize: T.md, lineHeight: 1.9 }}>
+        孩子寫完說太簡單？<Link href="/worksheets/make" style={{ color: "var(--accent)", fontWeight: 700 }}>換他出題給你寫 →</Link>
+      </p>
+
       <footer style={S.foot}>
         <p style={{ margin: 0 }}>題目、圖都是我們自己做的，可以自由印給家裡的孩子、班上的同學寫。</p>
       </footer>

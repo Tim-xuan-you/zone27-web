@@ -155,3 +155,6 @@ export function acornSheetPages(sheet: AcornSheet): { page1: string; page2: stri
 export function acornLegacyPuzzles(level: number, seed: number): [AcornPuzzle, AcornPuzzle] {
   return sheetPuzzles(level, seed);
 }
+
+/* 出題紙（make-sheet.ts）共用同一套標題、文字、頁面 */
+export { text as wsText, header as wsHeader, svgPage as wsPage, levelBadge as wsLevelBadge };

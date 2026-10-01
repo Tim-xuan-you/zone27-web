@@ -6,6 +6,7 @@ import { G, R, S, T } from "@/components/styles";
 import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
 import { acornSheetPages } from "@/lib/worksheets/acorn-sheet";
 import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
+import { acornMakerPage } from "@/lib/worksheets/make-sheet";
 
 /**
  * 學習單首頁。
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 };
 
 const THUMB = acornSheetPages(ACORN_SHEETS[0]).page1;
+const MAKER = acornMakerPage();
 const COMING = [
   ["注音猜猜看", "看注音，圈出是哪一個東西；會寫注音的，換你寫出來。點子是我家大班生出的。"],
   ["連連看", "誰吃什麼、長大會變成什麼。每一個答案都先查過可靠的資料。"],
@@ -45,6 +47,18 @@ export default function Page() {
           <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>撿松果回家</span>
           <span style={{ display: "block", fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8 }}>
             每一顆松果都要撿到，每個格子只能走一次。5 歲開始，{ACORN_LEVELS.length} 關、每關 {ACORN_SHEETS.filter((s) => s.level === 1).length} 張。
+          </span>
+        </span>
+        <span aria-hidden style={{ fontSize: T.xl, color: "var(--faint)" }}>›</span>
+      </Link>
+
+      <Link href="/worksheets/make" style={{ ...card, marginTop: G.md }}>
+        <span style={thumb} aria-hidden dangerouslySetInnerHTML={{ __html: MAKER }} />
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={tag}>出題紙</span>
+          <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>換你出題</span>
+          <span style={{ display: "block", fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8 }}>
+            孩子當出題的人，畫牆、畫松果，拿給大人寫。還有一張什麼題都能出的萬用出題紙。
           </span>
         </span>
         <span aria-hidden style={{ fontSize: T.xl, color: "var(--faint)" }}>›</span>
