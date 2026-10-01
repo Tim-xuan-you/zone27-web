@@ -26,6 +26,12 @@ const FAMILIES = [
   { key: "sans", name: "Noto Sans TC", query: "Noto+Sans+TC:wght@400;500;700", variable: "--font-sans" },
   { key: "serif", name: "Noto Serif TC", query: "Noto+Serif+TC:wght@600;700;900", variable: "--font-serif" },
   { key: "mono", name: "IBM Plex Mono", query: "IBM+Plex+Mono:wght@400;500;600", variable: "--font-mono" },
+  /*
+   * 2026-10-01 學習單用的楷書：芫荽（Iansui，ButTaiwan 做的，SIL Open Font License，可以商用、可以嵌進 PDF）。
+   * 照教育部標準字形調過，有注音符號和聲調符號，孩子在學校看到的字長得一樣。
+   * 只有學習單用得到，所以不預先載入（不然每一頁都多下載一塊）
+   */
+  { key: "kai", name: "Iansui", query: "Iansui", variable: "--font-kai", preload: false },
 ];
 
 /*
@@ -37,6 +43,8 @@ const FALLBACK = {
   sans: "src: local(Arial); ascent-override: 110.73%; descent-override: 27.49%; line-gap-override: 0.0%; size-adjust: 104.76%;",
   serif: "src: local(Times New Roman); ascent-override: 95.04%; descent-override: 23.62%; line-gap-override: 0.0%; size-adjust: 121.11%;",
   mono: "src: local(Arial); ascent-override: 76.16%; descent-override: 20.43%; line-gap-override: 0.0%; size-adjust: 134.59%;",
+  // 楷書還沒載好之前，先用電腦裡的標楷體（Windows 叫 DFKai-SB，Mac 叫 BiauKai）
+  kai: "src: local(DFKai-SB), local(BiauKai);",
 };
 
 // Google 看瀏覽器給檔案格式，要假裝是新版 Chrome 才會給 woff2
@@ -76,7 +84,7 @@ for (const f of FAMILIES) {
       writeFileSync(join(OUT, name), buf);
       local.set(url, name);
       files++; bytes += buf.length;
-      if (label === "latin") preload.push(`/fonts/${name}`);
+      if (label === "latin" && f.preload !== false) preload.push(`/fonts/${name}`);
     }
     const weight = body.match(/font-weight:\s*(\d+)/)[1];
     const range = body.match(/unicode-range:\s*([^;]+);/)[1];
