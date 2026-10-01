@@ -1,6 +1,6 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
-import { CatIcon, ChargerIcon, PowerBankIcon, DogIcon } from "@/components/Icons";
+import { CatIcon, ChargerIcon, PowerBankIcon, DogIcon, WorksheetIcon } from "@/components/Icons";
 import ReadList from "@/components/ReadList";
 import { S } from "@/components/styles";
 import { animalHref, categoriesOf } from "@/lib/categories";
@@ -69,9 +69,11 @@ export default function Home() {
       </p>
 
       {/* 先說要買什麼，進去只看那一種（2026-09-24 狗貓分開，2026-09-26 加充電器，2026-09-27 加行動電源） */}
-      <p style={S.lbl}>先選你要買的</p>
+      <p style={S.lbl}>先選你要找的</p>
       <div style={doors}>
         {[
+          // 2026-10-01 學習單開工，Tim 要它當主軸，放第一個
+          { href: "/worksheets", icon: <WorksheetIcon size={26} />, title: "孩子的學習單", line: "A4 印了就能寫，每次都是新題目" },
           { href: animalHref("dog"), icon: <DogIcon size={26} />, title: "養狗的", line: categoriesOf("dog").map((c) => c.short).join("、") },
           { href: animalHref("cat"), icon: <CatIcon size={26} />, title: "養貓的", line: categoriesOf("cat").map((c) => c.short).join("、") },
           { href: "/charger", icon: <ChargerIcon size={26} />, title: "充電器", line: "iPhone、iPad、MacBook、Galaxy" },

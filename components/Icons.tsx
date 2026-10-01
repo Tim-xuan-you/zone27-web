@@ -142,3 +142,14 @@ export function LitterIcon({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
+/** 學習單：一張紙加一支鉛筆（2026-10-01） */
+export function WorksheetIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h9a1.5 1.5 0 0 0 1.5-1.5V13" />
+      <path d="M8 8h4M8 11.5h3M8 15h5" />
+      <path d="m19.5 3.5 1 1-6.2 6.2-1.8.8.8-1.8z" />
+    </svg>
+  );
+}
