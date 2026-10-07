@@ -260,8 +260,9 @@ const moreLink: React.CSSProperties = {
   background: "none", border: 0, padding: "4px 0", font: "inherit", fontSize: 15.5, fontWeight: 700,
   color: "var(--accent)", cursor: "pointer",
 };
+// 整個 border 重給，不要只給 borderColor：React 換回沒選的樣式時會把 borderColor 清掉，連 border 的顏色一起不見（變成文字的深色）。2026-10-08
 const pickOn: React.CSSProperties = {
-  background: "var(--accent-soft)", borderColor: "var(--accent)", color: "var(--accent)", fontWeight: 700,
+  background: "var(--accent-soft)", border: "1px solid var(--accent)", color: "var(--accent)", fontWeight: 700,
 };
 const card: React.CSSProperties = {
   background: "var(--surface)", border: "1px solid var(--keep)", borderRadius: 14, boxShadow: "var(--sh-lift)", padding: "18px 20px",

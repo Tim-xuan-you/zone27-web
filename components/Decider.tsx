@@ -647,8 +647,9 @@ const typeLink: React.CSSProperties = {
   font: "inherit", fontSize: 14, color: "var(--accent)", fontWeight: 600, cursor: "pointer",
 };
 const pickHead: React.CSSProperties = { display: "block", fontSize: 12.5, color: "var(--muted)", marginBottom: 8 };
+// 整個 border 重給，不要只給 borderColor：React 換回沒選的樣式時會把 borderColor 清掉，連 border 的顏色一起不見（變成文字的深色）。2026-10-08
 const pickOn: React.CSSProperties = {
-  background: "var(--accent-soft)", borderColor: "var(--accent)", color: "var(--accent)", fontWeight: 700,
+  background: "var(--accent-soft)", border: "1px solid var(--accent)", color: "var(--accent)", fontWeight: 700,
 };
 
 const answerWrap: React.CSSProperties = {

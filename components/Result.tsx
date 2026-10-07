@@ -185,8 +185,9 @@ export default function Result({
 function StopBox({ stop }: { stop: NonNullable<Verdict["stop"]> }) {
   // 「還在上架」不是拒絕，是還沒準備好。不打叉，也不用警告色。
   const soon = stop.kind === "soon";
+  // 整個 border 重給：只給 borderColor 的話，換回 S.stopBox 時紅框的顏色會一起被清掉（2026-10-08）
   return (
-    <div style={soon ? { ...S.stopBox, borderColor: "var(--line)", background: "var(--surface)" } : S.stopBox}>
+    <div style={soon ? { ...S.stopBox, border: "2px solid var(--line)", background: "var(--surface)" } : S.stopBox}>
       {!soon && <p style={S.stopMark}>✕</p>}
       <h2 style={S.stopTitle}>{stop.title}</h2>
       <p style={S.stopBody}>{stop.body}</p>

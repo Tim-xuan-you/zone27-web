@@ -192,7 +192,8 @@ const chip: React.CSSProperties = {
   display: "inline-flex", alignItems: "center", gap: 6, cursor: "pointer", font: "inherit", fontSize: 14,
   padding: "6px 14px", borderRadius: 999, border: "1px solid var(--line)", background: "var(--surface)", color: "var(--muted)",
 };
-const chipOn: React.CSSProperties = { borderColor: "var(--accent)", color: "var(--accent)", background: "var(--accent-soft)", fontWeight: 700 };
+// 整個 border 重給，不要只給 borderColor：React 換回沒選的樣式時會把 borderColor 清掉，連 border 的顏色一起不見（變成文字的深色）。2026-10-08
+const chipOn: React.CSSProperties = { border: "1px solid var(--accent)", color: "var(--accent)", background: "var(--accent-soft)", fontWeight: 700 };
 const groupHead: React.CSSProperties = { margin: "0 0 10px", fontSize: 12.5, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em" };
 const row: React.CSSProperties = { background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14 };
 const summary: React.CSSProperties = {
