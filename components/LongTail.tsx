@@ -11,6 +11,7 @@ import {
   type PageKind,
 } from "@/lib/slugs";
 import type { Species } from "@/lib/types";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 長尾決策頁（品種、過敏原、品種 × 過敏原）。
@@ -59,7 +60,7 @@ export function longTailMetadata(sp: Species, slug: string[]): Metadata {
     description,
     alternates: { canonical: `/${cat.slug}/${slug.join("/")}` },
     openGraph: {
-      title, description, type: "article",
+      ...OG_BASE, title, description, type: "article",
       // catch-all 路由底下不能放 opengraph-image 檔，所以圖由 /og/{類目}/... 靜態產生
       images: [{ url: `/og/${cat.slug}/${slug.join("/")}`, width: 1200, height: 630 }],
     },

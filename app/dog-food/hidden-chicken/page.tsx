@@ -4,6 +4,7 @@ import { S } from "@/components/styles";
 import data from "@/data/hidden-chicken.json";
 import SiteHeader from "@/components/SiteHeader";
 import Checked from "@/components/Checked";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 「標榜低敏但含雞肉」。
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   description:
     "台灣架上幾款主打低敏或單一口味的狗飼料，成分表其實有雞。逐筆核對，附成分表位置與查核日期，也包含我們自己推薦的那一款。",
   alternates: { canonical: "/dog-food/hidden-chicken" },
-  openGraph: { title: "寫著低敏，成分表裡有雞", type: "article" },
+  openGraph: { ...OG_BASE, title: "寫著低敏，成分表裡有雞", type: "article" },
 };
 
 export default function Page() {

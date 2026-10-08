@@ -9,6 +9,7 @@ import { ASSETS, SHEET_IMG, guessSheetImg, sheetImg } from "@/lib/worksheets/ass
 import { GUESS_LEVELS } from "@/lib/worksheets/guess";
 import { GUESS_SHEETS } from "@/lib/worksheets/guess-sheets";
 import { breadcrumb, graph, SITE, TIM } from "@/lib/worksheets/seo";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 學習單首頁。
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: "/worksheets" },
-  openGraph: { title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.worksheetsOg, width: 1200, height: 630, alt: "陪孩子動腦的益智學習單" }] },
+  openGraph: { ...OG_BASE, title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.worksheetsOg, width: 1200, height: 630, alt: "陪孩子動腦的益智學習單" }] },
   twitter: { card: "summary_large_image", images: [ASSETS.worksheetsOg] },
 };
 

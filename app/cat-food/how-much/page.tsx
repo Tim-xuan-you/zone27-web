@@ -4,6 +4,7 @@ import Calc from "@/components/Calc";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { CAT_MER_FACTORS, FRESH_DAYS, KCAL_PER_KG, dailyGrams, mer, type Stage } from "@/lib/engine";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 貓一天要吃多少飼料。
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   description:
     `用獸醫的能量公式算：一天幾克、這包吃幾天、一個月多少錢。4 公斤已結紮的貓一天約 ${EX_KCAL} 大卡、${EX_LOW} 到 ${EX_HIGH} 克。算式和係數全部寫出來。`,
   alternates: { canonical: "/cat-food/how-much" },
-  openGraph: { title: "貓一天要吃多少飼料", type: "article" },
+  openGraph: { ...OG_BASE, title: "貓一天要吃多少飼料", type: "article" },
 };
 
 export default function Page() {

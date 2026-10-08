@@ -16,6 +16,7 @@ import type { Product } from "@/lib/types";
 import dogChicken from "@/data/hidden-chicken.json";
 import catChicken from "@/data/cat-hidden-chicken.json";
 import canChicken from "@/data/cat-wet-hidden-chicken.json";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 每一款的商品頁：/dog-food/p/df-01。
@@ -63,7 +64,7 @@ export function productMetadata(id: string): Metadata {
     description: `${chick}${facts}。什麼時候不要買：${p.dealbreaker}`.slice(0, 150),
     alternates: { canonical: productHref(p) },
     openGraph: {
-      title, type: "article",
+      ...OG_BASE, title, type: "article",
       // 每一款自己的分享卡：右上角蓋「藏雞／沒有雞」的章（app/og/p/[id]）
       images: [{ url: `/og/p/${p.id}`, width: 1200, height: 630 }],
     },

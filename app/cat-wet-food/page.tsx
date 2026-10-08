@@ -11,6 +11,7 @@ import { catalogOf, isLive, liveCount } from "@/lib/catalog";
 import { MIN_LIVE } from "@/lib/categories";
 import { cansOf, mer } from "@/lib/engine";
 import type { Product } from "@/lib/types";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 貓主食罐類目頁。
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   description:
     "我們一款一款讀過台灣架上的貓罐頭標示：哪些是副食罐不能當正餐，哪些名字寫鮭魚、鴨肉，第一項卻是雞湯。每一款都寫清楚什麼時候不要買，一天要吃幾罐。",
   alternates: { canonical: "/cat-wet-food" },
-  openGraph: { title: TITLE, type: "website" },
+  openGraph: { ...OG_BASE, title: TITLE, type: "website" },
 };
 
 /** 一罐幾大卡。規格或熱量缺一個就是 null */

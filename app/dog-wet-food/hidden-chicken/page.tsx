@@ -6,6 +6,7 @@ import data from "@/data/dog-wet-hidden-chicken.json";
 import Checked from "@/components/Checked";
 import { catalogOf, shopLink } from "@/lib/catalog";
 import { NAME_HAS_CHICKEN } from "@/lib/chicken";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 狗罐頭版的「名字寫別的肉，成分表裡有雞」。
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
   description:
     `${TALLY}逐筆核對台灣通路的中文標示，附查核日期。`,
   alternates: { canonical: PATH },
-  openGraph: { title: TITLE, type: "article" },
+  openGraph: { ...OG_BASE, title: TITLE, type: "article" },
 };
 
 export default function Page() {

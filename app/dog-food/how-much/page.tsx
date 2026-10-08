@@ -4,6 +4,7 @@ import Calc from "@/components/Calc";
 import { S } from "@/components/styles";
 import { FRESH_DAYS, KCAL_PER_KG, MER_FACTORS } from "@/lib/engine";
 import SiteHeader from "@/components/SiteHeader";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 狗一天要吃多少飼料。
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   description:
     "用獸醫的能量公式算：一天幾克、這包吃幾天、一個月多少錢。算式和係數全部寫出來，你可以自己驗。",
   alternates: { canonical: "/dog-food/how-much" },
-  openGraph: { title: "狗一天要吃多少飼料", type: "article" },
+  openGraph: { ...OG_BASE, title: "狗一天要吃多少飼料", type: "article" },
 };
 
 export default function Page() {

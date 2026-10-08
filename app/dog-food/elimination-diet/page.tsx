@@ -8,6 +8,7 @@ import { catalogOf } from "@/lib/catalog";
 const catalog = catalogOf("dog");
 import { recommendable } from "@/lib/engine";
 import SiteHeader from "@/components/SiteHeader";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 排除飲食法。
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
   description:
     "一直抓癢的狗裡只有約 18% 是食物造成的。要確認是不是，得跑滿八週、期間完全乾淨、而且最後要把舊飼料餵回去回測。少了最後那一步，你永遠不會知道答案。",
   alternates: { canonical: "/dog-food/elimination-diet" },
-  openGraph: { title: "排除飲食法：怎麼真的找出牠對什麼過敏", type: "article" },
+  openGraph: { ...OG_BASE, title: "排除飲食法：怎麼真的找出牠對什麼過敏", type: "article" },
 };
 
 export default function Page() {

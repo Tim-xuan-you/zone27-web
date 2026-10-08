@@ -6,6 +6,7 @@ import { GUESS_LEVELS } from "@/lib/worksheets/guess";
 import { GUESS_SHEETS, guessSheetsOf } from "@/lib/worksheets/guess-sheets";
 import { ASSETS, SHEET_IMG, guessLevelPdf, guessSheetImg } from "@/lib/worksheets/assets";
 import { breadcrumb, faq, graph, guessSeries, TIM } from "@/lib/worksheets/seo";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 注音猜猜看：4 關的總覽。接「注音學習單下載」「注音練習單 pdf」「大班注音」這種不分關卡的搜尋。
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: "/worksheets/zhuyin" },
-  openGraph: { title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.zhuyinOg, width: 1200, height: 630, alt: "注音猜猜看：注音學習單" }] },
+  openGraph: { ...OG_BASE, title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.zhuyinOg, width: 1200, height: 630, alt: "注音猜猜看：注音學習單" }] },
   twitter: { card: "summary_large_image", images: [ASSETS.zhuyinOg] },
 };
 

@@ -6,6 +6,7 @@ import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
 import { ACORN_SHEETS, acornSheetsOf } from "@/lib/worksheets/acorn-sheets";
 import { ASSETS, SHEET_IMG, levelPdf, sheetImg } from "@/lib/worksheets/assets";
 import { acornSeries, breadcrumb, faq, graph, TIM } from "@/lib/worksheets/seo";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 撿松果回家：6 關的總覽（2026-10-09 起，每一關另外有自己的頁面）。
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: "/worksheets/acorn" },
-  openGraph: { title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.acornOg, width: 1200, height: 630, alt: "撿松果回家：幼兒迷宮學習單" }] },
+  openGraph: { ...OG_BASE, title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.acornOg, width: 1200, height: 630, alt: "撿松果回家：幼兒迷宮學習單" }] },
   twitter: { card: "summary_large_image", images: [ASSETS.acornOg] },
 };
 

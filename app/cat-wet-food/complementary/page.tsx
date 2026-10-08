@@ -4,6 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { byId, shopLink } from "@/lib/catalog";
 import { mer } from "@/lib/engine";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 副食罐可以當主食嗎。
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   description:
     "偶爾一餐沒關係，天天當正餐不行。我們讀的兩款副食罐，鈣是 0.002% 和 0.004%，主食罐是 0.18% 到 0.29%。怎麼分辨主食罐和副食罐、副食罐一天可以給多少，都寫在這裡。",
   alternates: { canonical: PATH },
-  openGraph: { title: TITLE, type: "article" },
+  openGraph: { ...OG_BASE, title: TITLE, type: "article" },
 };
 
 export default function Page() {

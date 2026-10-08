@@ -9,6 +9,7 @@ import { adjudicate, dailyGrams, FRESH_DAYS, kgOf, pricePerKg, stageForAge, unit
 import { productHref } from "@/lib/labels";
 import { anchorLitter, litters, liveOf, monthlyCost, sizeOf, MATERIAL_ZH, type LitterProduct } from "@/lib/litter";
 import type { Form, Merchant, Product } from "@/lib/types";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 第一次養貓，先買這幾樣。
@@ -92,7 +93,7 @@ export const metadata: Metadata = {
     `${LITTER ? `貓砂是${LITTER.p.brand} ${LITTER.p.name}，一個月大約 $${LITTER.month}。` : ""}` +
     "還有新手最常買錯的三件事。",
   alternates: { canonical: "/cat/first-time" },
-  openGraph: { title: TITLE, type: "article" },
+  openGraph: { ...OG_BASE, title: TITLE, type: "article" },
 };
 
 export default function Page() {

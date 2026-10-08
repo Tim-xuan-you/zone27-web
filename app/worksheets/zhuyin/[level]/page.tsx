@@ -8,6 +8,7 @@ import { GUESS_LEVELS, guessLevel } from "@/lib/worksheets/guess";
 import { guessSheetsOf } from "@/lib/worksheets/guess-sheets";
 import { guessAnswersPdf, guessLevelOg, guessLevelPdf, guessSheetPdf } from "@/lib/worksheets/assets";
 import { breadcrumb, faq, graph, guessLevelResource, TIM } from "@/lib/worksheets/seo";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 注音猜猜看的某一關。
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: `/worksheets/zhuyin/${n}` },
-    openGraph: { title, description, type: "website", images: [{ url: guessLevelOg(n), width: 1200, height: 630, alt: `注音猜猜看第 ${n} 關，${L.grade}注音學習單` }] },
+    openGraph: { ...OG_BASE, title, description, type: "website", images: [{ url: guessLevelOg(n), width: 1200, height: 630, alt: `注音猜猜看第 ${n} 關，${L.grade}注音學習單` }] },
     twitter: { card: "summary_large_image", images: [guessLevelOg(n)] },
   };
 }

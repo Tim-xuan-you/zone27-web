@@ -6,6 +6,7 @@ import { G, S, T } from "@/components/styles";
 import { acornMakerPage, freeMakerPage } from "@/lib/worksheets/make-sheet";
 import { ASSETS } from "@/lib/worksheets/assets";
 import { breadcrumb, faq, graph, ORG_ID, SITE, TIM, TIM_ID } from "@/lib/worksheets/seo";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 出題紙：換孩子出題給大人寫（2026-10-01）。
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: "/worksheets/make" },
-  openGraph: { title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.makeOg, width: 1200, height: 630, alt: "換你出題：出題紙" }] },
+  openGraph: { ...OG_BASE, title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.makeOg, width: 1200, height: 630, alt: "換你出題：出題紙" }] },
   twitter: { card: "summary_large_image", images: [ASSETS.makeOg] },
 };
 

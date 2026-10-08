@@ -5,6 +5,7 @@ import { S } from "@/components/styles";
 import data from "@/data/cat-hidden-chicken.json";
 import Checked from "@/components/Checked";
 import { shopLink } from "@/lib/catalog";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 貓飼料版的「名字寫別的肉，成分表裡有雞」。
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   description:
     "台灣架上幾款貓飼料，名字寫的是鴨肉、火雞、鮭魚，成分表前四項就有雞。逐筆核對台灣代理商的中文標示，附查核日期。",
   alternates: { canonical: "/cat-food/hidden-chicken" },
-  openGraph: { title: TITLE, type: "article" },
+  openGraph: { ...OG_BASE, title: TITLE, type: "article" },
 };
 
 export default function Page() {

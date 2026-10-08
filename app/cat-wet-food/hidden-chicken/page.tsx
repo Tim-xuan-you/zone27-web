@@ -5,6 +5,7 @@ import { S } from "@/components/styles";
 import data from "@/data/cat-wet-hidden-chicken.json";
 import Checked from "@/components/Checked";
 import { shopLink } from "@/lib/catalog";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 罐頭版的「名字寫別的肉，成分表裡有雞」。
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   description:
     `${data._meta.tally}逐筆核對台灣通路與品牌官網的中文標示，附查核日期。`,
   alternates: { canonical: PATH },
-  openGraph: { title: TITLE, type: "article" },
+  openGraph: { ...OG_BASE, title: TITLE, type: "article" },
 };
 
 export default function Page() {

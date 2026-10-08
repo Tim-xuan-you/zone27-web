@@ -6,6 +6,7 @@ import { catalogOf } from "@/lib/catalog";
 // 這一頁講的是狗飼料，統計只數狗的
 const catalog = catalogOf("dog");
 import SiteHeader from "@/components/SiteHeader";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 無穀飼料到底有沒有比較好。
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   description:
     "「無穀」不等於無雞、不等於低碳水、也不等於豆類少。用我們自己十款飼料的成分表對照，順便把 FDA 和獸醫營養學界對心臟病那件事的說法講清楚。",
   alternates: { canonical: "/dog-food/grain-free" },
-  openGraph: { title: "無穀飼料到底有沒有比較好", type: "article" },
+  openGraph: { ...OG_BASE, title: "無穀飼料到底有沒有比較好", type: "article" },
 };
 
 export default function Page() {

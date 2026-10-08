@@ -5,6 +5,7 @@ import Share from "@/components/Share";
 import { S } from "@/components/styles";
 import { catalogOf } from "@/lib/catalog";
 import type { Product } from "@/lib/types";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 罐子上的蛋白質，為什麼不能直接比。
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
     `我們讀的 ${ROWS.length} 款狗主食罐，罐子上的蛋白質從 ${AF_LO.asFed}% 到 ${AF_HI.asFed}%，差 ${AF_RATIO} 倍。` +
     `扣掉水分之後是 ${DM_LO.dm}% 到 ${DM_HI.dm}%，只差 ${DM_RATIO} 倍，而且排名整個翻過來。`,
   alternates: { canonical: "/dog-wet-food/protein" },
-  openGraph: { title: TITLE, type: "article" },
+  openGraph: { ...OG_BASE, title: TITLE, type: "article" },
 };
 
 export default function Page() {

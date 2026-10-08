@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { ASSETS, SHEET_IMG, sheetImg } from "@/lib/worksheets/assets";
 import { TIM, TIM_ID } from "@/lib/worksheets/seo";
 import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
+import { OG_BASE } from "@/lib/og-base";
 
 const ENTITY = {
   "@context": "https://schema.org",
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
   title: { absolute: `${TITLE} · ZONE 27` },
   description: DESC,
   alternates: { canonical: "/" },
-  openGraph: { title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.worksheetsOg, width: 1200, height: 630, alt: "陪孩子動腦的益智學習單" }] },
+  openGraph: { ...OG_BASE, title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.worksheetsOg, width: 1200, height: 630, alt: "陪孩子動腦的益智學習單" }] },
   twitter: { card: "summary_large_image", images: [ASSETS.worksheetsOg] },
 };
 

@@ -6,6 +6,7 @@ import { S } from "@/components/styles";
 import { catalogOf } from "@/lib/catalog";
 import { cansOf, canWord, mer } from "@/lib/engine";
 import type { Product } from "@/lib/types";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 貓一天要吃幾罐。
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
   description:
     `看那一罐的熱量，不是看罐子大小。4 公斤已結紮的貓一天大約 ${DAY} 大卡，全吃主食罐一天要 ${LO} 到 ${HI} 罐。一個月多少錢、乾濕混餵怎麼算，計算機和算式都在這裡。`,
   alternates: { canonical: PATH },
-  openGraph: { title: TITLE, type: "article" },
+  openGraph: { ...OG_BASE, title: TITLE, type: "article" },
 };
 
 export default function Page() {

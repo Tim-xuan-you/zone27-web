@@ -7,6 +7,7 @@ import { S } from "@/components/styles";
 import { catalogOf } from "@/lib/catalog";
 import { cansOf, mer, KCAL_PER_KG } from "@/lib/engine";
 import type { Product } from "@/lib/types";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 狗一天要吃幾罐。
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     `熱量最高的一天要 ${FEWEST.cans.toFixed(1)} 罐，最低的要 ${MOST.cans.toFixed(1)} 罐。` +
     `有一款品牌自己標了餵食量：5 公斤的狗一天 5 又 1/3 盒。`,
   alternates: { canonical: "/dog-wet-food/how-much" },
-  openGraph: { title: TITLE, type: "article" },
+  openGraph: { ...OG_BASE, title: TITLE, type: "article" },
 };
 
 export default function Page() {

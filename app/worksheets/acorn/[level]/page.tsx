@@ -8,6 +8,7 @@ import { ACORN_LEVELS, acornLevel } from "@/lib/worksheets/acorn";
 import { acornSheetsOf } from "@/lib/worksheets/acorn-sheets";
 import { levelAnswersPdf, levelOg, levelPdf, sheetPdf } from "@/lib/worksheets/assets";
 import { breadcrumb, faq, graph, levelResource, TIM } from "@/lib/worksheets/seo";
+import { OG_BASE } from "@/lib/og-base";
 
 /**
  * 撿松果回家的某一關（2026-10-09：每一關自己一個網址）。
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: `/worksheets/acorn/${n}` },
-    openGraph: { title, description, type: "website", images: [{ url: levelOg(n), width: 1200, height: 630, alt: `撿松果回家第 ${n} 關，${L.grade}迷宮學習單` }] },
+    openGraph: { ...OG_BASE, title, description, type: "website", images: [{ url: levelOg(n), width: 1200, height: 630, alt: `撿松果回家第 ${n} 關，${L.grade}迷宮學習單` }] },
     twitter: { card: "summary_large_image", images: [levelOg(n)] },
   };
 }
