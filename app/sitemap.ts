@@ -8,10 +8,12 @@ import { productHref } from "@/lib/labels";
 import { allPaths } from "@/lib/slugs";
 import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
 import { ACORN_SHEETS, acornSheetsOf } from "@/lib/worksheets/acorn-sheets";
-import { ASSETS, matchAnswersPdf, matchOg, matchThemePdf, guessAnswersPdf, guessLevelOg, guessLevelPdf, guessSheetImg, guessSheetPdf, levelAnswersPdf, levelOg, levelPdf, sheetImg, sheetPdf } from "@/lib/worksheets/assets";
+import { ASSETS, numberAnswersPdf, numberLevelOg, numberLevelPdf, matchAnswersPdf, matchOg, matchThemePdf, guessAnswersPdf, guessLevelOg, guessLevelPdf, guessSheetImg, guessSheetPdf, levelAnswersPdf, levelOg, levelPdf, sheetImg, sheetPdf } from "@/lib/worksheets/assets";
 import { GUESS_LEVELS } from "@/lib/worksheets/guess";
 import { GUESS_SHEETS, guessSheetsOf } from "@/lib/worksheets/guess-sheets";
 import { MATCH_THEMES } from "@/lib/worksheets/match";
+import { NUMBER_LEVELS } from "@/lib/worksheets/number";
+import { NUMBER_SHEETS, numberSheetsOf } from "@/lib/worksheets/number-sheets";
 import { MATCH_SHEETS, matchSheetsOf } from "@/lib/worksheets/match-sheets";
 
 const BASE = "https://zone27.com.tw";
@@ -50,6 +52,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE}/worksheets/zhuyin/${L.n}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9,
       images: [`${BASE}${guessLevelOg(L.n)}`, ...guessSheetsOf(L.n).flatMap((s) => [`${BASE}${guessSheetImg(s.id, "circle")}`, `${BASE}${guessSheetImg(s.id, "write")}`])],
     })),
+    { url: `${BASE}/worksheets/number`, lastModified: now, changeFrequency: "weekly", priority: 0.95, images: [`${BASE}${ASSETS.numberOg}`] },
+    ...NUMBER_LEVELS.map((L) => ({
+      url: `${BASE}/worksheets/number/${L.n}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9,
+      images: [`${BASE}${numberLevelOg(L.n)}`, ...numberSheetsOf(L.n).map((s) => `${BASE}${sheetImg(s.id)}`)],
+    })),
     { url: `${BASE}/worksheets/match`, lastModified: now, changeFrequency: "weekly", priority: 0.95, images: [`${BASE}${ASSETS.matchOg}`] },
     ...MATCH_THEMES.map((T) => ({
       url: `${BASE}/worksheets/match/${T.id}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9,
@@ -60,6 +67,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ...ACORN_SHEETS.map((s) => sheetPdf(s.id)),
       ...ACORN_LEVELS.flatMap((L) => [levelPdf(L.n), levelAnswersPdf(L.n)]),
       ASSETS.makeAcornPdf, ASSETS.makeFreePdf,
+      ...NUMBER_SHEETS.map((s) => sheetPdf(s.id)),
+      ...NUMBER_LEVELS.flatMap((L) => [numberLevelPdf(L.n), numberAnswersPdf(L.n)]),
       ...MATCH_SHEETS.map((s) => sheetPdf(s.id)),
       ...MATCH_THEMES.flatMap((T) => [matchThemePdf(T.id), matchAnswersPdf(T.id)]),
       ...GUESS_SHEETS.flatMap((s) => [guessSheetPdf(s.id, "circle"), guessSheetPdf(s.id, "write")]),

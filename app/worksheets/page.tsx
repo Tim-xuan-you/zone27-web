@@ -9,6 +9,8 @@ import { ASSETS, SHEET_IMG, guessSheetImg, sheetImg } from "@/lib/worksheets/ass
 import { GUESS_LEVELS } from "@/lib/worksheets/guess";
 import { GUESS_SHEETS } from "@/lib/worksheets/guess-sheets";
 import { MATCH_SHEETS } from "@/lib/worksheets/match-sheets";
+import { NUMBER_LEVELS } from "@/lib/worksheets/number";
+import { NUMBER_SHEETS } from "@/lib/worksheets/number-sheets";
 import { breadcrumb, graph, SITE, TIM } from "@/lib/worksheets/seo";
 import { OG_BASE } from "@/lib/og-base";
 
@@ -21,8 +23,8 @@ import { OG_BASE } from "@/lib/og-base";
  */
 
 // 2026-10-09 查 Google 建議字：免費學習單下載、大班學習單下載、中班學習單下載、幼兒迷宮pdf、注音學習單下載
-const TITLE = "免費學習單下載：幼兒迷宮、注音、連連看 PDF（中班、大班、小一）";
-const DESC = `給中班、大班、小一孩子的免費益智學習單，A4 PDF 下載就能印。幼兒迷宮 6 關共 ${ACORN_SHEETS.length} 張、注音猜猜看 4 關共 ${GUESS_SHEETS.length} 張、連連看 ${MATCH_SHEETS.length} 張，還有讓孩子出題的出題紙。說明都有注音，答案不用寫國字，卡住了掃 QR code 看提示。`;
+const TITLE = "免費學習單下載：幼兒迷宮、數學、注音、連連看 PDF（中班、大班、小一）";
+const DESC = `給中班、大班、小一孩子的免費益智學習單，A4 PDF 下載就能印。幼兒迷宮 6 關共 ${ACORN_SHEETS.length} 張、數字松果加法迷宮 ${NUMBER_SHEETS.length} 張、注音猜猜看 4 關共 ${GUESS_SHEETS.length} 張、連連看 ${MATCH_SHEETS.length} 張，還有讓孩子出題的出題紙。說明都有注音，答案不用寫國字，卡住了掃 QR code 看提示。`;
 export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
@@ -36,14 +38,12 @@ const LIST = {
   name: "ZONE 27 的免費學習單",
   itemListElement: [
     { "@type": "ListItem", position: 1, url: `${SITE}/worksheets/acorn`, name: "撿松果回家：幼兒迷宮學習單" },
-    { "@type": "ListItem", position: 2, url: `${SITE}/worksheets/zhuyin`, name: "注音猜猜看：注音學習單" },
-    { "@type": "ListItem", position: 3, url: `${SITE}/worksheets/match`, name: "連連看：誰吃什麼、長大變成什麼" },
-    { "@type": "ListItem", position: 4, url: `${SITE}/worksheets/make`, name: "換你出題：出題紙" },
+    { "@type": "ListItem", position: 2, url: `${SITE}/worksheets/number`, name: "數字松果：加法迷宮數學學習單" },
+    { "@type": "ListItem", position: 3, url: `${SITE}/worksheets/zhuyin`, name: "注音猜猜看：注音學習單" },
+    { "@type": "ListItem", position: 4, url: `${SITE}/worksheets/match`, name: "連連看：誰吃什麼、長大變成什麼" },
+    { "@type": "ListItem", position: 5, url: `${SITE}/worksheets/make`, name: "換你出題：出題紙" },
   ],
 };
-const COMING = [
-  ["數字松果", "松果上有數字，撿到的加起來要剛好等於房子上的數字。"],
-] as const;
 
 export default function Page() {
   return (
@@ -66,6 +66,18 @@ export default function Page() {
           <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>撿松果回家</span>
           <span style={{ display: "block", fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8 }}>
             每一顆松果都要撿到，每個格子只能走一次。5 歲開始，{ACORN_LEVELS.length} 關、每關 {ACORN_SHEETS.filter((s) => s.level === 1).length} 張。
+          </span>
+        </span>
+        <span aria-hidden style={{ fontSize: T.xl, color: "var(--faint)" }}>›</span>
+      </Link>
+
+      <Link href="/worksheets/number" style={{ ...card, marginTop: G.md }}>
+        <span style={thumb}><img src={sheetImg(NUMBER_SHEETS[0].id)} alt="數字松果：加法迷宮數學學習單預覽" width={SHEET_IMG.w} height={SHEET_IMG.h} loading="lazy" style={imgFit} /></span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={tag}>數學・加法</span>
+          <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>數字松果</span>
+          <span style={{ display: "block", fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8 }}>
+            撿到的松果加起來，要剛好等於房子上的數字。大班 10 以內到小一 20 以內進位，{NUMBER_LEVELS.length} 關。
           </span>
         </span>
         <span aria-hidden style={{ fontSize: T.xl, color: "var(--faint)" }}>›</span>
@@ -106,16 +118,6 @@ export default function Page() {
         </span>
         <span aria-hidden style={{ fontSize: T.xl, color: "var(--faint)" }}>›</span>
       </Link>
-
-      <p style={S.lbl}>正在做的</p>
-      <div style={{ ...S.box, padding: `${G.sm}px ${G.xl - 4}px` }}>
-        {COMING.map(([t, d], i) => (
-          <div key={t} style={{ padding: `${G.md}px 0`, borderTop: i ? "1px solid var(--line)" : 0 }}>
-            <span style={{ fontWeight: 700, fontSize: T.md }}>{t}</span>
-            <span style={{ display: "block", fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8 }}>{d}</span>
-          </div>
-        ))}
-      </div>
 
       <p style={S.lbl}>每一張都做到的四件事</p>
       <Promises />

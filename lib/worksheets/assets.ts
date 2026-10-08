@@ -27,7 +27,12 @@ export const guessLevelOg = (level: number) => at(`zhuyin-${level}-og.jpg`);
 export const matchThemePdf = (theme: string) => at(`match-${theme}.pdf`);
 export const matchAnswersPdf = (theme: string) => at(`match-${theme}-answers.pdf`);
 export const matchOg = (theme: string) => at(`match-${theme}-og.jpg`);
+/** 數字松果：每一張的 PDF、預覽圖用 sheetPdf(id)、sheetImg(id)；一關 5 張一個 PDF、答案、分享圖 */
+export const numberLevelPdf = (level: number) => at(`number-${level}.pdf`);
+export const numberAnswersPdf = (level: number) => at(`number-${level}-answers.pdf`);
+export const numberLevelOg = (level: number) => at(`number-${level}-og.jpg`);
 export const ASSETS = {
+  numberOg: at("number-og.jpg"),
   matchOg: at("match-og.jpg"),
   zhuyinOg: at("zhuyin-og.jpg"),
   acornOg: at("acorn-og.jpg"),

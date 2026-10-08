@@ -80,7 +80,16 @@ export interface MazeOpts {
   /** 左右留給松鼠、房子的空間（格子的倍數） */
   side?: number;
   icon?: number;
+  /** 數字松果：每一顆松果上的數字（跟 p.acorns 同順序）、房子上的數字 */
+  values?: number[];
+  target?: number;
 }
+
+const SANS = "'Noto Sans TC', 'Noto Sans TC Fallback', sans-serif";
+/** 白底圓圈裡一個數字（松果上的數字） */
+const numBadge = (x: number, y: number, r: number, n: number, fill = "#FFFFFF", ink: string = WS.iron) =>
+  `<circle cx="${r2(x)}" cy="${r2(y)}" r="${r2(r)}" fill="${fill}" stroke="${WS.iron}" stroke-width="${r2(r * 0.12)}"/>` +
+  `<text x="${r2(x)}" y="${r2(y + r * 0.05)}" font-size="${r2(r * (n >= 10 ? 1.15 : 1.35))}" font-family="${SANS}" font-weight="800" fill="${ink}" text-anchor="middle" dominant-baseline="central">${n}</text>`;
 
 /**
  * 一題迷宮。回傳 SVG 片段（放在 translate 裡用）和它的寬高。
@@ -88,7 +97,7 @@ export interface MazeOpts {
  * 2026-10-01 Tim 抓到：第一版右下角也封起來了，走到房子前面進不去。
  */
 export function mazeSvg(p: AcornPuzzle, c: number, opts: MazeOpts = {}): { svg: string; w: number; h: number } {
-  const { path, paws = false, color = WS.emerald, side = 1.15, icon = 0.95 } = opts;
+  const { path, paws = false, color = WS.emerald, side = 1.15, icon = 0.95, values, target } = opts;
   const { W, H } = p;
   const open = new Set(p.open);
   const ml = c * side, mr = c * side, mt = c * 0.2, mb = c * 0.35;
@@ -145,10 +154,14 @@ export function mazeSvg(p: AcornPuzzle, c: number, opts: MazeOpts = {}): { svg: 
     }
   }
   for (const a of p.acorns) g += acornIcon(X(a), Y(a), c * 0.8);
+  // 數字松果：數字放在松果右下角，白底圓圈，黑白印也看得清楚
+  if (values) p.acorns.forEach((a, k) => { g += numBadge(X(a) + c * 0.2, Y(a) + c * 0.18, c * 0.21, values[k]); });
   g += squirrelIcon(ml - c * 0.62, mt + c * 0.5, c * icon);
   g += arrowRight(ml - c * 0.16, mt + c * 0.5, c * 0.14, WS.orange);
   g += arrowRight(x1 + c * 0.04, y1 - c * 0.5, c * 0.14, WS.orange);
   g += houseIcon(x1 + c * 0.66, y1 - c * 0.5, c * icon);
+  // 數字松果：房子上面的數字（橘色，要湊到的那個數）
+  if (target !== undefined) g += numBadge(x1 + c * 0.66, y1 - c * 1.32, c * 0.32, target, WS.orange, "#FFFFFF");
   return { svg: g, w, h };
 }
 

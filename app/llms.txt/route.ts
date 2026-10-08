@@ -4,6 +4,7 @@ import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
 import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
 import { GUESS_LEVELS } from "@/lib/worksheets/guess";
 import { MATCH_THEMES } from "@/lib/worksheets/match";
+import { NUMBER_LEVELS } from "@/lib/worksheets/number";
 
 /**
  * /llms.txt，給大型語言模型讀的網站說明。
@@ -92,9 +93,13 @@ ${GUESS_LEVELS.map((L) => `- 第 ${L.n} 關「${L.name}」（${L.grade}，${L.ag
 ${MATCH_THEMES.map((T) => `- ${T.name}：${BASE}/worksheets/match/${T.id}　PDF：${BASE}/worksheets/files/match-${T.id}.pdf
 ${T.pairs.map((p) => `  - ${p.left.name}${T.verb}${p.right.name}：${p.fact}${p.source ? `（資料：${p.source}）` : ""}`).join("\n")}`).join("\n")}
 
-### 正在製作
+### 數字松果（加法迷宮數學學習單）
 
-數字松果（松果上有數字，撿到的加起來要剛好等於房子上的數字）
+- 總覽：${BASE}/worksheets/number
+- 撿松果回家的迷宮加上數字：撿到的松果加起來要剛好等於房子上的數字，每個格子只能走一次，不用每一顆都撿
+- 每一題都用程式把起點到房子的每一條路走過一遍、算出總和，剛好等於房子數字的只有一條
+- 掃 QR code 先看要撿哪幾顆（路線讓孩子自己找），還是不會再看路線
+${NUMBER_LEVELS.map((L) => `- 第 ${L.n} 關「${L.name}」（${L.grade}，${L.age}；${L.what}，${L.W}×${L.H} 格子）：${BASE}/worksheets/number/${L.n}　整關 PDF：${BASE}/worksheets/files/number-${L.n}.pdf`).join("\n")}
 
 ## 早期內容：寵物飼料與 3C
 

@@ -3,6 +3,9 @@ import { acornSheetsOf } from "./acorn-sheets";
 import { guessAnswersPdf, guessLevelOg, guessLevelPdf, guessSheetImg, guessSheetPdf, levelAnswersPdf, levelOg, levelPdf, sheetImg, sheetPdf } from "./assets";
 import { GUESS_LEVELS, guessLevel } from "./guess";
 import { MATCH_THEMES, matchTheme } from "./match";
+import { NUMBER_LEVELS, numberLevel } from "./number";
+import { numberSheetsOf } from "./number-sheets";
+import { numberAnswersPdf, numberLevelOg, numberLevelPdf } from "./assets";
 import { matchSheetsOf } from "./match-sheets";
 import { matchAnswersPdf, matchOg, matchThemePdf } from "./assets";
 import { guessSheetsOf } from "./guess-sheets";
@@ -192,6 +195,48 @@ export function matchSeries() {
     name: "連連看學習單",
     numberOfItems: MATCH_THEMES.length,
     itemListElement: MATCH_THEMES.map((T, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/worksheets/match/${T.id}`, name: `連連看：${T.name}` })),
+  };
+}
+
+/** 數字松果一關：5 張學習單、整關 PDF、答案 */
+export function numberLevelResource(n: number) {
+  const L = numberLevel(n);
+  const url = `${SITE}/worksheets/number/${n}`;
+  const sheets = numberSheetsOf(n);
+  const nm = { ...common, teaches: "加法：先想好要撿哪幾個數，加起來剛好等於目標" };
+  const age = n <= 2 ? "5-6" : "6-7";
+  return {
+    "@type": "LearningResource",
+    "@id": `${url}#level`,
+    name: `數字松果 第 ${n} 關：${L.name}（${L.grade}數學學習單）`,
+    description: `加法迷宮：${L.what}。${L.W}×${L.H} 的格子，${sheets.length} 張 A4、每張 2 題。每一題都把起點到房子的每一條路算過，剛好湊到房子數字的只有一條。`,
+    url,
+    image: `${SITE}${numberLevelOg(n)}`,
+    educationalLevel: L.grade,
+    typicalAgeRange: age,
+    ...nm,
+    encoding: [
+      { "@type": "MediaObject", name: `第 ${n} 關 ${sheets.length} 張題目`, contentUrl: `${SITE}${numberLevelPdf(n)}`, encodingFormat: "application/pdf" },
+      { "@type": "MediaObject", name: `第 ${n} 關答案`, contentUrl: `${SITE}${numberAnswersPdf(n)}`, encodingFormat: "application/pdf" },
+    ],
+    hasPart: sheets.map((s) => ({
+      "@type": "LearningResource",
+      name: `數字松果 第 ${n} 關第 ${s.n} 張`,
+      url: `${url}?n=${s.n}`,
+      image: `${SITE}${sheetImg(s.id)}`,
+      typicalAgeRange: age,
+      ...nm,
+      encoding: { "@type": "MediaObject", contentUrl: `${SITE}${sheetPdf(s.id)}`, encodingFormat: "application/pdf" },
+    })),
+  };
+}
+
+export function numberSeries() {
+  return {
+    "@type": "ItemList",
+    name: "數字松果：加法迷宮數學學習單",
+    numberOfItems: NUMBER_LEVELS.length,
+    itemListElement: NUMBER_LEVELS.map((L, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/worksheets/number/${L.n}`, name: `第 ${L.n} 關：${L.name}（${L.grade}）` })),
   };
 }
 

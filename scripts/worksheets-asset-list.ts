@@ -10,6 +10,9 @@ import { guessSheetPages } from "../lib/worksheets/guess-sheet";
 import { GUESS_SHEETS, guessSheetsOf } from "../lib/worksheets/guess-sheets";
 import { acornMakerPage, freeMakerPage } from "../lib/worksheets/make-sheet";
 import { MATCH_THEMES } from "../lib/worksheets/match";
+import { NUMBER_LEVELS } from "../lib/worksheets/number";
+import { numberSheetPages } from "../lib/worksheets/number-sheet";
+import { NUMBER_SHEETS, numberSheetsOf } from "../lib/worksheets/number-sheets";
 import { matchSheetPages } from "../lib/worksheets/match-sheet";
 import { MATCH_SHEETS, matchSheetsOf } from "../lib/worksheets/match-sheets";
 
@@ -76,11 +79,25 @@ export function assetJobs(): AssetJob[] {
     og(`match-${T.id}-og.jpg`, sheets[0].page1, `連連看・${T.name}`, `連連看<br>${T.ask}`, `大班、小一，${sheets.length} 張 PDF 免費下載`);
   }
 
+  /* 數字松果：每一張題目 PDF、預覽圖；每一關 5 張一個 PDF、答案、分享圖 */
+  for (const s of NUMBER_SHEETS) {
+    const { page1 } = numberSheetPages(s);
+    pdf(`${s.id}.pdf`, [page1]);
+    img(`${s.id}.webp`, page1);
+  }
+  for (const L of NUMBER_LEVELS) {
+    const sheets = numberSheetsOf(L.n).map((s) => numberSheetPages(s));
+    pdf(`number-${L.n}.pdf`, sheets.map((x) => x.page1));
+    pdf(`number-${L.n}-answers.pdf`, sheets.map((x) => x.page2));
+    og(`number-${L.n}-og.jpg`, sheets[0].page1, `第 ${L.n} 關・${L.grade}`, `數字松果<br>${L.name}`, `加法迷宮，${sheets.length} 張 PDF 免費下載`);
+  }
+
   /* 各系列、學習單首頁的分享圖 */
   const first = acornSheetPages(ACORN_SHEETS[0]).page1;
   og("acorn-og.jpg", first, "免費下載・A4 PDF", "幼兒迷宮學習單<br>撿松果回家", "中班到小一，6 個關卡、30 張");
   og("zhuyin-og.jpg", guessSheetPages(GUESS_SHEETS[0]).circle, "免費下載・A4 PDF", "注音學習單<br>注音猜猜看", `大班到小一，${GUESS_LEVELS.length} 個關卡，圈圈看、寫寫看`);
   og("match-og.jpg", matchSheetPages(MATCH_SHEETS[0]).page1, "免費下載・A4 PDF", "幼兒連連看<br>學習單", "誰吃什麼、長大變成什麼，答案都查過");
+  og("number-og.jpg", numberSheetPages(NUMBER_SHEETS[0]).page1, "免費下載・A4 PDF", "數學學習單<br>數字松果", "加法迷宮，大班 10 以內到小一 20 以內");
   og("worksheets-og.jpg", first, "免費・A4・印了就能寫", "陪孩子動腦的<br>益智學習單", "說明都有注音，不用寫國字，卡住了有提示");
   return jobs;
 }

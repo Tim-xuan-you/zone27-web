@@ -96,6 +96,7 @@ export default function Page() {
       </div>
 
       <p style={{ marginTop: G.xl, fontSize: T.md, lineHeight: 1.9 }}>
+        會 10 以內的加法了？同一種迷宮加上數字：<Link href="/worksheets/number" style={{ color: "var(--accent)", fontWeight: 700 }}>數字松果 →</Link><br />
         孩子寫完說太簡單？<Link href="/worksheets/make" style={{ color: "var(--accent)", fontWeight: 700 }}>換他出題給你寫 →</Link>
       </p>
 
