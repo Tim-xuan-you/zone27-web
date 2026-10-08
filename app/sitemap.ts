@@ -8,7 +8,9 @@ import { productHref } from "@/lib/labels";
 import { allPaths } from "@/lib/slugs";
 import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
 import { ACORN_SHEETS, acornSheetsOf } from "@/lib/worksheets/acorn-sheets";
-import { ASSETS, levelAnswersPdf, levelOg, levelPdf, sheetImg, sheetPdf } from "@/lib/worksheets/assets";
+import { ASSETS, guessAnswersPdf, guessLevelOg, guessLevelPdf, guessSheetImg, guessSheetPdf, levelAnswersPdf, levelOg, levelPdf, sheetImg, sheetPdf } from "@/lib/worksheets/assets";
+import { GUESS_LEVELS } from "@/lib/worksheets/guess";
+import { GUESS_SHEETS, guessSheetsOf } from "@/lib/worksheets/guess-sheets";
 
 const BASE = "https://zone27.com.tw";
 
@@ -41,11 +43,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE}/worksheets/acorn/${L.n}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9,
       images: [`${BASE}${levelOg(L.n)}`, ...acornSheetsOf(L.n).map((s) => `${BASE}${sheetImg(s.id)}`)],
     })),
+    { url: `${BASE}/worksheets/zhuyin`, lastModified: now, changeFrequency: "weekly", priority: 0.95, images: [`${BASE}${ASSETS.zhuyinOg}`] },
+    ...GUESS_LEVELS.map((L) => ({
+      url: `${BASE}/worksheets/zhuyin/${L.n}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9,
+      images: [`${BASE}${guessLevelOg(L.n)}`, ...guessSheetsOf(L.n).flatMap((s) => [`${BASE}${guessSheetImg(s.id, "circle")}`, `${BASE}${guessSheetImg(s.id, "write")}`])],
+    })),
     { url: `${BASE}/worksheets/make`, lastModified: now, changeFrequency: "weekly", priority: 0.9, images: [`${BASE}${ASSETS.makeAcornImg}`, `${BASE}${ASSETS.makeFreeImg}`] },
     ...[
       ...ACORN_SHEETS.map((s) => sheetPdf(s.id)),
       ...ACORN_LEVELS.flatMap((L) => [levelPdf(L.n), levelAnswersPdf(L.n)]),
       ASSETS.makeAcornPdf, ASSETS.makeFreePdf,
+      ...GUESS_SHEETS.flatMap((s) => [guessSheetPdf(s.id, "circle"), guessSheetPdf(s.id, "write")]),
+      ...GUESS_LEVELS.flatMap((L) => [guessLevelPdf(L.n, "circle"), guessLevelPdf(L.n, "write"), guessAnswersPdf(L.n)]),
     ].map((p) => ({ url: `${BASE}${p}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 })),
     { url: `${BASE}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/dog-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },

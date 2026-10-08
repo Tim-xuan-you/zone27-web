@@ -1,6 +1,8 @@
 import { ACORN_LEVELS, acornLevel, type AcornLevel } from "./acorn";
 import { acornSheetsOf } from "./acorn-sheets";
-import { levelAnswersPdf, levelOg, levelPdf, sheetImg, sheetPdf } from "./assets";
+import { guessAnswersPdf, guessLevelOg, guessLevelPdf, guessSheetImg, guessSheetPdf, levelAnswersPdf, levelOg, levelPdf, sheetImg, sheetPdf } from "./assets";
+import { GUESS_LEVELS, guessLevel } from "./guess";
+import { guessSheetsOf } from "./guess-sheets";
 
 /**
  * 學習單的結構化資料（schema.org JSON-LD）：給 Google 和 AI 看的「這一頁是什麼」。
@@ -92,6 +94,59 @@ export function acornSeries() {
       position: i + 1,
       url: `${SITE}/worksheets/acorn/${L.n}`,
       name: `第 ${L.n} 關（${L.grade}，${L.W}×${L.H}）`,
+    })),
+  };
+}
+
+/** 注音猜猜看每一關的年齡 */
+export const guessAgeRange = (n: number): string => (n <= 2 ? "5-6" : "6-7");
+
+/** 注音猜猜看一關：幾張學習單，兩種玩法各一個 PDF、答案 */
+export function guessLevelResource(n: number) {
+  const L = guessLevel(n);
+  const url = `${SITE}/worksheets/zhuyin/${n}`;
+  const sheets = guessSheetsOf(n);
+  const zy = { ...common, teaches: "看注音認出是什麼東西，再自己寫出注音（符號和聲調）" };
+  return {
+    "@type": "LearningResource",
+    "@id": `${url}#level`,
+    name: `注音猜猜看 第 ${n} 關：${L.name}（${L.grade}注音學習單）`,
+    description: `${L.what}。${sheets.length} 張 A4，每張 6 題，有圈圈看（看注音圈出對的圖）和寫寫看（看圖寫出注音）兩種，題目一樣。每個詞的注音都對過教育部國語辭典。`,
+    url,
+    image: `${SITE}${guessLevelOg(n)}`,
+    educationalLevel: L.grade,
+    typicalAgeRange: guessAgeRange(n),
+    ...zy,
+    encoding: [
+      { "@type": "MediaObject", name: `第 ${n} 關圈圈看 ${sheets.length} 張`, contentUrl: `${SITE}${guessLevelPdf(n, "circle")}`, encodingFormat: "application/pdf" },
+      { "@type": "MediaObject", name: `第 ${n} 關寫寫看 ${sheets.length} 張`, contentUrl: `${SITE}${guessLevelPdf(n, "write")}`, encodingFormat: "application/pdf" },
+      { "@type": "MediaObject", name: `第 ${n} 關答案`, contentUrl: `${SITE}${guessAnswersPdf(n)}`, encodingFormat: "application/pdf" },
+    ],
+    hasPart: sheets.map((s) => ({
+      "@type": "LearningResource",
+      name: `注音猜猜看 第 ${n} 關第 ${s.n} 張`,
+      url: `${url}?n=${s.n}`,
+      image: `${SITE}${guessSheetImg(s.id, "circle")}`,
+      typicalAgeRange: guessAgeRange(n),
+      ...zy,
+      encoding: [
+        { "@type": "MediaObject", name: "圈圈看", contentUrl: `${SITE}${guessSheetPdf(s.id, "circle")}`, encodingFormat: "application/pdf" },
+        { "@type": "MediaObject", name: "寫寫看", contentUrl: `${SITE}${guessSheetPdf(s.id, "write")}`, encodingFormat: "application/pdf" },
+      ],
+    })),
+  };
+}
+
+export function guessSeries() {
+  return {
+    "@type": "ItemList",
+    name: "注音猜猜看：注音學習單",
+    numberOfItems: GUESS_LEVELS.length,
+    itemListElement: GUESS_LEVELS.map((L, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${SITE}/worksheets/zhuyin/${L.n}`,
+      name: `第 ${L.n} 關：${L.name}（${L.grade}）`,
     })),
   };
 }

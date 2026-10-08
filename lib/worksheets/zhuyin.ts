@@ -3,7 +3,7 @@
  * 跟國小課本的排法一樣。
  *
  * 只收學習單上真的用到的字，每個字的讀音都是查過的（教育部國語辭典）。
- * 「一」「不」標本調（課本的做法，唸的時候再變調）。
+ * 「一」「不」標本調（課本的做法，唸的時候再變調）。「個」當量詞是輕聲 ˙ㄍㄜ（辭典：一個、這個、幾個都是）。
  * 同一個字在不同詞裡讀音不同，寫成 {字|注音} 指定，例如 {得|˙ㄉㄜ}。
  *
  * 2026-10-01 Tim：孩子讀的字，用詞要照那張學習單的年紀（memory: kids-worksheet-wording）。
@@ -14,12 +14,15 @@ export const ZHUYIN: Record<string, string> = {
   // 撿松果回家
   撿: "ㄐㄧㄢˇ", 松: "ㄙㄨㄥ", 果: "ㄍㄨㄛˇ", 回: "ㄏㄨㄟˊ", 家: "ㄐㄧㄚ",
   幫: "ㄅㄤ", 像: "ㄒㄧㄤˋ", 小: "ㄒㄧㄠˇ", 鼠: "ㄕㄨˇ", 每: "ㄇㄟˇ", 一: "ㄧ", 顆: "ㄎㄜ", 都: "ㄉㄡ", 要: "ㄧㄠˋ", 到: "ㄉㄠˋ",
-  格: "ㄍㄜˊ", 個: "ㄍㄜˋ", 子: "˙ㄗ", 只: "ㄓˇ", 能: "ㄋㄥˊ", 走: "ㄗㄡˇ", 次: "ㄘˋ", 這: "ㄓㄜˋ", 樣: "ㄧㄤˋ",
+  格: "ㄍㄜˊ", 個: "˙ㄍㄜ", 子: "˙ㄗ", 只: "ㄓˇ", 能: "ㄋㄥˊ", 走: "ㄗㄡˇ", 次: "ㄘˋ", 這: "ㄓㄜˋ", 樣: "ㄧㄤˋ",
   // 出題紙（2026-10-01）
   換: "ㄏㄨㄢˋ", 你: "ㄋㄧˇ", 出: "ㄔㄨ", 題: "ㄊㄧˊ", 目: "ㄇㄨˋ", 的: "˙ㄉㄜ", 人: "ㄖㄣˊ", 寫: "ㄒㄧㄝˇ",
   在: "ㄗㄞˋ", 虛: "ㄒㄩ", 線: "ㄒㄧㄢˋ", 上: "ㄕㄤˋ", 畫: "ㄏㄨㄚˋ", 牆: "ㄑㄧㄤˊ", 裡: "ㄌㄧˇ",
   自: "ㄗˋ", 己: "ㄐㄧˇ", 先: "ㄒㄧㄢ", 看: "ㄎㄢˋ", 再: "ㄗㄞˋ", 給: "ㄍㄟˇ", 別: "ㄅㄧㄝˊ",
   下: "ㄒㄧㄚˋ", 面: "ㄇㄧㄢˋ", 往: "ㄨㄤˇ", 後: "ㄏㄡˋ", 摺: "ㄓㄜˊ", 不: "ㄅㄨˋ", 偷: "ㄊㄡ",
+  // 注音猜猜看（2026-10-09）。圈：畫圈的 ㄑㄩㄢ，不是豬圈的 ㄐㄩㄢˋ
+  注: "ㄓㄨˋ", 音: "ㄧㄣ", 猜: "ㄘㄞ", 唸: "ㄋㄧㄢˋ", 左: "ㄗㄨㄛˇ", 邊: "ㄅㄧㄢ", 圈: "ㄑㄩㄢ", 對: "ㄉㄨㄟˋ", 圖: "ㄊㄨˊ",
+  說: "ㄕㄨㄛ", 它: "ㄊㄚ",
   // 共用
   名: "ㄇㄧㄥˊ", 字: "ㄗˋ", 日: "ㄖˋ", 期: "ㄑㄧˊ", 第: "ㄉㄧˋ", 關: "ㄍㄨㄢ",
   提: "ㄊㄧˊ", 示: "ㄕˋ", 答: "ㄉㄚˊ", 案: "ㄢˋ", 和: "ㄏㄜˊ",
@@ -30,7 +33,17 @@ const FONT_KAI = "Iansui, 'Iansui Fallback', DFKai-SB, BiauKai, serif";
 const FONT_SANS = "'Noto Sans TC', 'Noto Sans TC Fallback', sans-serif";
 
 type Unit = { ch: string; zy?: string };
+/**
+ * 詞裡面讀音跟單字不一樣的（多半是輕聲）。寫到這些詞會自動換成對的讀音，不用每次記得寫 {字|注音}。
+ * 每一個都對過教育部國語辭典（2026-10-09：「名字」以前標成 ㄗˋ，辭典是輕聲 ˙ㄗ，已經上線的學習單一起改了）。
+ */
+export const PHRASES: Record<string, string[]> = {
+  名字: ["ㄇㄧㄥˊ", "˙ㄗ"],
+};
+
 function units(text: string): Unit[] {
+  // 先把詞換成 {字|注音}，再一個字一個字拆
+  for (const [w, zy] of Object.entries(PHRASES)) text = text.split(w).join([...w].map((c, i) => `{${c}|${zy[i]}}`).join(""));
   const out: Unit[] = [];
   for (const m of text.matchAll(/\{(.)\|([^}]+)\}|(.)/gu)) {
     if (m[1]) out.push({ ch: m[1], zy: m[2] });
@@ -90,4 +103,37 @@ export function zyLine(text: string, x: number, y: number, size: number, color =
     cx += s * 1.03 + b + s * 0.3;
   }
   return { svg: parts.join(""), width: cx - x };
+}
+
+/**
+ * 只畫注音、不畫國字（注音猜猜看用）：每個字一直排，從左到右排開，置中在 (cx, cy)。
+ * b 是注音符號的大小。聲調在最後一個符號右上，輕聲的點在最上面，跟課本一樣。
+ */
+export function zyBlock(syllables: string[], cx: number, cy: number, b: number, color = "#3E4348"): { svg: string; width: number; height: number } {
+  const lineH = b * 1.08;
+  const colW = b * 1.0, gap = b * 0.95;
+  const cols = syllables.map((zy) => {
+    const light = zy.startsWith("˙");
+    const body = zy.replace("˙", "");
+    const last = body[body.length - 1] ?? "";
+    const tone = TONES.includes(last) ? last : "";
+    return { light, tone, syms: [...(tone ? body.slice(0, -1) : body)] };
+  });
+  const height = Math.max(...cols.map((c) => c.syms.length)) * lineH;
+  const width = cols.length * colW + (cols.length - 1) * gap + b * 0.5;
+  let x = cx - width / 2 + colW / 2;
+  const parts: string[] = [];
+  for (const c of cols) {
+    const top = cy - (c.syms.length * lineH) / 2;
+    c.syms.forEach((sym, k) => {
+      parts.push(`<text x="${x}" y="${top + (k + 0.5) * lineH}" font-size="${b}" font-family="${FONT_KAI}" text-anchor="middle" dominant-baseline="central" fill="${color}">${sym}</text>`);
+    });
+    if (c.tone) {
+      const ly = top + (c.syms.length - 0.5) * lineH;
+      parts.push(`<text x="${x + b * 0.5}" y="${ly + b * 0.02}" font-size="${b}" font-family="${FONT_KAI}" dominant-baseline="central" fill="${color}">${c.tone}</text>`);
+    }
+    if (c.light) parts.push(`<text x="${x}" y="${top - b * 0.32}" font-size="${b}" font-family="${FONT_KAI}" text-anchor="middle" dominant-baseline="central" fill="${color}">˙</text>`);
+    x += colW + gap;
+  }
+  return { svg: parts.join(""), width, height };
 }

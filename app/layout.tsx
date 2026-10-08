@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s · ZONE 27",
   },
   description:
-    "免費的益智學習單，A4 印了就能寫。說明都有注音，答案用畫的不用寫字，卡住了有一段一段的提示。一個大班生的爸爸做的。",
+    "免費的益智學習單，A4 印了就能寫。說明都有注音，答案不用寫國字，卡住了有提示。一個大班生的爸爸做的。",
   openGraph: { type: "website", locale: "zh_TW", siteName: "ZONE 27" },
   robots: { index: true, follow: true },
 };

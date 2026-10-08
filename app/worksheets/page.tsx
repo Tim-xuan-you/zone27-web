@@ -5,7 +5,9 @@ import Promises from "@/components/worksheets/Promises";
 import { G, R, S, T } from "@/components/styles";
 import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
 import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
-import { ASSETS, SHEET_IMG, sheetImg } from "@/lib/worksheets/assets";
+import { ASSETS, SHEET_IMG, guessSheetImg, sheetImg } from "@/lib/worksheets/assets";
+import { GUESS_LEVELS } from "@/lib/worksheets/guess";
+import { GUESS_SHEETS } from "@/lib/worksheets/guess-sheets";
 import { breadcrumb, graph, SITE, TIM } from "@/lib/worksheets/seo";
 
 /**
@@ -16,9 +18,9 @@ import { breadcrumb, graph, SITE, TIM } from "@/lib/worksheets/seo";
  * 還在做的那幾款也列出來（一行一款，不做成空卡片），讓家長知道這裡會一直長，也知道點子從哪裡來。
  */
 
-// 2026-10-09 查 Google 建議字：免費學習單下載、大班學習單下載、中班學習單下載、幼兒迷宮pdf
-const TITLE = "免費學習單下載：幼兒迷宮、出題紙 PDF（中班、大班、小一）";
-const DESC = `給中班、大班、小一孩子的免費益智學習單，A4 PDF 下載就能印。幼兒迷宮分 6 關共 ${ACORN_SHEETS.length} 張，還有讓孩子出題的出題紙。說明都有注音，答案用畫的不用寫字，卡住了掃 QR code 一段一段看提示。`;
+// 2026-10-09 查 Google 建議字：免費學習單下載、大班學習單下載、中班學習單下載、幼兒迷宮pdf、注音學習單下載
+const TITLE = "免費學習單下載：幼兒迷宮、注音學習單 PDF（中班、大班、小一）";
+const DESC = `給中班、大班、小一孩子的免費益智學習單，A4 PDF 下載就能印。幼兒迷宮 6 關共 ${ACORN_SHEETS.length} 張、注音猜猜看 4 關共 ${GUESS_SHEETS.length} 張，還有讓孩子出題的出題紙。說明都有注音，答案不用寫國字，卡住了掃 QR code 看提示。`;
 export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
@@ -32,11 +34,11 @@ const LIST = {
   name: "ZONE 27 的免費學習單",
   itemListElement: [
     { "@type": "ListItem", position: 1, url: `${SITE}/worksheets/acorn`, name: "撿松果回家：幼兒迷宮學習單" },
-    { "@type": "ListItem", position: 2, url: `${SITE}/worksheets/make`, name: "換你出題：出題紙" },
+    { "@type": "ListItem", position: 2, url: `${SITE}/worksheets/zhuyin`, name: "注音猜猜看：注音學習單" },
+    { "@type": "ListItem", position: 3, url: `${SITE}/worksheets/make`, name: "換你出題：出題紙" },
   ],
 };
 const COMING = [
-  ["注音猜猜看", "看注音，圈出是哪一個東西；會寫注音的，換你寫出來。點子是我家大班生出的。"],
   ["連連看", "誰吃什麼、長大會變成什麼。每一個答案都先查過可靠的資料。"],
   ["數字松果", "松果上有數字，撿到的加起來要剛好等於房子上的數字。"],
 ] as const;
@@ -52,7 +54,7 @@ export default function Page() {
         <span style={{ fontSize: "0.6em", color: "var(--muted)" }}>中班、大班、小一・PDF 下載</span>
       </h1>
       <p style={{ color: "var(--muted)", fontSize: T.lg, lineHeight: 1.9, margin: `0 0 ${G.xl}px` }}>
-        A4 一張兩題，每一張都能下載 PDF。每一關有固定的幾張，挑想要的印。第一次寫，先從第 1 關開始。
+        A4，每一張都能下載 PDF。每一關有固定的幾張，挑想要的印。第一次寫，先從第 1 關開始。
       </p>
 
       <Link href="/worksheets/acorn" style={card}>
@@ -62,6 +64,18 @@ export default function Page() {
           <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>撿松果回家</span>
           <span style={{ display: "block", fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8 }}>
             每一顆松果都要撿到，每個格子只能走一次。5 歲開始，{ACORN_LEVELS.length} 關、每關 {ACORN_SHEETS.filter((s) => s.level === 1).length} 張。
+          </span>
+        </span>
+        <span aria-hidden style={{ fontSize: T.xl, color: "var(--faint)" }}>›</span>
+      </Link>
+
+      <Link href="/worksheets/zhuyin" style={{ ...card, marginTop: G.md }}>
+        <span style={thumb}><img src={guessSheetImg(GUESS_SHEETS[0].id, "circle")} alt="注音猜猜看：注音學習單預覽" width={SHEET_IMG.w} height={SHEET_IMG.h} loading="lazy" style={imgFit} /></span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={tag}>注音</span>
+          <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>注音猜猜看</span>
+          <span style={{ display: "block", fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8 }}>
+            看注音圈出對的圖，會寫的換你寫出來。大班開始，{GUESS_LEVELS.length} 關、每關 {GUESS_SHEETS.filter((s) => s.level === 1).length} 張。點子是我家大班生出的。
           </span>
         </span>
         <span aria-hidden style={{ fontSize: T.xl, color: "var(--faint)" }}>›</span>

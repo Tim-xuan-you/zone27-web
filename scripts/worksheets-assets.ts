@@ -12,17 +12,16 @@
  * build 後的 scripts/worksheets-assets-check.ts 會比對，舊的檔案沒更新就擋下來。
  *
  * 用法：npx tsx scripts/worksheets-assets.ts（要先能連網，字型從 Google Fonts 載）
+ * 只重產一部分：npx tsx scripts/worksheets-assets.ts zhuyin-1 acorn-og（檔名開頭符合的）
+ * 要產哪些檔案寫在 scripts/worksheets-asset-list.ts。
  */
 import { spawn } from "node:child_process";
-import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { ACORN_LEVELS, acornLevel } from "../lib/worksheets/acorn";
-import { acornSheetPages } from "../lib/worksheets/acorn-sheet";
-import { ACORN_SHEETS, acornSheetsOf } from "../lib/worksheets/acorn-sheets";
-import { acornMakerPage, freeMakerPage } from "../lib/worksheets/make-sheet";
 import { ASSET_DIR } from "../lib/worksheets/assets";
+import { assetJobs } from "./worksheets-asset-list";
 import { assetFingerprint } from "./worksheets-fingerprint";
 
 const ROOT = resolve(import.meta.dirname, "..");
@@ -96,41 +95,26 @@ html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#F7F9FC;
 }
 
 async function main() {
+  // 只重產一部分：npx tsx scripts/worksheets-assets.ts zhuyin-1（檔名開頭符合的才產，其他的指紋照舊）
+  const only = process.argv.slice(2);
   mkdirSync(OUT, { recursive: true });
-  await connect();
+  const manifestFile = join(OUT, "manifest.json");
+  const old: Record<string, string> = existsSync(manifestFile) ? JSON.parse(readFileSync(manifestFile, "utf8")) : {};
+  const jobs = assetJobs();
+  const keep = new Set(jobs.map((j) => j.file));
   const manifest: Record<string, string> = {};
-  const done = (file: string, svgs: string[]) => { manifest[file] = assetFingerprint(svgs); console.log("  ", file); };
-
-  // 每一張：題目 PDF、預覽圖
-  for (const s of ACORN_SHEETS) {
-    const { page1 } = acornSheetPages(s);
-    await pdf(a4Html([page1]), `${s.id}.pdf`); done(`${s.id}.pdf`, [page1]);
-    await shot(a4Html([page1]), `${s.id}.webp`, 794, 1123, "webp", 1.2); done(`${s.id}.webp`, [page1]);
+  for (const [f, fp] of Object.entries(old)) if (keep.has(f)) manifest[f] = fp;
+  await connect();
+  for (const j of jobs) {
+    if (only.length && !only.some((p) => j.file.startsWith(p))) continue;
+    if (j.kind === "pdf") await pdf(a4Html(j.svgs), j.file);
+    else if (j.kind === "img") await shot(a4Html(j.svgs), j.file, 794, 1123, "webp", 1.2);
+    else await shot(ogHtml(j.kicker, j.title, j.sub, j.svgs[0]), j.file, 1200, 630, "jpeg");
+    manifest[j.file] = assetFingerprint(j.svgs);
+    console.log("  ", j.file);
   }
-  // 每一關：5 張題目一個 PDF、5 張提示和答案一個 PDF、分享圖
-  for (const L of ACORN_LEVELS) {
-    const sheets = acornSheetsOf(L.n).map((s) => acornSheetPages(s));
-    const p1 = sheets.map((x) => x.page1), p2 = sheets.map((x) => x.page2);
-    await pdf(a4Html(p1), `acorn-${L.n}.pdf`); done(`acorn-${L.n}.pdf`, p1);
-    await pdf(a4Html(p2), `acorn-${L.n}-answers.pdf`); done(`acorn-${L.n}-answers.pdf`, p2);
-    const lv = acornLevel(L.n);
-    await shot(ogHtml(`第 ${L.n} 關・${lv.grade}`, "撿松果回家<br>迷宮學習單", `${lv.W}×${lv.H} 格子，5 張 PDF 免費下載`, p1[0]), `acorn-${L.n}-og.jpg`, 1200, 630, "jpeg");
-    done(`acorn-${L.n}-og.jpg`, [p1[0]]);
-  }
-  // 出題紙
-  const maker = acornMakerPage(), free = freeMakerPage();
-  await pdf(a4Html([maker]), "make-acorn.pdf"); done("make-acorn.pdf", [maker]);
-  await pdf(a4Html([free]), "make-free.pdf"); done("make-free.pdf", [free]);
-  await shot(a4Html([maker]), "make-acorn.webp", 794, 1123, "webp", 1.2); done("make-acorn.webp", [maker]);
-  await shot(a4Html([free]), "make-free.webp", 794, 1123, "webp", 1.2); done("make-free.webp", [free]);
-  await shot(ogHtml("出題紙・PDF 免費下載", "換你出題", "孩子畫牆、畫松果，出題給大人寫", maker), "make-og.jpg", 1200, 630, "jpeg"); done("make-og.jpg", [maker]);
-  // 撿松果回家、學習單首頁的分享圖
-  const first = acornSheetPages(ACORN_SHEETS[0]).page1;
-  await shot(ogHtml("免費下載・A4 PDF", "幼兒迷宮學習單<br>撿松果回家", "中班到小一，6 個關卡、30 張", first), "acorn-og.jpg", 1200, 630, "jpeg"); done("acorn-og.jpg", [first]);
-  await shot(ogHtml("免費・A4・印了就能寫", "陪孩子動腦的<br>益智學習單", "說明都有注音，答案用畫的，卡住了有提示", first), "worksheets-og.jpg", 1200, 630, "jpeg"); done("worksheets-og.jpg", [first]);
-
-  writeFileSync(join(OUT, "manifest.json"), JSON.stringify(manifest, null, 1) + "\n");
-  console.log(`\n寫好 ${Object.keys(manifest).length} 個檔案到 public/${ASSET_DIR}/`);
+  writeFileSync(manifestFile, JSON.stringify(Object.fromEntries(Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b))), null, 1) + "\n");
+  console.log(`\n寫好了，public/${ASSET_DIR}/ 一共 ${Object.keys(manifest).length} 個檔案`);
   await closeEdge();
 }
 

@@ -9,11 +9,8 @@
  */
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { ACORN_LEVELS } from "../lib/worksheets/acorn";
-import { acornSheetPages } from "../lib/worksheets/acorn-sheet";
-import { ACORN_SHEETS, acornSheetsOf } from "../lib/worksheets/acorn-sheets";
 import { ASSET_DIR } from "../lib/worksheets/assets";
-import { acornMakerPage, freeMakerPage } from "../lib/worksheets/make-sheet";
+import { assetJobs } from "./worksheets-asset-list";
 import { assetFingerprint } from "./worksheets-fingerprint";
 
 const DIR = resolve(import.meta.dirname, "..", "public", ASSET_DIR);
@@ -24,20 +21,7 @@ if (!existsSync(manifestFile)) {
 }
 const manifest = JSON.parse(readFileSync(manifestFile, "utf8")) as Record<string, string>;
 
-const want: [string, string[]][] = [];
-for (const s of ACORN_SHEETS) {
-  const { page1 } = acornSheetPages(s);
-  want.push([`${s.id}.pdf`, [page1]], [`${s.id}.webp`, [page1]]);
-}
-for (const L of ACORN_LEVELS) {
-  const sheets = acornSheetsOf(L.n).map((s) => acornSheetPages(s));
-  want.push([`acorn-${L.n}.pdf`, sheets.map((x) => x.page1)], [`acorn-${L.n}-answers.pdf`, sheets.map((x) => x.page2)], [`acorn-${L.n}-og.jpg`, [sheets[0].page1]]);
-}
-const maker = acornMakerPage(), free = freeMakerPage(), first = acornSheetPages(ACORN_SHEETS[0]).page1;
-want.push(
-  ["make-acorn.pdf", [maker]], ["make-free.pdf", [free]], ["make-acorn.webp", [maker]], ["make-free.webp", [free]], ["make-og.jpg", [maker]],
-  ["acorn-og.jpg", [first]], ["worksheets-og.jpg", [first]],
-);
+const want = assetJobs().map((j) => [j.file, j.svgs] as const);
 
 const problems: string[] = [];
 for (const [file, svgs] of want) {

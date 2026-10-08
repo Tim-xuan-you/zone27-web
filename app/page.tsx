@@ -15,7 +15,7 @@ const ENTITY = {
       "@id": "https://zone27.com.tw/#org",
       name: "ZONE 27",
       url: "https://zone27.com.tw",
-      description: "免費的益智學習單：A4 PDF 下載就能印，說明都有注音，答案用畫的，卡住了有一段一段的提示。一個大班生的爸爸做的。",
+      description: "免費的益智學習單：A4 PDF 下載就能印，說明都有注音，答案不用寫國字，卡住了有提示。一個大班生的爸爸做的。",
       logo: "https://zone27.com.tw/opengraph-image",
       founder: { "@id": TIM_ID },
     },
@@ -26,7 +26,7 @@ const ENTITY = {
       name: "ZONE 27",
       url: "https://zone27.com.tw",
       inLanguage: "zh-Hant-TW",
-      description: "免費的益智學習單：幼兒迷宮、出題紙，中班、大班、小一，A4 PDF 下載。",
+      description: "免費的益智學習單：幼兒迷宮、注音學習單、出題紙，中班、大班、小一，A4 PDF 下載。",
       publisher: { "@id": "https://zone27.com.tw/#org" },
     },
   ],
@@ -44,9 +44,9 @@ const ENTITY = {
  *
  * 以前的狗貓飼料、充電器沒有放在這裡，收在頁尾一行（PageReport）。
  */
-// 2026-10-09：家長搜「免費學習單下載」「大班學習單下載」「幼兒迷宮pdf」
-const TITLE = "免費學習單下載：幼兒迷宮 PDF、出題紙｜陪孩子動腦的益智學習單";
-const DESC = "一個大班生的爸爸做的免費益智學習單：幼兒迷宮分 6 關、出題紙讓孩子出題考大人。中班、大班、小一，A4 PDF 下載就能印，說明都有注音，答案用畫的不用寫字。";
+// 2026-10-09：家長搜「免費學習單下載」「大班學習單下載」「幼兒迷宮pdf」「注音學習單下載」
+const TITLE = "免費學習單下載：幼兒迷宮、注音學習單 PDF｜陪孩子動腦的益智學習單";
+const DESC = "一個大班生的爸爸做的免費益智學習單：幼兒迷宮 6 關、注音猜猜看 4 關，還有讓孩子出題考大人的出題紙。中班、大班、小一，A4 PDF 下載就能印，說明都有注音，答案不用寫國字。";
 export const metadata: Metadata = {
   title: { absolute: `${TITLE} · ZONE 27` },
   description: DESC,
@@ -70,7 +70,7 @@ export default function Home() {
             陪孩子動腦的<br />益智學習單
           </h1>
           <p style={{ color: "var(--muted)", fontSize: T.lg, lineHeight: 1.9, margin: 0 }}>
-            我是 Tim，家裡有一個大班生。他卡住的地方，我做成一關一關的學習單。說明都有注音，孩子自己讀得懂；答案用畫的，不用寫字。
+            我是 Tim，家裡有一個大班生。他卡住的地方，我做成一關一關的學習單。說明都有注音，孩子自己讀得懂；答案用畫的、圈的，不用寫國字。
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: G.md, marginTop: G.xl }}>
             <Link href={`/worksheets/acorn/${FIRST.level}`} style={cta}>從第 1 關開始</Link>
@@ -92,7 +92,7 @@ export default function Home() {
             第一張「撿松果回家」，他先問我：「每一格是什麼？」所以現在的格子，都畫成一塊一塊的地磚。
           </p>
           <p style={{ margin: `${G.md}px 0 0`, fontSize: T.md, lineHeight: 2 }}>
-            解完他說太簡單，自己畫了兩題考我：左邊是中班的迷宮，右邊是大班的「看注音猜東西」。下一款學習單「注音猜猜看」，就是照他出的題做的。
+            解完他說太簡單，自己畫了兩題考我：左邊是中班的迷宮，右邊是大班的「看注音猜東西」。<Link href="/worksheets/zhuyin" style={{ color: "var(--accent)", fontWeight: 700 }}>注音猜猜看</Link>，就是照他出的題做的。
           </p>
         </div>
         <figure style={{ margin: 0, flex: "1 1 260px", minWidth: 0 }}>

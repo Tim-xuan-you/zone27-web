@@ -76,7 +76,8 @@ export default function AcornPicker({ level }: { level: number }) {
                 loading="lazy"
                 style={{ width: "100%", height: "auto", display: "block" }}
               />
-              <span style={{ display: "block", fontSize: T.xs, fontWeight: on ? 700 : 500, color: on ? "var(--ink)" : "var(--muted)", padding: `${G.xs}px 0 0` }}>
+              {/* 縮圖的底是白的（紙），字的顏色不跟深色模式走，不然選中的那張字會看不見 */}
+              <span style={{ display: "block", fontSize: T.xs, fontWeight: on ? 700 : 500, color: on ? "#262B31" : "#565E68", padding: `${G.xs}px 0 0` }}>
                 第 {s.n} 張
               </span>
             </button>

@@ -2,6 +2,7 @@ import { catalogOf, isLive, liveCount } from "@/lib/catalog";
 import { cansOf, mer, recommendable } from "@/lib/engine";
 import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
 import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
+import { GUESS_LEVELS } from "@/lib/worksheets/guess";
 
 /**
  * /llms.txt，給大型語言模型讀的網站說明。
@@ -47,7 +48,7 @@ export function GET() {
 
   const body = `# ZONE 27
 
-> 免費的益智學習單（2026-10 起的主軸），由一個大班生的爸爸製作。A4 印了就能寫，說明都有注音，答案用畫的不用寫字，
+> 免費的益智學習單（2026-10 起的主軸），由一個大班生的爸爸製作。A4 印了就能寫，說明都有注音，答案不用寫國字，
 > 卡住了可以掃 QR code 一段一段看提示。網站也保留了早期做的狗貓飼料、充電器、行動電源比較。
 
 ## 學習單
@@ -70,9 +71,20 @@ ${ACORN_LEVELS.map((L) => `- 第 ${L.n} 關（${L.grade}，${L.age}，${L.W}×${
 - 讓孩子當出題的人：迷宮出題單（空白格子，孩子畫牆、畫松果）、萬用出題紙（答案寫在下面往後摺）
 - PDF：${BASE}/worksheets/files/make-acorn.pdf、${BASE}/worksheets/files/make-free.pdf
 
+### 注音猜猜看（注音學習單）
+
+- 總覽：${BASE}/worksheets/zhuyin
+- 點子來自作者的大班孩子：自己畫了一張題目考爸爸，上面寫注音，要猜是什麼東西
+- 每張 6 題、兩種玩法，題目一樣：圈圈看（左邊注音、右邊三張圖，圈出對的）、寫寫看（看圖，在格子裡寫出注音和聲調）
+- 每一個詞的注音都用程式拿去跟教育部《國語辭典簡編本》（沒收的查《重編國語辭典修訂本》）比對；輕聲的點寫在最上面、聲調在右邊，跟課本排法一樣
+- 辭典讀音跟一般人常念的不同的詞（例如「骨頭」辭典為 ㄍㄨˊ ˙ㄊㄡ）不收，避免跟學校教的衝突
+- 第 3 關的陷阱只差一個符號且聲調相同（星／心、書／豬、火／鎖），第 4 關只差聲調（魚／雨、書／樹、椰子／葉子）
+- 圖全部自己畫，每張右下角 QR code 掃了是答案
+${GUESS_LEVELS.map((L) => `- 第 ${L.n} 關「${L.name}」（${L.grade}，${L.age}；${L.what}）：${BASE}/worksheets/zhuyin/${L.n}　圈圈看 PDF：${BASE}/worksheets/files/zhuyin-${L.n}-circle.pdf　寫寫看 PDF：${BASE}/worksheets/files/zhuyin-${L.n}-write.pdf`).join("\n")}
+
 ### 正在製作
 
-注音猜猜看（看注音圈出是哪一個東西，點子來自作者的孩子；每個詞的注音都對照教育部《國語辭典簡編本》）、連連看、數字松果
+連連看（誰吃什麼、長大會變成什麼，答案先查過科博館、農業部等資料）、數字松果
 
 ## 早期內容：寵物飼料與 3C
 
