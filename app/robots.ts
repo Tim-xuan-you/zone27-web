@@ -26,6 +26,11 @@ const AI_BOTS = [
   "Google-Extended",  // Gemini / AI Overviews
   "Applebot-Extended",
   "Bingbot",          // ChatGPT 搜尋的索引來源
+  // 2026-10-09 補：Claude、Perplexity 的搜尋與使用者即時抓取，Meta AI
+  "Claude-SearchBot",
+  "Claude-User",
+  "Perplexity-User",
+  "meta-externalagent",
 ];
 
 export default function robots(): MetadataRoute.Robots {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { G, S, T } from "@/components/styles";
 import { CONTACT } from "@/lib/contact";
+import { breadcrumb, graph, ORG_ID, TIM } from "@/lib/worksheets/seo";
 
 /**
  * 關於我們（2026-10-01）。
@@ -22,6 +23,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main style={S.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: graph(
+        breadcrumb([["首頁", "/"], ["關於我們", "/about"]]),
+        { "@type": "AboutPage", url: "https://zone27.com.tw/about", name: "關於我們", about: { "@id": ORG_ID }, mainEntity: TIM },
+      ) }} />
       <SiteHeader current="about" />
       <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: `0 0 ${G.xl}px` }}>關於我們</h1>
 

@@ -30,6 +30,8 @@ export interface AcornLevel {
   cell: number;
   /** 給家長看的：大概幾歲開始 */
   age: string;
+  /** 適合的年級。家長搜尋的時候打的是「大班學習單」「中班迷宮」，不是幾歲（2026-10-09 查 Google 建議字） */
+  grade: string;
 }
 
 /*
@@ -37,12 +39,12 @@ export interface AcornLevel {
  * 最慢的第 6 關一題 26 毫秒，家長手機上按一下就出來。
  */
 export const ACORN_LEVELS: AcornLevel[] = [
-  { n: 1, W: 4, H: 4, acMin: 3, acMax: 4, braid: 2, minLen: 9, missMin: 1, stars: 1, cell: 17, age: "5 歲" },
-  { n: 2, W: 5, H: 5, acMin: 4, acMax: 5, braid: 4, minLen: 13, missMin: 1, stars: 1, cell: 14.5, age: "5 歲" },
-  { n: 3, W: 5, H: 5, acMin: 5, acMax: 7, braid: 5, minLen: 17, missMin: 2, stars: 2, cell: 14.5, age: "5～6 歲" },
-  { n: 4, W: 6, H: 6, acMin: 6, acMax: 8, braid: 7, minLen: 22, missMin: 2, stars: 2, cell: 12.3, age: "6 歲" },
-  { n: 5, W: 6, H: 6, acMin: 8, acMax: 9, braid: 8, minLen: 26, missMin: 2, stars: 3, cell: 12.3, age: "6～7 歲" },
-  { n: 6, W: 7, H: 7, acMin: 9, acMax: 11, braid: 11, minLen: 33, missMin: 3, stars: 3, cell: 10.6, age: "7 歲以上" },
+  { n: 1, W: 4, H: 4, acMin: 3, acMax: 4, braid: 2, minLen: 9, missMin: 1, stars: 1, cell: 17, age: "5 歲", grade: "中班、大班" },
+  { n: 2, W: 5, H: 5, acMin: 4, acMax: 5, braid: 4, minLen: 13, missMin: 1, stars: 1, cell: 14.5, age: "5 歲", grade: "大班" },
+  { n: 3, W: 5, H: 5, acMin: 5, acMax: 7, braid: 5, minLen: 17, missMin: 2, stars: 2, cell: 14.5, age: "5～6 歲", grade: "大班" },
+  { n: 4, W: 6, H: 6, acMin: 6, acMax: 8, braid: 7, minLen: 22, missMin: 2, stars: 2, cell: 12.3, age: "6 歲", grade: "大班、小一" },
+  { n: 5, W: 6, H: 6, acMin: 8, acMax: 9, braid: 8, minLen: 26, missMin: 2, stars: 3, cell: 12.3, age: "6～7 歲", grade: "小一" },
+  { n: 6, W: 7, H: 7, acMin: 9, acMax: 11, braid: 11, minLen: 33, missMin: 3, stars: 3, cell: 10.6, age: "7 歲以上", grade: "小一、小二" },
 ];
 export const acornLevel = (n: number): AcornLevel => ACORN_LEVELS[Math.min(Math.max(Math.round(n) || 1, 1), ACORN_LEVELS.length) - 1];
 

@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { G, R, S } from "@/components/styles";
+import { G, R, S, T } from "@/components/styles";
+import { SHEET_IMG } from "@/lib/worksheets/assets";
 
 /**
  * 一張固定的學習單：預覽、印出來。出題紙這種不用選關卡的用這個。
@@ -23,7 +24,11 @@ export const PRINT_CSS = `
 .ws-svg svg { width: 100%; height: auto; display: block; }
 `;
 
-export default function SheetPrint({ svg, label }: { svg: string; label: string }) {
+/**
+ * img、pdf：預先產生的預覽圖和 PDF（scripts/worksheets-assets.ts）。
+ * 2026-10-09 家長搜的是「下載」「pdf」，所以下載 PDF 放第一個；預覽用圖片，頁面輕、Google 圖片也找得到。
+ */
+export default function SheetPrint({ svg, label, img, alt, pdf, filename }: { svg: string; label: string; img: string; alt: string; pdf: string; filename: string }) {
   const [mounted, setMounted] = useState(false);
   const [on, setOn] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -40,8 +45,13 @@ export default function SheetPrint({ svg, label }: { svg: string; label: string 
   return (
     <div>
       <style>{PRINT_CSS}</style>
-      <div className="ws-svg" style={paper} aria-label={`${label}的預覽`} dangerouslySetInnerHTML={{ __html: svg }} />
-      <button type="button" onClick={print} style={btn}>印{label}</button>
+      <figure style={{ ...paper, margin: 0 }}>
+        <img src={img} alt={alt} width={SHEET_IMG.w} height={SHEET_IMG.h} loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+      </figure>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: G.md, marginTop: G.lg }}>
+        <a href={pdf} download={filename} style={btn}>下載 PDF</a>
+        <button type="button" onClick={print} style={ghost}>印{label}</button>
+      </div>
       {/* 同一頁有好幾張可以印：按哪一張，印的那一份才放哪一張 */}
       {mounted && on && createPortal(
         <div className="ws-print" aria-hidden>
@@ -56,4 +66,8 @@ export default function SheetPrint({ svg, label }: { svg: string; label: string 
 const paper: React.CSSProperties = {
   background: "#fff", border: "1px solid var(--line)", borderRadius: R.sm, boxShadow: "var(--sh)", overflow: "hidden",
 };
-const btn: React.CSSProperties = { ...S.buy, border: 0, cursor: "pointer", background: "var(--pop)", color: "var(--pop-ink)", marginTop: G.lg };
+const btn: React.CSSProperties = { ...S.buy, background: "var(--pop)", color: "var(--pop-ink)" };
+const ghost: React.CSSProperties = {
+  padding: "12px 22px", borderRadius: R.pill, border: "1px solid var(--line)", background: "var(--surface)",
+  color: "var(--ink)", fontWeight: 700, fontSize: T.md, cursor: "pointer",
+};

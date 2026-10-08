@@ -57,14 +57,14 @@ export default function AcornHints() {
     const u = new URLSearchParams(window.location.search);
     const sheet = acornSheetById(u.get("id") ?? "");
     if (sheet) {
-      setQ({ level: sheet.level, n: sheet.n, puzzles: sheet.puzzles, back: `/worksheets/acorn?id=${sheet.id}` });
+      setQ({ level: sheet.level, n: sheet.n, puzzles: sheet.puzzles, back: `/worksheets/acorn/${sheet.level}${sheet.n === 1 ? "" : `?n=${sheet.n}`}` });
       return;
     }
     // 2026-10-01 改成固定編號以前印的（?l=關&s=號碼），只有 Tim 家印過，留著讓舊的 QR code 還掃得到
     const level = acornLevel(Number(u.get("l")) || 1).n;
     const seed = Number(u.get("s"));
     if (Number.isInteger(seed) && seed >= 100000 && seed <= 999999) {
-      setQ({ level, puzzles: sheetPuzzles(level, seed), back: `/worksheets/acorn?l=${level}` });
+      setQ({ level, puzzles: sheetPuzzles(level, seed), back: `/worksheets/acorn/${level}` });
       return;
     }
     setQ("bad");
@@ -90,7 +90,7 @@ export default function AcornHints() {
         {q.level < 6 && next && (
           <>
             <span style={{ color: "var(--faint)", margin: `0 ${G.sm}px` }}>·</span>
-            <Link href={`/worksheets/acorn?id=${next.id}`} style={link}>寫得很順？試第 {q.level + 1} 關</Link>
+            <Link href={`/worksheets/acorn/${next.level}`} style={link}>寫得很順？試第 {q.level + 1} 關</Link>
           </>
         )}
       </p>

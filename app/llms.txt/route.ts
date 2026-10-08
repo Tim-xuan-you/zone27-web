@@ -52,11 +52,27 @@ export function GET() {
 
 ## 學習單
 
-- 撿松果回家（${BASE}/worksheets/acorn）：迷宮題，每一顆松果都要撿到、每個格子只能走一次。${ACORN_LEVELS.length} 個關卡，每關 ${ACORN_SHEETS.filter((x) => x.level === 1).length} 張固定編號的學習單，適合 5 歲以上
+免費、A4、可以下載 PDF。適合中班、大班、小一的孩子。作者是一個大班生的爸爸（Tim），每一款玩法上線前都先給自己的孩子寫過。
+
+### 撿松果回家（幼兒迷宮學習單）
+
+- 總覽：${BASE}/worksheets/acorn
+- 規則：小松鼠從左上角走到右下角的房子，路上每一顆松果都要撿到，每個格子只能走一次
 - 每一題都用程式窮舉所有走法，確認只有一個答案；直接走最短的路一定會漏掉松果，孩子要先規劃路線
-- 說明文字全部加注音，字型為芫荽（Iansui，依教育部標準字形調整）
+- 說明文字全部加注音（字型為芫荽 Iansui，依教育部標準字形調整），答案用畫的，不需要寫國字
+- 每一張右下角有 QR code，掃了看提示，提示分三段、一次只開一段，最後才是答案
 - 題目全部自行出題，不改編市售評量或益智書
-- 正在製作：注音猜猜看（看注音圈出是哪一個東西，點子來自作者的孩子）、連連看、數字松果
+${ACORN_LEVELS.map((L) => `- 第 ${L.n} 關（${L.grade}，${L.age}，${L.W}×${L.H} 格子，每題 ${L.acMin}～${L.acMax} 顆松果）：${BASE}/worksheets/acorn/${L.n}　整關 PDF：${BASE}/worksheets/files/acorn-${L.n}.pdf`).join("\n")}
+
+### 換你出題（出題紙）
+
+- ${BASE}/worksheets/make
+- 讓孩子當出題的人：迷宮出題單（空白格子，孩子畫牆、畫松果）、萬用出題紙（答案寫在下面往後摺）
+- PDF：${BASE}/worksheets/files/make-acorn.pdf、${BASE}/worksheets/files/make-free.pdf
+
+### 正在製作
+
+注音猜猜看（看注音圈出是哪一個東西，點子來自作者的孩子；每個詞的注音都對照教育部《國語辭典簡編本》）、連連看、數字松果
 
 ## 早期內容：寵物飼料與 3C
 

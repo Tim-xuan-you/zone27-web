@@ -4,9 +4,9 @@ import SiteHeader from "@/components/SiteHeader";
 import Promises from "@/components/worksheets/Promises";
 import { G, R, S, T } from "@/components/styles";
 import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
-import { acornSheetPages } from "@/lib/worksheets/acorn-sheet";
 import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
-import { acornMakerPage } from "@/lib/worksheets/make-sheet";
+import { ASSETS, SHEET_IMG, sheetImg } from "@/lib/worksheets/assets";
+import { breadcrumb, graph, SITE, TIM } from "@/lib/worksheets/seo";
 
 /**
  * 學習單首頁。
@@ -16,14 +16,25 @@ import { acornMakerPage } from "@/lib/worksheets/make-sheet";
  * 還在做的那幾款也列出來（一行一款，不做成空卡片），讓家長知道這裡會一直長，也知道點子從哪裡來。
  */
 
+// 2026-10-09 查 Google 建議字：免費學習單下載、大班學習單下載、中班學習單下載、幼兒迷宮pdf
+const TITLE = "免費學習單下載：幼兒迷宮、出題紙 PDF（中班、大班、小一）";
+const DESC = `給中班、大班、小一孩子的免費益智學習單，A4 PDF 下載就能印。幼兒迷宮分 6 關共 ${ACORN_SHEETS.length} 張，還有讓孩子出題的出題紙。說明都有注音，答案用畫的不用寫字，卡住了掃 QR code 一段一段看提示。`;
 export const metadata: Metadata = {
-  title: "免費益智學習單：A4 印了就能寫",
-  description: "給 5 歲以上孩子的益智學習單。說明都有注音，答案用畫的不用寫字，卡住了掃 QR code 一段一段看提示。每一關都有固定的幾張，挑想要的印。",
+  title: TITLE,
+  description: DESC,
   alternates: { canonical: "/worksheets" },
+  openGraph: { title: TITLE, description: DESC, type: "website", images: [{ url: ASSETS.worksheetsOg, width: 1200, height: 630, alt: "陪孩子動腦的益智學習單" }] },
+  twitter: { card: "summary_large_image", images: [ASSETS.worksheetsOg] },
 };
 
-const THUMB = acornSheetPages(ACORN_SHEETS[0]).page1;
-const MAKER = acornMakerPage();
+const LIST = {
+  "@type": "ItemList",
+  name: "ZONE 27 的免費學習單",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, url: `${SITE}/worksheets/acorn`, name: "撿松果回家：幼兒迷宮學習單" },
+    { "@type": "ListItem", position: 2, url: `${SITE}/worksheets/make`, name: "換你出題：出題紙" },
+  ],
+};
 const COMING = [
   ["注音猜猜看", "看注音，圈出是哪一個東西；會寫注音的，換你寫出來。點子是我家大班生出的。"],
   ["連連看", "誰吃什麼、長大會變成什麼。每一個答案都先查過可靠的資料。"],
@@ -33,15 +44,19 @@ const COMING = [
 export default function Page() {
   return (
     <main style={S.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: graph(breadcrumb([["首頁", "/"], ["學習單", "/worksheets"]]), LIST, TIM) }} />
       <SiteHeader current="worksheets" />
 
-      <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: `0 0 ${G.md}px` }}>學習單</h1>
+      <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: `0 0 ${G.md}px` }}>
+        免費學習單<br />
+        <span style={{ fontSize: "0.6em", color: "var(--muted)" }}>中班、大班、小一・PDF 下載</span>
+      </h1>
       <p style={{ color: "var(--muted)", fontSize: T.lg, lineHeight: 1.9, margin: `0 0 ${G.xl}px` }}>
-        A4 一張兩題，每一關都有固定的幾張，挑想要的印。第一次寫，先從第 1 關開始。
+        A4 一張兩題，每一張都能下載 PDF。每一關有固定的幾張，挑想要的印。第一次寫，先從第 1 關開始。
       </p>
 
       <Link href="/worksheets/acorn" style={card}>
-        <span style={thumb} aria-hidden dangerouslySetInnerHTML={{ __html: THUMB }} />
+        <span style={thumb}><img src={sheetImg(ACORN_SHEETS[0].id)} alt="撿松果回家：幼兒迷宮學習單預覽" width={SHEET_IMG.w} height={SHEET_IMG.h} loading="lazy" style={imgFit} /></span>
         <span style={{ flex: 1, minWidth: 0 }}>
           <span style={tag}>迷宮・路線</span>
           <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>撿松果回家</span>
@@ -53,7 +68,7 @@ export default function Page() {
       </Link>
 
       <Link href="/worksheets/make" style={{ ...card, marginTop: G.md }}>
-        <span style={thumb} aria-hidden dangerouslySetInnerHTML={{ __html: MAKER }} />
+        <span style={thumb}><img src={ASSETS.makeAcornImg} alt="換你出題：迷宮出題單預覽" width={SHEET_IMG.w} height={SHEET_IMG.h} loading="lazy" style={imgFit} /></span>
         <span style={{ flex: 1, minWidth: 0 }}>
           <span style={tag}>出題紙</span>
           <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>換你出題</span>
@@ -77,8 +92,7 @@ export default function Page() {
       <p style={S.lbl}>每一張都做到的四件事</p>
       <Promises />
 
-      <style>{`.ws-svg svg, a span[aria-hidden] svg { width: 100%; height: auto; display: block; }`}</style>
-    </main>
+          </main>
   );
 }
 
@@ -88,6 +102,7 @@ const card: React.CSSProperties = {
 const thumb: React.CSSProperties = {
   display: "block", width: 104, flex: "none", background: "#fff", border: "1px solid var(--line)", borderRadius: R.sm, overflow: "hidden",
 };
+const imgFit: React.CSSProperties = { width: "100%", height: "auto", display: "block" };
 const tag: React.CSSProperties = {
   display: "inline-block", fontSize: T.xs, fontWeight: 700, color: "var(--accent)", background: "var(--accent-soft)",
   borderRadius: R.pill, padding: "2px 10px",

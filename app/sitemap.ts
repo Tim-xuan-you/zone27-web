@@ -6,6 +6,9 @@ import { powerbanks } from "@/lib/powerbank";
 import { catalog, isLive } from "@/lib/catalog";
 import { productHref } from "@/lib/labels";
 import { allPaths } from "@/lib/slugs";
+import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
+import { ACORN_SHEETS, acornSheetsOf } from "@/lib/worksheets/acorn-sheets";
+import { ASSETS, levelAnswersPdf, levelOg, levelPdf, sheetImg, sheetPdf } from "@/lib/worksheets/assets";
 
 const BASE = "https://zone27.com.tw";
 
@@ -30,10 +33,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: BASE, lastModified: now, changeFrequency: "daily", priority: 1 },
-    // 2026-10-01 學習單：免費、會被轉傳，是之後的主軸
-    { url: `${BASE}/worksheets`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
-    { url: `${BASE}/worksheets/acorn`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
-    { url: `${BASE}/worksheets/make`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    // 2026-10-01 學習單：免費、會被轉傳，是之後的主軸。
+    // 2026-10-09 每一關一頁，附預覽圖（Google 圖片搜尋）；PDF 也列進來，家長搜「幼兒迷宮 pdf」有機會直接找到檔案
+    { url: `${BASE}/worksheets`, lastModified: now, changeFrequency: "weekly", priority: 0.95, images: [`${BASE}${ASSETS.worksheetsOg}`] },
+    { url: `${BASE}/worksheets/acorn`, lastModified: now, changeFrequency: "weekly", priority: 0.95, images: [`${BASE}${ASSETS.acornOg}`] },
+    ...ACORN_LEVELS.map((L) => ({
+      url: `${BASE}/worksheets/acorn/${L.n}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9,
+      images: [`${BASE}${levelOg(L.n)}`, ...acornSheetsOf(L.n).map((s) => `${BASE}${sheetImg(s.id)}`)],
+    })),
+    { url: `${BASE}/worksheets/make`, lastModified: now, changeFrequency: "weekly", priority: 0.9, images: [`${BASE}${ASSETS.makeAcornImg}`, `${BASE}${ASSETS.makeFreeImg}`] },
+    ...[
+      ...ACORN_SHEETS.map((s) => sheetPdf(s.id)),
+      ...ACORN_LEVELS.flatMap((L) => [levelPdf(L.n), levelAnswersPdf(L.n)]),
+      ASSETS.makeAcornPdf, ASSETS.makeFreePdf,
+    ].map((p) => ({ url: `${BASE}${p}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 })),
     { url: `${BASE}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/dog-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/dog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },

@@ -41,6 +41,20 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(to, 308);
   }
 
+  /*
+   * 撿松果回家以前只有一頁，用 ?id=acorn-3-2、?l=3 選哪一張（2026-10-01～10-09）。
+   * 10-09 每一關改成自己的網址（/worksheets/acorn/3），讓搜尋引擎分得出第幾關給幾歲。
+   * 以前傳出去的連結轉到對的那一關、那一張，用 308 讓搜尋引擎知道是永久搬家。
+   */
+  if (url.pathname === "/worksheets/acorn" && (url.searchParams.get("id") || url.searchParams.get("l"))) {
+    const m = (url.searchParams.get("id") ?? "").match(/^acorn-([1-6])-(\d+)$/);
+    const level = m ? m[1] : String(Math.min(6, Math.max(1, Number(url.searchParams.get("l")) || 1)));
+    const to = url.clone();
+    to.pathname = `/worksheets/acorn/${level}`;
+    to.search = m ? `?n=${m[2]}` : "";
+    return NextResponse.redirect(to, 308);
+  }
+
   const first = url.pathname.split("/")[1];
 
   if (GONE.has(first)) {

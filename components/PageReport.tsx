@@ -52,6 +52,10 @@ export default function PageReport() {
         <span style={addr}>{CONTACT.email}</span>
         {/* 利益關係全站只講這一句（2026-09-13 Tim：一直講分潤，讀者只會覺得你在賺錢） */}
         <span style={{ display: "block", marginTop: 8 }}>購買連結是聯盟行銷連結，透過連結下單，你付的價格一樣。</span>
+        {/* 2026-10-09 以前的 600 多頁都連到學習單：站內連結告訴搜尋引擎，這個網站現在的重點在這裡 */}
+        <span style={{ display: "block", marginTop: 8 }}>
+          現在主要在做：<Link href="/worksheets" style={link}>孩子的免費學習單（幼兒迷宮 PDF 下載）</Link>
+        </span>
       </p>
     </div>
   );
