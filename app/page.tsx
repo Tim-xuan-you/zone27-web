@@ -3,7 +3,10 @@ import SiteHeader from "@/components/SiteHeader";
 import Promises from "@/components/worksheets/Promises";
 import { G, R, S, T } from "@/components/styles";
 import type { Metadata } from "next";
-import { ASSETS, SHEET_IMG, sheetImg } from "@/lib/worksheets/assets";
+import { ASSETS, SHEET_IMG, guessSheetImg, sheetImg } from "@/lib/worksheets/assets";
+import { GUESS_SHEETS } from "@/lib/worksheets/guess-sheets";
+import { MATCH_SHEETS } from "@/lib/worksheets/match-sheets";
+import { NUMBER_SHEETS } from "@/lib/worksheets/number-sheets";
 import { TIM, TIM_ID } from "@/lib/worksheets/seo";
 import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
 import { OG_BASE } from "@/lib/og-base";
@@ -58,6 +61,13 @@ export const metadata: Metadata = {
 
 const FIRST = ACORN_SHEETS[0];
 
+const KINDS = [
+  { href: "/worksheets/acorn", img: sheetImg(ACORN_SHEETS[0].id), alt: "撿松果回家：幼兒迷宮學習單", name: "幼兒迷宮", line: "撿松果回家・中班到小一" },
+  { href: "/worksheets/number", img: sheetImg(NUMBER_SHEETS[0].id), alt: "數字松果：加法迷宮數學學習單", name: "加法迷宮", line: "數字松果・10 以內到 20 以內" },
+  { href: "/worksheets/zhuyin", img: guessSheetImg(GUESS_SHEETS[0].id, "circle"), alt: "注音猜猜看：注音學習單", name: "注音學習單", line: "注音猜猜看・大班、小一" },
+  { href: "/worksheets/match", img: sheetImg(MATCH_SHEETS[0].id), alt: "連連看學習單：誰吃什麼、長大變成什麼", name: "連連看", line: "誰吃什麼、長大變成什麼" },
+];
+
 export default function Home() {
   return (
     <main style={{ maxWidth: 760, margin: "0 auto", padding: "0 20px 120px" }}>
@@ -82,6 +92,18 @@ export default function Home() {
           <img src={sheetImg(FIRST.id)} alt="撿松果回家第 1 關：幼兒迷宮學習單，幫小松鼠撿完松果再回家" width={SHEET_IMG.w} height={SHEET_IMG.h} fetchPriority="high" style={{ width: "100%", height: "auto", display: "block" }} />
         </Link>
       </section>
+
+      {/* 四款各一格：手機上兩兩一排，一眼看完有哪幾種（站內連結也告訴搜尋引擎每一款的總覽頁在哪） */}
+      <p style={S.lbl}>四款學習單</p>
+      <div style={kinds}>
+        {KINDS.map((k) => (
+          <Link key={k.href} href={k.href} style={kindCard}>
+            <img src={k.img} alt={k.alt} width={SHEET_IMG.w} height={SHEET_IMG.h} loading="lazy" style={{ width: "100%", height: "auto", display: "block", borderRadius: R.sm, border: "1px solid var(--line)", background: "#fff" }} />
+            <span style={{ display: "block", fontWeight: 700, fontSize: T.md, marginTop: G.sm }}>{k.name}</span>
+            <span style={{ display: "block", fontSize: T.xs, color: "var(--muted)", lineHeight: 1.7 }}>{k.line}</span>
+          </Link>
+        ))}
+      </div>
 
       <p style={S.lbl}>每一張都做到的四件事</p>
       <Promises />
@@ -114,6 +136,8 @@ export default function Home() {
   );
 }
 
+const kinds: React.CSSProperties = { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))", gap: G.md };
+const kindCard: React.CSSProperties = { ...S.box, display: "block", padding: G.md, textDecoration: "none", color: "inherit" };
 const hero: React.CSSProperties = { display: "flex", flexWrap: "wrap", alignItems: "center", gap: G.xl };
 const kicker: React.CSSProperties = {
   display: "inline-block", margin: 0, fontSize: T.sm, fontWeight: 700, color: "var(--accent)",

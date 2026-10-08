@@ -54,7 +54,7 @@ export default function PageReport() {
         <span style={{ display: "block", marginTop: 8 }}>購買連結是聯盟行銷連結，透過連結下單，你付的價格一樣。</span>
         {/* 2026-10-09 以前的 600 多頁都連到學習單：站內連結告訴搜尋引擎，這個網站現在的重點在這裡 */}
         <span style={{ display: "block", marginTop: 8 }}>
-          現在主要在做：<Link href="/worksheets" style={link}>孩子的免費學習單（幼兒迷宮 PDF 下載）</Link>
+          現在主要在做：<Link href="/worksheets" style={link}>孩子的免費學習單</Link>（<Link href="/worksheets/acorn" style={link}>幼兒迷宮</Link>、<Link href="/worksheets/number" style={link}>加法迷宮</Link>、<Link href="/worksheets/zhuyin" style={link}>注音學習單</Link>、<Link href="/worksheets/match" style={link}>連連看</Link>，PDF 下載）
         </span>
       </p>
     </div>
