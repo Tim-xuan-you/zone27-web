@@ -10,8 +10,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { ASSET_DIR } from "../lib/worksheets/assets";
-import { assetJobs } from "./worksheets-asset-list";
-import { assetFingerprint } from "./worksheets-fingerprint";
+import { assetJobs, jobFingerprint } from "./worksheets-asset-list";
 
 const DIR = resolve(import.meta.dirname, "..", "public", ASSET_DIR);
 const manifestFile = join(DIR, "manifest.json");
@@ -21,12 +20,13 @@ if (!existsSync(manifestFile)) {
 }
 const manifest = JSON.parse(readFileSync(manifestFile, "utf8")) as Record<string, string>;
 
-const want = assetJobs().map((j) => [j.file, j.svgs] as const);
+const want = assetJobs();
 
 const problems: string[] = [];
-for (const [file, svgs] of want) {
+for (const j of want) {
+  const file = j.file;
   if (!existsSync(join(DIR, file))) { problems.push(`${file}：檔案不見了`); continue; }
-  if (manifest[file] !== assetFingerprint(svgs)) problems.push(`${file}：學習單改過了，檔案還是舊的`);
+  if (manifest[file] !== jobFingerprint(j)) problems.push(`${file}：學習單改過了，檔案還是舊的`);
 }
 if (problems.length) {
   console.error(`\n✗ 學習單的 PDF／預覽圖有 ${problems.length} 個跟網頁上的不一樣：`);

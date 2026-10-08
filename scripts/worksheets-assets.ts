@@ -21,8 +21,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { ASSET_DIR } from "../lib/worksheets/assets";
-import { assetJobs } from "./worksheets-asset-list";
-import { assetFingerprint } from "./worksheets-fingerprint";
+import { assetJobs, jobFingerprint } from "./worksheets-asset-list";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const OUT = join(ROOT, "public", ASSET_DIR);
@@ -31,7 +30,9 @@ const PORT = 9701;
 
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Iansui&family=Noto+Sans+TC:wght@400;700;800&display=block" rel="stylesheet">`;
 const A4_CSS = `@page{size:A4;margin:0} html,body{margin:0;background:#fff} .p{width:210mm;height:297mm;overflow:hidden;break-after:page} .p:last-child{break-after:auto} .p svg{width:210mm;height:297mm;display:block}`;
-const a4Html = (pages: string[]) => `<!doctype html><html><head><meta charset="utf-8">${FONTS}<style>${A4_CSS}</style></head><body>${pages.map((p) => `<div class="p">${p}</div>`).join("")}</body></html>`;
+const escHtml = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+/** title 會變成 PDF 的標題（印表機產生 PDF 時拿 <title>） */
+const a4Html = (pages: string[], title = "") => `<!doctype html><html><head><meta charset="utf-8"><title>${escHtml(title)}</title>${FONTS}<style>${A4_CSS}</style></head><body>${pages.map((p) => `<div class="p">${p}</div>`).join("")}</body></html>`;
 
 /* ---------------- 開一個沒有介面的 Edge，用 DevTools 協定操作 ---------------- */
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -107,10 +108,10 @@ async function main() {
   await connect();
   for (const j of jobs) {
     if (only.length && !only.some((p) => j.file.startsWith(p))) continue;
-    if (j.kind === "pdf") await pdf(a4Html(j.svgs), j.file);
+    if (j.kind === "pdf") await pdf(a4Html(j.svgs, j.title), j.file);
     else if (j.kind === "img") await shot(a4Html(j.svgs), j.file, 794, 1123, "webp", 1.2);
     else await shot(ogHtml(j.kicker, j.title, j.sub, j.svgs[0]), j.file, 1200, 630, "jpeg");
-    manifest[j.file] = assetFingerprint(j.svgs);
+    manifest[j.file] = jobFingerprint(j);
     console.log("  ", j.file);
   }
   writeFileSync(manifestFile, JSON.stringify(Object.fromEntries(Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b))), null, 1) + "\n");
