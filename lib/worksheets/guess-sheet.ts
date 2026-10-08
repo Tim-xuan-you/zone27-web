@@ -47,23 +47,25 @@ function header(tag: string, level: number): string {
   return g;
 }
 
-function ruleBox(lines: string[], example: string): string {
+/** 淡紫色的規則框：① ② 兩句（或三句），右邊放例子。連連看也用 */
+export function ruleBox(lines: string[], example: string, size = 6.4): string {
   let g = `<rect x="14" y="37" width="182" height="31" rx="3" fill="${WS.lilac}"/>`;
   const ys = lines.length === 2 ? [46, 59] : [44, 52.5, 61];
   lines.forEach((line, k) => {
     g += `<circle cx="22" cy="${ys[k]}" r="3.1" fill="${WS.orange}"/>` + wsText(22, ys[k] + 0.1, 4, String(k + 1), { fill: "#FFFFFF", weight: 800, anchor: "middle" });
-    g += zyLine(line, 27.5, ys[k], 6.4).svg;
+    g += zyLine(line, 27.5, ys[k], size).svg;
   });
   return g + example;
 }
 
-function footer(lines: string[], qrUrl: string, level: number, n: number): string {
+/** 「家長看這裡」和右下角的 QR code；caption 是 QR 下面的「第幾關第幾張」 */
+export function footer(lines: string[], qrUrl: string, caption: string): string {
   let g = `<rect x="14" y="256" width="152" height="29" rx="3" fill="${WS.paper}" stroke="${WS.tan}" stroke-width="0.5"/>`;
   g += wsText(18, 260.8, 3.6, "家長看這裡", { fill: WS.taupe, weight: 700 });
   lines.forEach((l, k) => { g += wsText(18, 266.2 + k * 4.7, 3.05, l); });
   g += qrSvg(qrUrl, 172.5, 255, 22);
   g += wsText(183.5, 279.4, 2.7, "掃這裡看答案", { weight: 700, anchor: "middle" });
-  g += wsText(183.5, 283.2, 2.5, `第 ${level} 關第 ${n} 張`, { fill: WS.taupe, anchor: "middle" });
+  g += wsText(183.5, 283.2, 2.5, caption, { fill: WS.taupe, anchor: "middle" });
   g += wsText(183.5, 286.8, 2.4, "zone27.com.tw", { fill: WS.taupe, anchor: "middle" });
   return g;
 }
@@ -78,7 +80,7 @@ function zyCard(zh: string, x: number, cy: number, w: number, h: number, b: numb
 }
 
 /** 圖框：淡灰色圓角框，孩子在外面畫圈 */
-const picBox = (icon: string, cx: number, cy: number, s: number) =>
+export const picBox = (icon: string, cx: number, cy: number, s: number) =>
   `<rect x="${r2(cx - s / 2)}" y="${r2(cy - s / 2)}" width="${r2(s)}" height="${r2(s)}" rx="3.5" fill="#FFFFFF" stroke="#D5DCE4" stroke-width="0.5"/>` + iconSvg(icon, cx, cy, s * 0.8);
 
 // 第一列離規則框留 4 公釐，最後一列的下緣在 251，離「家長看這裡」5 公釐
@@ -101,7 +103,7 @@ function circlePage(s: GuessSheet): string {
     q.options.forEach((o, k) => { g += picBox(wordByZh(o).icon, 88 + k * 43, cy, 26); });
   });
   const trap = s.level === 3 ? "這一關有陷阱：有一張圖的注音只差一個符號，一個一個看清楚。" : s.level === 4 ? "這一關有陷阱：有一張圖的注音一樣、只差聲調，唸慢一點再圈。" : "這張在練：一個符號一個符號看清楚，把注音和東西對起來。";
-  g += footer([trap, "開始前可以說：「先唸唸看左邊的注音，再找是哪一個。」", "卡住了，就請孩子把三張圖的名字都唸一次，跟左邊比比看。", credit], guessAnswerUrl(s.id), s.level, s.n);
+  g += footer([trap, "開始前可以說：「先唸唸看左邊的注音，再找是哪一個。」", "卡住了，就請孩子把三張圖的名字都唸一次，跟左邊比比看。", credit], guessAnswerUrl(s.id), `第 ${s.level} 關第 ${s.n} 張`);
   return wsPage(g);
 }
 
@@ -136,7 +138,7 @@ function writePage(s: GuessSheet): string {
     "寫不出來：先印同一張的「圈圈看」，看過注音再寫一次。",
     "輕聲的點寫在最上面，像「車子」的「子」。聲調寫在右邊那一條。",
     credit,
-  ], guessAnswerUrl(s.id), s.level, s.n);
+  ], guessAnswerUrl(s.id), `第 ${s.level} 關第 ${s.n} 張`);
   return wsPage(g);
 }
 

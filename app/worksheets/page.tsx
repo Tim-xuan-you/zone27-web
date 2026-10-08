@@ -8,6 +8,7 @@ import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
 import { ASSETS, SHEET_IMG, guessSheetImg, sheetImg } from "@/lib/worksheets/assets";
 import { GUESS_LEVELS } from "@/lib/worksheets/guess";
 import { GUESS_SHEETS } from "@/lib/worksheets/guess-sheets";
+import { MATCH_SHEETS } from "@/lib/worksheets/match-sheets";
 import { breadcrumb, graph, SITE, TIM } from "@/lib/worksheets/seo";
 import { OG_BASE } from "@/lib/og-base";
 
@@ -20,8 +21,8 @@ import { OG_BASE } from "@/lib/og-base";
  */
 
 // 2026-10-09 查 Google 建議字：免費學習單下載、大班學習單下載、中班學習單下載、幼兒迷宮pdf、注音學習單下載
-const TITLE = "免費學習單下載：幼兒迷宮、注音學習單 PDF（中班、大班、小一）";
-const DESC = `給中班、大班、小一孩子的免費益智學習單，A4 PDF 下載就能印。幼兒迷宮 6 關共 ${ACORN_SHEETS.length} 張、注音猜猜看 4 關共 ${GUESS_SHEETS.length} 張，還有讓孩子出題的出題紙。說明都有注音，答案不用寫國字，卡住了掃 QR code 看提示。`;
+const TITLE = "免費學習單下載：幼兒迷宮、注音、連連看 PDF（中班、大班、小一）";
+const DESC = `給中班、大班、小一孩子的免費益智學習單，A4 PDF 下載就能印。幼兒迷宮 6 關共 ${ACORN_SHEETS.length} 張、注音猜猜看 4 關共 ${GUESS_SHEETS.length} 張、連連看 ${MATCH_SHEETS.length} 張，還有讓孩子出題的出題紙。說明都有注音，答案不用寫國字，卡住了掃 QR code 看提示。`;
 export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
@@ -36,11 +37,11 @@ const LIST = {
   itemListElement: [
     { "@type": "ListItem", position: 1, url: `${SITE}/worksheets/acorn`, name: "撿松果回家：幼兒迷宮學習單" },
     { "@type": "ListItem", position: 2, url: `${SITE}/worksheets/zhuyin`, name: "注音猜猜看：注音學習單" },
-    { "@type": "ListItem", position: 3, url: `${SITE}/worksheets/make`, name: "換你出題：出題紙" },
+    { "@type": "ListItem", position: 3, url: `${SITE}/worksheets/match`, name: "連連看：誰吃什麼、長大變成什麼" },
+    { "@type": "ListItem", position: 4, url: `${SITE}/worksheets/make`, name: "換你出題：出題紙" },
   ],
 };
 const COMING = [
-  ["連連看", "誰吃什麼、長大會變成什麼。每一個答案都先查過可靠的資料。"],
   ["數字松果", "松果上有數字，撿到的加起來要剛好等於房子上的數字。"],
 ] as const;
 
@@ -77,6 +78,18 @@ export default function Page() {
           <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>注音猜猜看</span>
           <span style={{ display: "block", fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8 }}>
             看注音圈出對的圖，會寫的換你寫出來。大班開始，{GUESS_LEVELS.length} 關、每關 {GUESS_SHEETS.filter((s) => s.level === 1).length} 張。點子是我家大班生出的。
+          </span>
+        </span>
+        <span aria-hidden style={{ fontSize: T.xl, color: "var(--faint)" }}>›</span>
+      </Link>
+
+      <Link href="/worksheets/match" style={{ ...card, marginTop: G.md }}>
+        <span style={thumb}><img src={sheetImg(MATCH_SHEETS[0].id)} alt="連連看學習單預覽" width={SHEET_IMG.w} height={SHEET_IMG.h} loading="lazy" style={imgFit} /></span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={tag}>連連看</span>
+          <span style={{ display: "block", fontSize: T.xl, fontWeight: 700, lineHeight: 1.4, margin: `${G.sm}px 0 ${G.xs}px` }}>誰吃什麼、長大變成什麼</span>
+          <span style={{ display: "block", fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8 }}>
+            從黑點畫線連起來。兔子主要吃草、孑孓長大變成蚊子，每一組答案都先查過資料。
           </span>
         </span>
         <span aria-hidden style={{ fontSize: T.xl, color: "var(--faint)" }}>›</span>

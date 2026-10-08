@@ -9,6 +9,9 @@ import { GUESS_LEVELS } from "../lib/worksheets/guess";
 import { guessSheetPages } from "../lib/worksheets/guess-sheet";
 import { GUESS_SHEETS, guessSheetsOf } from "../lib/worksheets/guess-sheets";
 import { acornMakerPage, freeMakerPage } from "../lib/worksheets/make-sheet";
+import { MATCH_THEMES } from "../lib/worksheets/match";
+import { matchSheetPages } from "../lib/worksheets/match-sheet";
+import { MATCH_SHEETS, matchSheetsOf } from "../lib/worksheets/match-sheets";
 
 export type AssetJob =
   | { file: string; kind: "pdf"; svgs: string[] }
@@ -60,10 +63,24 @@ export function assetJobs(): AssetJob[] {
     og(`zhuyin-${L.n}-og.jpg`, sheets[0].circle, `第 ${L.n} 關・${L.grade}`, `注音猜猜看<br>${L.name}`, `${L.what}，PDF 免費下載`);
   }
 
+  /* 連連看：每一張題目 PDF、預覽圖；每個主題幾張一個 PDF、答案、分享圖 */
+  for (const s of MATCH_SHEETS) {
+    const { page1 } = matchSheetPages(s);
+    pdf(`${s.id}.pdf`, [page1]);
+    img(`${s.id}.webp`, page1);
+  }
+  for (const T of MATCH_THEMES) {
+    const sheets = matchSheetsOf(T.id).map((s) => matchSheetPages(s));
+    pdf(`match-${T.id}.pdf`, sheets.map((x) => x.page1));
+    pdf(`match-${T.id}-answers.pdf`, sheets.map((x) => x.page2));
+    og(`match-${T.id}-og.jpg`, sheets[0].page1, `連連看・${T.name}`, `連連看<br>${T.ask}`, `大班、小一，${sheets.length} 張 PDF 免費下載`);
+  }
+
   /* 各系列、學習單首頁的分享圖 */
   const first = acornSheetPages(ACORN_SHEETS[0]).page1;
   og("acorn-og.jpg", first, "免費下載・A4 PDF", "幼兒迷宮學習單<br>撿松果回家", "中班到小一，6 個關卡、30 張");
   og("zhuyin-og.jpg", guessSheetPages(GUESS_SHEETS[0]).circle, "免費下載・A4 PDF", "注音學習單<br>注音猜猜看", `大班到小一，${GUESS_LEVELS.length} 個關卡，圈圈看、寫寫看`);
+  og("match-og.jpg", matchSheetPages(MATCH_SHEETS[0]).page1, "免費下載・A4 PDF", "幼兒連連看<br>學習單", "誰吃什麼、長大變成什麼，答案都查過");
   og("worksheets-og.jpg", first, "免費・A4・印了就能寫", "陪孩子動腦的<br>益智學習單", "說明都有注音，不用寫國字，卡住了有提示");
   return jobs;
 }

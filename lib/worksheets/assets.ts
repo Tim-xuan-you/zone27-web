@@ -23,7 +23,12 @@ export const guessSheetImg = (id: string, m: GuessMode) => at(`${id}-${m}.webp`)
 export const guessLevelPdf = (level: number, m: GuessMode) => at(`zhuyin-${level}-${m}.pdf`);
 export const guessAnswersPdf = (level: number) => at(`zhuyin-${level}-answers.pdf`);
 export const guessLevelOg = (level: number) => at(`zhuyin-${level}-og.jpg`);
+/** 連連看：每一張的 PDF、預覽圖跟撿松果一樣用 sheetPdf(id)、sheetImg(id)；一個主題幾張一個 PDF */
+export const matchThemePdf = (theme: string) => at(`match-${theme}.pdf`);
+export const matchAnswersPdf = (theme: string) => at(`match-${theme}-answers.pdf`);
+export const matchOg = (theme: string) => at(`match-${theme}-og.jpg`);
 export const ASSETS = {
+  matchOg: at("match-og.jpg"),
   zhuyinOg: at("zhuyin-og.jpg"),
   acornOg: at("acorn-og.jpg"),
   worksheetsOg: at("worksheets-og.jpg"),

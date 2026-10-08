@@ -2,6 +2,9 @@ import { ACORN_LEVELS, acornLevel, type AcornLevel } from "./acorn";
 import { acornSheetsOf } from "./acorn-sheets";
 import { guessAnswersPdf, guessLevelOg, guessLevelPdf, guessSheetImg, guessSheetPdf, levelAnswersPdf, levelOg, levelPdf, sheetImg, sheetPdf } from "./assets";
 import { GUESS_LEVELS, guessLevel } from "./guess";
+import { MATCH_THEMES, matchTheme } from "./match";
+import { matchSheetsOf } from "./match-sheets";
+import { matchAnswersPdf, matchOg, matchThemePdf } from "./assets";
 import { guessSheetsOf } from "./guess-sheets";
 
 /**
@@ -148,6 +151,47 @@ export function guessSeries() {
       url: `${SITE}/worksheets/zhuyin/${L.n}`,
       name: `第 ${L.n} 關：${L.name}（${L.grade}）`,
     })),
+  };
+}
+
+/** 連連看一個主題：幾張學習單、整組 PDF、答案 */
+export function matchThemeResource(themeId: string) {
+  const T = matchTheme(themeId);
+  const url = `${SITE}/worksheets/match/${T.id}`;
+  const sheets = matchSheetsOf(T.id);
+  const mt = { ...common, teaches: T.id === "eat" ? "認識動物吃什麼，分辨一般人以為的和真正的答案" : "認識動物、昆蟲、植物從小到大的樣子" };
+  return {
+    "@type": "LearningResource",
+    "@id": `${url}#theme`,
+    name: `連連看：${T.name}（大班、小一學習單）`,
+    description: `${sheets.length} 張 A4 連連看學習單，從黑點畫線，把${T.id === "eat" ? "動物和牠吃的東西" : "小時候和長大的樣子"}連起來。每張圖下面有名字和注音，每一組答案都先查過資料。`,
+    url,
+    image: `${SITE}${matchOg(T.id)}`,
+    educationalLevel: "大班、小一",
+    typicalAgeRange: "5-7",
+    ...mt,
+    encoding: [
+      { "@type": "MediaObject", name: `${T.name} ${sheets.length} 張`, contentUrl: `${SITE}${matchThemePdf(T.id)}`, encodingFormat: "application/pdf" },
+      { "@type": "MediaObject", name: `${T.name}答案`, contentUrl: `${SITE}${matchAnswersPdf(T.id)}`, encodingFormat: "application/pdf" },
+    ],
+    hasPart: sheets.map((s) => ({
+      "@type": "LearningResource",
+      name: `連連看・${T.name}第 ${s.n} 張`,
+      url: `${url}?n=${s.n}`,
+      image: `${SITE}${sheetImg(s.id)}`,
+      typicalAgeRange: "5-7",
+      ...mt,
+      encoding: { "@type": "MediaObject", contentUrl: `${SITE}${sheetPdf(s.id)}`, encodingFormat: "application/pdf" },
+    })),
+  };
+}
+
+export function matchSeries() {
+  return {
+    "@type": "ItemList",
+    name: "連連看學習單",
+    numberOfItems: MATCH_THEMES.length,
+    itemListElement: MATCH_THEMES.map((T, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/worksheets/match/${T.id}`, name: `連連看：${T.name}` })),
   };
 }
 

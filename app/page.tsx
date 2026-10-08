@@ -27,7 +27,7 @@ const ENTITY = {
       name: "ZONE 27",
       url: "https://zone27.com.tw",
       inLanguage: "zh-Hant-TW",
-      description: "免費的益智學習單：幼兒迷宮、注音學習單、出題紙，中班、大班、小一，A4 PDF 下載。",
+      description: "免費的益智學習單：幼兒迷宮、注音學習單、連連看、出題紙，中班、大班、小一，A4 PDF 下載。",
       publisher: { "@id": "https://zone27.com.tw/#org" },
     },
   ],
@@ -47,7 +47,7 @@ const ENTITY = {
  */
 // 2026-10-09：家長搜「免費學習單下載」「大班學習單下載」「幼兒迷宮pdf」「注音學習單下載」
 const TITLE = "免費學習單下載：幼兒迷宮、注音學習單 PDF｜陪孩子動腦的益智學習單";
-const DESC = "一個大班生的爸爸做的免費益智學習單：幼兒迷宮 6 關、注音猜猜看 4 關，還有讓孩子出題考大人的出題紙。中班、大班、小一，A4 PDF 下載就能印，說明都有注音，答案不用寫國字。";
+const DESC = "一個大班生的爸爸做的免費益智學習單：幼兒迷宮 6 關、注音猜猜看 4 關、連連看兩個主題，還有讓孩子出題考大人的出題紙。中班、大班、小一，A4 PDF 下載就能印，說明都有注音，答案不用寫國字。";
 export const metadata: Metadata = {
   title: { absolute: `${TITLE} · ZONE 27` },
   description: DESC,

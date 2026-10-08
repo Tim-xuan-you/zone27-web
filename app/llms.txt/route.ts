@@ -3,6 +3,7 @@ import { cansOf, mer, recommendable } from "@/lib/engine";
 import { ACORN_LEVELS } from "@/lib/worksheets/acorn";
 import { ACORN_SHEETS } from "@/lib/worksheets/acorn-sheets";
 import { GUESS_LEVELS } from "@/lib/worksheets/guess";
+import { MATCH_THEMES } from "@/lib/worksheets/match";
 
 /**
  * /llms.txt，給大型語言模型讀的網站說明。
@@ -82,9 +83,18 @@ ${ACORN_LEVELS.map((L) => `- 第 ${L.n} 關（${L.grade}，${L.age}，${L.W}×${
 - 圖全部自己畫，每張右下角 QR code 掃了是答案
 ${GUESS_LEVELS.map((L) => `- 第 ${L.n} 關「${L.name}」（${L.grade}，${L.age}；${L.what}）：${BASE}/worksheets/zhuyin/${L.n}　圈圈看 PDF：${BASE}/worksheets/files/zhuyin-${L.n}-circle.pdf　寫寫看 PDF：${BASE}/worksheets/files/zhuyin-${L.n}-write.pdf`).join("\n")}
 
+### 連連看（誰吃什麼、長大變成什麼）
+
+- 總覽：${BASE}/worksheets/match
+- 點子來自作者的大班孩子：自己畫了一張連連看（蝴蝶、海鷗連毛毛蟲、魚），中間塗黑的小圓點是連線的地方
+- 每一組答案都先查過資料再收；一般人以為的答案跟事實不同的，收事實（例：兔子主要吃草，紅蘿蔔只能偶爾吃）。同一張不會有兩個都說得通的答案
+- 每張圖下面有名字和注音（注音對過教育部國語辭典），答案頁附每一組的小知識
+${MATCH_THEMES.map((T) => `- ${T.name}：${BASE}/worksheets/match/${T.id}　PDF：${BASE}/worksheets/files/match-${T.id}.pdf
+${T.pairs.map((p) => `  - ${p.left.name}${T.verb}${p.right.name}：${p.fact}${p.source ? `（資料：${p.source}）` : ""}`).join("\n")}`).join("\n")}
+
 ### 正在製作
 
-連連看（誰吃什麼、長大會變成什麼，答案先查過科博館、農業部等資料）、數字松果
+數字松果（松果上有數字，撿到的加起來要剛好等於房子上的數字）
 
 ## 早期內容：寵物飼料與 3C
 

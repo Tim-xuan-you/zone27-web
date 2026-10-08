@@ -329,6 +329,238 @@ export const ICONS: Record<string, string> = {
 <path d="M20 82 C12 46 40 14 88 10 C92 56 62 88 20 82 Z" fill="#5DB85F" ${st}/>
 <path d="M8 94 L22 80 C42 60 60 40 78 22" fill="none" ${st}/>
 <path d="M36 64 L32 46 M48 52 L46 34 M60 40 L60 24 M36 64 L54 68 M48 52 L66 56 M60 40 L76 42" fill="none" stroke="#2F7D3A" stroke-width="2.6" stroke-linecap="round"/>`,
+
+  /* ---------- 連連看（2026-10-09）：誰吃什麼、長大變成什麼 ---------- */
+  panda: `
+<circle cx="22" cy="26" r="12" fill="${O}"/><circle cx="78" cy="26" r="12" fill="${O}"/>
+<ellipse cx="50" cy="56" rx="37" ry="33" fill="#FFFFFF" ${st}/>
+<ellipse cx="34" cy="54" rx="9" ry="13" fill="${O}" transform="rotate(-28 34 54)"/><ellipse cx="66" cy="54" rx="9" ry="13" fill="${O}" transform="rotate(28 66 54)"/>
+<circle cx="36" cy="52" r="3.2" fill="#FFFFFF"/><circle cx="64" cy="52" r="3.2" fill="#FFFFFF"/>
+<ellipse cx="50" cy="68" rx="6.5" ry="4.5" fill="${O}"/>
+<path d="M50 72 Q46 79 41 76 M50 72 Q54 79 59 76" fill="none" ${thin}/>`,
+
+  koala: `
+<circle cx="20" cy="38" r="17" fill="#A9B1BA" ${st}/><circle cx="80" cy="38" r="17" fill="#A9B1BA" ${st}/>
+<circle cx="20" cy="38" r="9" fill="#F3DDE2"/><circle cx="80" cy="38" r="9" fill="#F3DDE2"/>
+<ellipse cx="50" cy="58" rx="30" ry="29" fill="#A9B1BA" ${st}/>
+<circle cx="37" cy="51" r="3.8" fill="${O}"/><circle cx="63" cy="51" r="3.8" fill="${O}"/>
+<path d="M42 56 C42 50 58 50 58 56 L58 70 C58 78 42 78 42 70 Z" fill="${O}"/>
+<ellipse cx="50" cy="82" rx="12" ry="3" fill="#8D96A0"/>`,
+
+  eucalyptus: `
+<path d="M48 96 C50 72 50 44 54 8" fill="none" stroke="#8B5A3C" stroke-width="4" stroke-linecap="round"/>
+<path d="M50 70 C38 74 22 72 10 62 C24 56 40 60 50 70 Z" fill="#8FBFA9" ${st}/>
+<path d="M50 56 C62 60 78 58 90 48 C76 42 60 46 50 56 Z" fill="#8FBFA9" ${st}/>
+<path d="M51 40 C40 42 26 38 16 28 C30 22 44 28 51 40 Z" fill="#8FBFA9" ${st}/>
+<path d="M52 26 C62 26 74 20 82 10 C68 6 56 14 52 26 Z" fill="#8FBFA9" ${st}/>
+<path d="M50 70 C38 70 24 66 14 62 M50 56 C62 56 76 52 86 48 M51 40 C40 38 28 34 20 29 M52 26 C62 24 72 18 79 12" fill="none" stroke="#5E8E78" stroke-width="2" stroke-linecap="round"/>`,
+
+  grass: `
+<path d="M10 88 L90 88" ${st}/>
+<path d="M16 88 C16 70 10 56 4 46 C18 52 26 68 27 88 Z" fill="#5DB85F" ${st}/>
+<path d="M30 88 C30 62 34 40 42 22 C44 44 42 66 42 88 Z" fill="#4FA352" ${st}/>
+<path d="M44 88 C46 66 54 50 66 40 C60 58 56 74 56 88 Z" fill="#5DB85F" ${st}/>
+<path d="M58 88 C60 64 66 46 74 30 C76 52 72 70 70 88 Z" fill="#4FA352" ${st}/>
+<path d="M70 88 C74 72 84 62 96 56 C88 68 84 78 82 88 Z" fill="#5DB85F" ${st}/>`,
+
+  anteater: `
+<path d="M66 50 C70 24 96 22 98 44 C99 58 88 66 74 64 Z" fill="#5E5246" ${st}/>
+<path d="M72 46 C76 34 86 32 92 40" fill="none" stroke="#857565" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M40 66 L38 86 M64 66 L66 86" stroke="${O}" stroke-width="9" stroke-linecap="round"/>
+<path d="M40 66 L38 86 M64 66 L66 86" stroke="#A8998A" stroke-width="5" stroke-linecap="round"/>
+<path d="M26 56 C30 42 56 38 70 46 C80 52 78 68 68 72 L36 72 C26 72 22 64 26 56 Z" fill="#A8998A" ${st}/>
+<path d="M30 50 C22 50 10 58 2 66 C4 70 8 70 12 68 C18 66 26 64 32 64 Z" fill="#A8998A" ${st}/>
+<path d="M36 46 C44 52 52 62 56 72" fill="none" stroke="${O}" stroke-width="7"/>
+<path d="M42 44 C50 50 57 60 61 70" fill="none" stroke="#FFFFFF" stroke-width="3.4"/>
+<circle cx="31" cy="48" r="4" fill="#A8998A" ${st}/>
+<circle cx="24" cy="56" r="2.4" fill="${O}"/>
+<path d="M2 66 Q-1 72 3 76" fill="none" stroke="#E86F7E" stroke-width="2.6" stroke-linecap="round"/>`,
+
+  ant: `
+<path d="M44 58 L32 76 M50 60 L50 82 M56 58 L68 76 M44 54 L30 40 M56 54 L68 40" fill="none" stroke="${O}" stroke-width="3.4" stroke-linecap="round"/>
+<path d="M22 44 Q16 30 8 26 M28 42 Q30 28 24 18" fill="none" stroke="${O}" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="74" cy="58" rx="18" ry="14" fill="#B8452F" ${st}/>
+<ellipse cx="50" cy="56" rx="9" ry="8" fill="#B8452F" ${st}/>
+<circle cx="26" cy="52" r="12" fill="#B8452F" ${st}/>
+<circle cx="22" cy="49" r="2.6" fill="#FFFFFF"/>`,
+
+  bee: `
+<ellipse cx="40" cy="28" rx="11" ry="18" fill="#DCEBF7" ${st} transform="rotate(-22 40 28)"/>
+<ellipse cx="60" cy="28" rx="11" ry="18" fill="#DCEBF7" ${st} transform="rotate(22 60 28)"/>
+<path d="M80 60 L94 60 L80 66 Z" fill="${O}"/>
+<ellipse cx="52" cy="60" rx="30" ry="21" fill="#F6C443" ${st}/>
+<path d="M50 40 C46 52 46 68 50 80 M64 42 C61 52 61 68 64 78" fill="none" stroke="${O}" stroke-width="7"/>
+<circle cx="28" cy="56" r="3.4" fill="${O}"/>
+<path d="M26 44 Q20 32 12 30 M32 42 Q30 30 24 24" fill="none" stroke="${O}" stroke-width="2.8" stroke-linecap="round"/>`,
+
+  seagull: `
+<path d="M6 90 Q16 84 26 90 T46 90 T66 90 T86 90 T96 90" fill="none" stroke="#4A9BE0" stroke-width="3.6" stroke-linecap="round"/>
+<path d="M48 50 C38 30 22 22 4 28 C18 32 30 42 40 58 Z" fill="#D5DAE0" ${st}/>
+<path d="M52 50 C62 30 78 22 96 28 C82 32 70 42 60 58 Z" fill="#D5DAE0" ${st}/>
+<path d="M4 28 C10 25 16 24 22 24 L18 32 C14 30 9 29 4 28 Z" fill="${O}"/><path d="M96 28 C90 25 84 24 78 24 L82 32 C86 30 91 29 96 28 Z" fill="${O}"/>
+<ellipse cx="50" cy="62" rx="14" ry="12" fill="#FFFFFF" ${st}/>
+<circle cx="50" cy="46" r="10" fill="#FFFFFF" ${st}/>
+<path d="M46 50 L54 50 L50 58 Z" fill="#F6C443" ${thin}/>
+<circle cx="45.5" cy="44" r="2.2" fill="${O}"/><circle cx="54.5" cy="44" r="2.2" fill="${O}"/>`,
+
+  owl: `
+<path d="M22 32 L28 10 L42 26 L58 26 L72 10 L78 32 C90 52 84 88 50 90 C16 88 10 52 22 32 Z" fill="#B07B4F" ${st}/>
+<ellipse cx="50" cy="72" rx="19" ry="14" fill="#EAD6BC"/>
+<path d="M42 68 L45 72 L48 68 M52 68 L55 72 L58 68 M46 78 L49 82 L52 78" fill="none" stroke="#B07B4F" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="37" cy="42" r="12" fill="#FFFFFF" ${st}/><circle cx="63" cy="42" r="12" fill="#FFFFFF" ${st}/>
+<circle cx="38" cy="43" r="5.4" fill="${O}"/><circle cx="62" cy="43" r="5.4" fill="${O}"/>
+<path d="M45 52 L55 52 L50 62 Z" fill="#F6C443" ${st}/>`,
+
+  mouse: `
+<path d="M80 68 C94 68 98 54 88 46" fill="none" stroke="${O}" stroke-width="3.4" stroke-linecap="round"/>
+<path d="M16 64 C18 44 44 34 64 40 C80 46 86 62 80 72 L26 74 C18 74 16 70 16 64 Z" fill="#A9B1BA" ${st}/>
+<circle cx="40" cy="36" r="12" fill="#A9B1BA" ${st}/><circle cx="40" cy="36" r="6" fill="#F6B3C0"/>
+<circle cx="28" cy="52" r="3" fill="${O}"/>
+<circle cx="15" cy="62" r="3.6" fill="#E86F7E" ${thin}/>
+<path d="M22 64 L8 68 M22 66 L10 74" fill="none" ${thin}/>`,
+
+  frog: `
+<ellipse cx="50" cy="62" rx="38" ry="26" fill="#5DB85F" ${st}/>
+<circle cx="29" cy="36" r="14" fill="#5DB85F" ${st}/><circle cx="71" cy="36" r="14" fill="#5DB85F" ${st}/>
+<circle cx="29" cy="35" r="8" fill="#FFFFFF"/><circle cx="71" cy="35" r="8" fill="#FFFFFF"/>
+<circle cx="30" cy="36" r="4" fill="${O}"/><circle cx="70" cy="36" r="4" fill="${O}"/>
+<path d="M26 64 Q50 80 74 64" fill="none" ${st}/>
+<circle cx="22" cy="60" r="4" fill="#F6B3C0"/><circle cx="78" cy="60" r="4" fill="#F6B3C0"/>`,
+
+  fly: `
+<ellipse cx="32" cy="46" rx="22" ry="12" fill="#E9EEF3" ${st} transform="rotate(30 32 46)"/>
+<ellipse cx="68" cy="46" rx="22" ry="12" fill="#E9EEF3" ${st} transform="rotate(-30 68 46)"/>
+<path d="M42 62 L28 74 M42 70 L30 86 M58 62 L72 74 M58 70 L70 86" fill="none" stroke="${O}" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="50" cy="64" rx="13" ry="20" fill="#3E4348"/>
+<circle cx="50" cy="36" r="11" fill="#3E4348"/>
+<circle cx="41" cy="34" r="6" fill="#C8443E" ${thin}/><circle cx="59" cy="34" r="6" fill="#C8443E" ${thin}/>`,
+
+  caterpillar: `
+<circle cx="84" cy="62" r="11" fill="#8CCB5E" ${st}/>
+<circle cx="68" cy="56" r="12" fill="#8CCB5E" ${st}/>
+<circle cx="52" cy="60" r="12" fill="#8CCB5E" ${st}/>
+<circle cx="36" cy="56" r="12" fill="#8CCB5E" ${st}/>
+<path d="M18 30 Q16 20 10 18 M26 30 Q30 20 36 18" fill="none" stroke="${O}" stroke-width="2.8" stroke-linecap="round"/>
+<circle cx="20" cy="46" r="15" fill="#A6D86F" ${st}/>
+<circle cx="15" cy="44" r="2.8" fill="${O}"/><circle cx="25" cy="44" r="2.8" fill="${O}"/>
+<path d="M15 52 Q20 56 25 52" fill="none" ${thin}/>
+<path d="M36 68 L36 76 M52 72 L52 80 M68 68 L68 76 M84 73 L84 80" stroke="${O}" stroke-width="3.4" stroke-linecap="round"/>`,
+
+  tadpole: `
+<path d="M50 54 C66 44 80 62 96 46 C88 68 70 66 52 66 Z" fill="#5E6B78" ${st}/>
+<ellipse cx="34" cy="56" rx="24" ry="20" fill="#5E6B78" ${st}/>
+<circle cx="26" cy="50" r="5" fill="#FFFFFF"/><circle cx="25" cy="50" r="2.4" fill="${O}"/>
+<path d="M18 64 Q24 68 30 64" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="70" cy="24" r="4" fill="none" stroke="#4A9BE0" stroke-width="2.4"/><circle cx="82" cy="14" r="3" fill="none" stroke="#4A9BE0" stroke-width="2.2"/>`,
+
+  chick: `
+<path d="M42 82 L38 92 M58 82 L62 92" stroke="#F28C28" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="50" cy="62" rx="30" ry="24" fill="#F6D24A" ${st}/>
+<circle cx="50" cy="36" r="18" fill="#F6D24A" ${st}/>
+<path d="M46 18 Q50 8 54 18" fill="#F6D24A" ${thin}/>
+<circle cx="43" cy="34" r="3" fill="${O}"/><circle cx="57" cy="34" r="3" fill="${O}"/>
+<path d="M45 41 L55 41 L50 48 Z" fill="#F28C28" ${thin}/>
+<path d="M70 58 C78 56 82 64 76 70" fill="none" ${thin}/>`,
+
+  hen: `
+<path d="M44 82 L42 94 M60 82 L62 94" stroke="#F28C28" stroke-width="4" stroke-linecap="round"/>
+<path d="M80 30 C92 30 96 48 88 56" fill="#C8443E" ${st}/>
+<path d="M28 44 C30 30 46 30 50 42 C56 52 74 46 84 40 C90 60 80 84 54 84 C32 84 20 66 28 44 Z" fill="#FFFFFF" ${st}/>
+<path d="M50 62 C58 56 70 58 74 66 C66 72 56 70 50 62 Z" fill="#E9E3DA" ${thin}/>
+<path d="M30 30 Q32 18 38 24 Q42 14 46 26 Q50 22 48 34" fill="#E8505B" ${thin}/>
+<path d="M24 44 L12 48 L24 52 Z" fill="#F6C443" ${thin}/>
+<path d="M26 54 C24 62 30 64 32 58" fill="#E8505B" ${thin}/>
+<circle cx="34" cy="42" r="3" fill="${O}"/>`,
+
+  wriggler: `
+<rect x="6" y="14" width="88" height="78" rx="8" fill="#DCEBF7" ${st}/>
+<path d="M6 30 Q17 25 28 30 T50 30 T72 30 T94 30" fill="none" stroke="#4A9BE0" stroke-width="3" stroke-linecap="round"/>
+<path d="M32 30 L34 44 Q36 56 30 66 Q26 74 30 78" fill="none" stroke="${O}" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="31" cy="81" rx="6" ry="5" fill="${O}"/>
+<path d="M68 30 L66 44 Q64 56 70 66 Q74 74 70 78" fill="none" stroke="${O}" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="69" cy="81" rx="6" ry="5" fill="${O}"/>
+<path d="M30 50 L24 48 M36 50 L40 48 M30 62 L24 62 M34 62 L38 64 M66 50 L60 48 M70 50 L76 48 M68 62 L62 64 M72 62 L78 62" stroke="${O}" stroke-width="1.8" stroke-linecap="round"/>`,
+
+  mosquito: `
+<ellipse cx="36" cy="34" rx="18" ry="8" fill="#E9EEF3" ${st} transform="rotate(-24 36 34)"/>
+<ellipse cx="62" cy="30" rx="18" ry="8" fill="#E9EEF3" ${st} transform="rotate(14 62 30)"/>
+<path d="M46 50 L30 70 L24 90 M50 52 L48 74 L52 94 M54 50 L70 70 L80 88 M44 46 L22 52 L10 64 M56 46 L76 50 L90 60" fill="none" stroke="${O}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M50 48 C64 52 80 62 88 74" fill="none" stroke="${O}" stroke-width="9" stroke-linecap="round"/>
+<path d="M56 52 L58 56 M64 56 L66 60 M72 61 L74 65 M80 67 L82 71" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/>
+<circle cx="44" cy="44" r="8" fill="${O}"/>
+<path d="M38 40 L18 22" stroke="${O}" stroke-width="2.4" stroke-linecap="round"/>`,
+
+  silkworm: `
+<path d="M8 82 C20 60 52 56 92 66 C70 86 34 94 8 82 Z" fill="#7FBF5A" ${st}/>
+<path d="M14 80 C40 70 66 68 88 68" fill="none" stroke="#4E8F3A" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="80" cy="48" r="10" fill="#FBFAF6" ${st}/>
+<circle cx="66" cy="44" r="12" fill="#FBFAF6" ${st}/>
+<circle cx="50" cy="42" r="12" fill="#FBFAF6" ${st}/>
+<circle cx="34" cy="42" r="12" fill="#FBFAF6" ${st}/>
+<circle cx="18" cy="40" r="11" fill="#E9E3DA" ${st}/>
+<circle cx="14" cy="38" r="2.4" fill="${O}"/>
+<path d="M44 38 Q50 34 56 38" fill="none" stroke="#B9B2A6" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M32 54 L32 58 M48 54 L48 58 M64 56 L64 60" stroke="${O}" stroke-width="3" stroke-linecap="round"/>`,
+
+  silkmoth: `
+<path d="M50 40 C34 20 10 22 8 40 C6 56 28 62 48 54 Z" fill="#FBFAF6" ${st}/>
+<path d="M50 40 C66 20 90 22 92 40 C94 56 72 62 52 54 Z" fill="#FBFAF6" ${st}/>
+<path d="M48 54 C34 60 20 72 26 82 C34 88 46 74 50 62 Z" fill="#F1ECE3" ${st}/>
+<path d="M52 54 C66 60 80 72 74 82 C66 88 54 74 50 62 Z" fill="#F1ECE3" ${st}/>
+<path d="M20 38 Q30 36 40 42 M80 38 Q70 36 60 42" fill="none" stroke="#C9C1B3" stroke-width="2.4" stroke-linecap="round"/>
+<ellipse cx="50" cy="56" rx="7" ry="20" fill="#FBFAF6" ${st}/>
+<circle cx="50" cy="34" r="7" fill="#FBFAF6" ${st}/>
+<path d="M47 28 C42 18 34 12 28 12 M53 28 C58 18 66 12 72 12" fill="none" stroke="${O}" stroke-width="2.6" stroke-linecap="round"/>
+<path d="M40 20 L36 24 M36 16 L32 20 M60 20 L64 24 M64 16 L68 20" stroke="${O}" stroke-width="1.8" stroke-linecap="round"/>`,
+
+  nymph: `
+<rect x="6" y="14" width="88" height="78" rx="8" fill="#DCEBF7" ${st}/>
+<path d="M34 50 L18 40 M34 58 L16 62 M38 64 L24 78 M66 50 L82 40 M66 58 L84 62 M62 64 L76 78" fill="none" stroke="${O}" stroke-width="3" stroke-linecap="round"/>
+<path d="M50 44 C62 44 64 70 58 82 C55 88 45 88 42 82 C36 70 38 44 50 44 Z" fill="#8C7A4E" ${st}/>
+<path d="M44 66 L56 66 M43 74 L57 74" stroke="#6B5B38" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M36 40 C36 28 64 28 64 40 C64 48 36 48 36 40 Z" fill="#8C7A4E" ${st}/>
+<circle cx="40" cy="36" r="5" fill="#5E6B78" ${thin}/><circle cx="60" cy="36" r="5" fill="#5E6B78" ${thin}/>`,
+
+  dragonfly: `
+<ellipse cx="30" cy="34" rx="24" ry="8" fill="#DCEBF7" ${st} transform="rotate(-12 30 34)"/>
+<ellipse cx="70" cy="34" rx="24" ry="8" fill="#DCEBF7" ${st} transform="rotate(12 70 34)"/>
+<ellipse cx="32" cy="50" rx="22" ry="7" fill="#DCEBF7" ${st} transform="rotate(10 32 50)"/>
+<ellipse cx="68" cy="50" rx="22" ry="7" fill="#DCEBF7" ${st} transform="rotate(-10 68 50)"/>
+<path d="M50 44 L50 92" stroke="${O}" stroke-width="10" stroke-linecap="round"/>
+<path d="M50 44 L50 92" stroke="#E8505B" stroke-width="5.4" stroke-linecap="round"/>
+<ellipse cx="50" cy="40" rx="7" ry="10" fill="#E8505B" ${st}/>
+<circle cx="42" cy="22" r="8" fill="#4A9BE0" ${st}/><circle cx="58" cy="22" r="8" fill="#4A9BE0" ${st}/>`,
+
+  seed: `
+<g transform="rotate(-24 36 52)"><path d="M36 14 C54 30 56 66 36 90 C16 66 18 30 36 14 Z" fill="${O}" ${st}/>
+<path d="M36 22 L36 84 M28 34 C26 50 26 66 31 80 M44 34 C46 50 46 66 41 80" fill="none" stroke="#C9CED4" stroke-width="2.4" stroke-linecap="round"/></g>
+<g transform="rotate(22 70 58)"><path d="M70 26 C84 40 86 70 70 88 C54 70 56 40 70 26 Z" fill="${O}" ${st}/>
+<path d="M70 34 L70 82 M64 44 C62 56 62 70 66 80 M76 44 C78 56 78 70 74 80" fill="none" stroke="#C9CED4" stroke-width="2.2" stroke-linecap="round"/></g>`,
+
+  sunflower: `
+<path d="M50 56 L50 96" stroke="#4FA352" stroke-width="5" stroke-linecap="round"/>
+<path d="M50 80 C40 70 26 72 20 78 C30 86 42 86 50 80 Z" fill="#5DB85F" ${st}/>
+<path d="M50 74 C60 64 74 66 80 72 C70 80 58 80 50 74 Z" fill="#5DB85F" ${st}/>
+<ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(0 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(30 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(60 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(90 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(120 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(150 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(180 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(210 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(240 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(270 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(300 50 42)"/><ellipse cx="50" cy="20" rx="6.5" ry="13" fill="#F6C443" stroke="#3E4348" stroke-width="2.2" transform="rotate(330 50 42)"/>
+<circle cx="50" cy="42" r="15" fill="#8B5A3C" ${st}/>
+<circle cx="45" cy="38" r="1.8" fill="#5E3A24"/><circle cx="54" cy="37" r="1.8" fill="#5E3A24"/><circle cx="50" cy="45" r="1.8" fill="#5E3A24"/><circle cx="43" cy="47" r="1.8" fill="#5E3A24"/><circle cx="57" cy="46" r="1.8" fill="#5E3A24"/>`,
+
+  grub: `
+<path d="M56 24 C84 24 94 60 74 76 C58 88 32 80 28 60" fill="none" stroke="${O}" stroke-width="25" stroke-linecap="round"/>
+<path d="M56 24 C84 24 94 60 74 76 C58 88 32 80 28 60" fill="none" stroke="#F4EEDF" stroke-width="18.6" stroke-linecap="round"/>
+<path d="M78 36 L86 32 M86 52 L94 52 M82 70 L88 76 M64 82 L64 90 M44 80 L40 88" stroke="${O}" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M52 36 L46 44 M58 38 L54 48 M64 40 L62 50" stroke="${O}" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="52" cy="24" r="12" fill="#C2783C" ${st}/>
+<circle cx="47" cy="22" r="2" fill="${O}"/>`,
+
+  beetle: `
+<path d="M30 50 L14 42 M28 64 L10 66 M30 78 L16 90 M70 50 L86 42 M72 64 L90 66 M70 78 L84 90" fill="none" stroke="${O}" stroke-width="3.4" stroke-linecap="round"/>
+<ellipse cx="50" cy="64" rx="24" ry="27" fill="#5A3A22" ${st}/>
+<path d="M50 42 L50 90" stroke="#2E1D10" stroke-width="2.4"/>
+<path d="M38 54 C36 62 36 72 40 80" fill="none" stroke="#8C5E3A" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="50" cy="38" rx="17" ry="10" fill="#6B4528" ${st}/>
+<path d="M45 30 C42 20 44 10 50 4 C56 10 58 20 55 30 Z" fill="#6B4528" ${st}/>
+<path d="M50 6 L43 1 M50 6 L57 1" stroke="${O}" stroke-width="3" stroke-linecap="round"/>`,
 };
 
 /** 畫一個小圖：中心在 (x, y)，邊長 s（公釐） */

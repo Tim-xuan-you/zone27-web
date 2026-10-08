@@ -7,6 +7,7 @@
  *
  * 用法：npx tsx scripts/worksheets-zhuyin-check.ts
  */
+import { MATCH_THEMES } from "../lib/worksheets/match";
 import { WORDS } from "../lib/worksheets/words";
 import { PHRASES, ZHUYIN } from "../lib/worksheets/zhuyin";
 
@@ -14,7 +15,16 @@ import { PHRASES, ZHUYIN } from "../lib/worksheets/zhuyin";
  * 學習單上給孩子讀的詞（規則、標題、欄位）。詞裡的讀音常常跟單字不一樣（2026-10-09 抓到「名字」是 ˙ㄗ、「個」是 ˙ㄍㄜ）。
  * 新的學習單用到新的詞，加進來一起查。辭典查不到的（像「撿到」是兩個字湊起來的），就照單字的讀音。
  */
-const SHEET_PHRASES = ["名字", "日期", "格子", "松果", "松鼠", "回家", "這樣", "提示", "答案", "出題", "題目", "虛線", "自己", "別人", "下面", "往後", "注音", "左邊"];
+const SHEET_PHRASES = [
+  "名字", "日期", "格子", "松果", "松鼠", "回家", "這樣", "提示", "答案", "出題", "題目", "虛線", "自己", "別人", "下面", "往後", "注音", "左邊",
+  // 連連看：圖下面的名字、規則裡的詞
+  ...MATCH_THEMES.flatMap((t) => t.pairs.flatMap((p) => [p.left.name, p.right.name])),
+  "東西", "什麼", "長大", "變成", "動物", "食物", "黑點", "寶寶", "連連看", "一條", "一隻", "誰", "起來", "連起來", "長大", "寶寶",
+];
+/** 學習單上的詞辭典有兩種讀音、我們看過確定用哪一個的：寫原因 */
+const PHRASE_OK: Record<string, string> = {
+  東西: "辭典第一個是「東邊和西邊」；學習單上是「物品」的意思，讀 ˙ㄒㄧ",
+};
 const oursOf = (w: string) => PHRASES[w]?.join(" ") ?? [...w].map((c) => ZHUYIN[c] ?? "？").join(" ");
 
 const BASE = "https://dict.concised.moe.edu.tw";
@@ -68,7 +78,7 @@ async function lookup(base: string, word: string, parse: (html: string) => Hit[]
 async function main() {
   const seen = new Set<string>();
   let bad = 0;
-  const all = [...WORDS, ...SHEET_PHRASES.map((zh) => ({ icon: "", zh, zy: oursOf(zh).split(" "), multiOk: undefined as string | undefined }))];
+  const all = [...WORDS, ...SHEET_PHRASES.map((zh) => ({ icon: "", zh, zy: oursOf(zh).split(" "), multiOk: PHRASE_OK[zh] as string | undefined }))];
   for (const w of all) {
     if (seen.has(w.zh)) continue;
     seen.add(w.zh);
