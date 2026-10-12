@@ -19,11 +19,12 @@ const SHEET_PHRASES = [
   "名字", "日期", "格子", "松果", "松鼠", "回家", "這樣", "提示", "答案", "出題", "題目", "虛線", "自己", "別人", "下面", "往後", "注音", "左邊",
   // 連連看：圖下面的名字、規則裡的詞
   ...MATCH_THEMES.flatMap((t) => t.pairs.flatMap((p) => [p.left.name, p.right.name])),
-  "東西", "什麼", "長大", "變成", "動物", "食物", "黑點", "寶寶", "連連看", "一條", "一隻", "誰", "起來", "連起來", "長大", "寶寶", "數字", "剛好", "等於", "房子", "加起來",
+  "東西", "什麼", "長大", "變成", "動物", "食物", "黑點", "寶寶", "連連看", "一條", "一隻", "誰", "起來", "連起來", "長大", "寶寶", "數字", "剛好", "等於", "房子", "加起來", "照著", "右邊", "一樣", "點點",
 ];
 /** 學習單上的詞辭典有兩種讀音、我們看過確定用哪一個的：寫原因 */
 const PHRASE_OK: Record<string, string> = {
   東西: "辭典第一個是「東邊和西邊」；學習單上是「物品」的意思，讀 ˙ㄒㄧ",
+  一樣: "辭典同一列寫了本調 ㄧ ㄧㄤˋ 和變調 ㄧˊ ㄧㄤˋ；學習單照課本標本調",
 };
 const oursOf = (w: string) => PHRASES[w]?.join(" ") ?? [...w].map((c) => ZHUYIN[c] ?? "？").join(" ");
 
@@ -88,8 +89,10 @@ async function main() {
     if (!hits.length) { await sleep(1300); hits = await lookup(REVISED, w.zh, revisedRows); from = "重編本"; }
     // 學習單上的詞辭典查不到（自己湊的），就不算錯
     if (!hits.length && SHEET_PHRASES.includes(w.zh)) { console.log(`  ・ ${w.zh}　辭典沒有這個詞，照單字讀音`); await sleep(1300); continue; }
-    // 多音字看過的（multiOk），我們用的讀音在辭典裡有就算對，不一定要排第一個
-    const ok = hits.length > 0 && (hits[0].zy === ours || (!!w.multiOk && hits.some((h) => h.zy === ours)));
+    // 多音字看過的（multiOk），我們用的讀音在辭典裡有就算對，不一定要排第一個；
+    // 「一」開頭的詞辭典會把變調接在同一列後面（ㄧ ㄧㄤˋ ㄧˊ ㄧㄤˋ），看過的就只比前面那一段
+    const head = (zy: string) => zy.split(" ").slice(0, ours.split(" ").length).join(" ");
+    const ok = hits.length > 0 && (hits[0].zy === ours || (!!w.multiOk && hits.some((h) => h.zy === ours || head(h.zy) === ours)));
     const multi = (hits.length > 1 || hits.some((h) => h.multi)) && !w.multiOk;
     if (!ok || multi) bad++;
     console.log(`${ok && !multi ? "  ✓" : ok ? "  ？" : "  ✗"} ${w.zh}　我們：${ours}　辭典（${from}）：${hits.map((h) => h.zy).join(" ／ ") || "查不到"}${w.multiOk ? `　（多音，看過：${w.multiOk}）` : ""}${multi ? "　（兩種以上讀音，第一個是我們用的才打？）" : ""}`);
