@@ -8,6 +8,8 @@ import { ACORN_LEVELS, acornLevel } from "@/lib/worksheets/acorn";
 import { acornSheetsOf } from "@/lib/worksheets/acorn-sheets";
 import { levelAnswersPdf, levelOg, levelPdf, sheetPdf } from "@/lib/worksheets/assets";
 import { breadcrumb, faq, graph, levelResource, TIM } from "@/lib/worksheets/seo";
+import { testedLabel } from "@/lib/worksheets/kid";
+
 import { OG_BASE } from "@/lib/og-base";
 
 /**
@@ -94,7 +96,7 @@ export default async function Page({ params }: P) {
       <p style={S.lbl}>這一關的檔案</p>
       <ul style={files}>
         {sheets.map((s) => (
-          <li key={s.id}><a href={sheetPdf(s.id)} style={fileLink}>第 {n} 關第 {s.n} 張（PDF）</a></li>
+          <li key={s.id}><a href={sheetPdf(s.id)} style={fileLink}>第 {n} 關第 {s.n} 張（PDF）</a>{testedLabel(s.tested) && <span style={{ color: "var(--keep)", fontWeight: 700 }}>　✓ {testedLabel(s.tested)}</span>}</li>
         ))}
         <li><a href={levelPdf(n)} style={fileLink}>第 {n} 關 {sheets.length} 張一起（PDF）</a></li>
         <li><a href={levelAnswersPdf(n)} style={fileLink}>第 {n} 關的提示和答案（PDF，給大人）</a></li>

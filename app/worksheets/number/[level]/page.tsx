@@ -9,6 +9,8 @@ import { numberSheetsOf } from "@/lib/worksheets/number-sheets";
 import { numberAnswersPdf, numberLevelOg, numberLevelPdf, sheetPdf } from "@/lib/worksheets/assets";
 import { breadcrumb, faq, graph, numberLevelResource, TIM } from "@/lib/worksheets/seo";
 import { OG_BASE } from "@/lib/og-base";
+import { testedLabel } from "@/lib/worksheets/kid";
+
 
 /**
  * 數字松果的某一關。家長搜「大班數學學習單」「10以內加法 學習單」「20以內進位加法」：年級＋範圍＋學習單／PDF。
@@ -85,7 +87,7 @@ export default async function Page({ params }: P) {
       <p style={S.lbl}>這一關的檔案</p>
       <ul style={files}>
         {sheets.map((s) => (
-          <li key={s.id}><a href={sheetPdf(s.id)} style={fileLink}>第 {n} 關第 {s.n} 張（PDF）</a></li>
+          <li key={s.id}><a href={sheetPdf(s.id)} style={fileLink}>第 {n} 關第 {s.n} 張（PDF）</a>{testedLabel(s.tested) && <span style={{ color: "var(--keep)", fontWeight: 700 }}>　✓ {testedLabel(s.tested)}</span>}</li>
         ))}
         <li><a href={numberLevelPdf(n)} style={fileLink}>第 {n} 關 {sheets.length} 張一起（PDF）</a></li>
         <li><a href={numberAnswersPdf(n)} style={fileLink}>第 {n} 關的答案和算式（PDF，給大人）</a></li>

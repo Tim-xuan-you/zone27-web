@@ -9,6 +9,8 @@ import { matchSheetsOf } from "@/lib/worksheets/match-sheets";
 import { matchAnswersPdf, matchOg, matchThemePdf, sheetPdf } from "@/lib/worksheets/assets";
 import { breadcrumb, faq, graph, matchThemeResource, TIM } from "@/lib/worksheets/seo";
 import { OG_BASE } from "@/lib/og-base";
+import { testedLabel } from "@/lib/worksheets/kid";
+
 
 /**
  * 連連看的一個主題（誰吃什麼、長大變成什麼）。
@@ -97,7 +99,7 @@ export default async function Page({ params }: P) {
       <p style={S.lbl}>這個主題的檔案</p>
       <ul style={files}>
         {sheets.map((s) => (
-          <li key={s.id}><a href={sheetPdf(s.id)} style={fileLink}>{Th.name}第 {s.n} 張（PDF，{s.left.length} 組）</a></li>
+          <li key={s.id}><a href={sheetPdf(s.id)} style={fileLink}>{Th.name}第 {s.n} 張（PDF，{s.left.length} 組）</a>{testedLabel(s.tested) && <span style={{ color: "var(--keep)", fontWeight: 700 }}>　✓ {testedLabel(s.tested)}</span>}</li>
         ))}
         <li><a href={matchThemePdf(id)} style={fileLink}>{Th.name} {sheets.length} 張一起（PDF）</a></li>
         <li><a href={matchAnswersPdf(id)} style={fileLink}>{Th.name}的答案和小知識（PDF，給大人）</a></li>

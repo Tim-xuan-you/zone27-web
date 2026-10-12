@@ -9,6 +9,8 @@ import { guessSheetsOf } from "@/lib/worksheets/guess-sheets";
 import { guessAnswersPdf, guessLevelOg, guessLevelPdf, guessSheetPdf } from "@/lib/worksheets/assets";
 import { breadcrumb, faq, graph, guessLevelResource, TIM } from "@/lib/worksheets/seo";
 import { OG_BASE } from "@/lib/og-base";
+import { testedLabel } from "@/lib/worksheets/kid";
+
 
 /**
  * 注音猜猜看的某一關。
@@ -93,7 +95,7 @@ export default async function Page({ params }: P) {
       <ul style={files}>
         {sheets.map((s) => (
           <li key={s.id}>
-            第 {n} 關第 {s.n} 張：<a href={guessSheetPdf(s.id, "circle")} style={fileLink}>圈圈看（PDF）</a>、<a href={guessSheetPdf(s.id, "write")} style={fileLink}>寫寫看（PDF）</a>
+            第 {n} 關第 {s.n} 張：<a href={guessSheetPdf(s.id, "circle")} style={fileLink}>圈圈看（PDF）</a>、<a href={guessSheetPdf(s.id, "write")} style={fileLink}>寫寫看（PDF）</a>{testedLabel(s.tested) && <span style={{ color: "var(--keep)", fontWeight: 700 }}>　✓ {testedLabel(s.tested)}</span>}
           </li>
         ))}
         <li><a href={guessLevelPdf(n, "circle")} style={fileLink}>第 {n} 關圈圈看 {sheets.length} 張一起（PDF）</a></li>

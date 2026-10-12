@@ -9,6 +9,7 @@ import { matchSheetPages } from "@/lib/worksheets/match-sheet";
 import { matchSheetsOf } from "@/lib/worksheets/match-sheets";
 import { SHEET_IMG, matchThemePdf, sheetImg, sheetPdf } from "@/lib/worksheets/assets";
 import { PRINT_CSS } from "./SheetPrint";
+import TestedNote from "./TestedNote";
 
 /**
  * 連連看某一個主題：挑一張、印出來或下載 PDF。跟 AcornPicker 一樣，選哪一張記在 ?n=2。
@@ -72,7 +73,7 @@ export default function MatchPicker({ theme }: { theme: MatchThemeId }) {
               />
               {/* 縮圖的底是白的（紙），字的顏色不跟深色模式走，不然選中的那張字會看不見 */}
               <span style={{ display: "block", fontSize: TY.xs, fontWeight: on ? 700 : 500, color: on ? "#262B31" : "#565E68", padding: `${G.xs}px 0 0` }}>
-                第 {s.n} 張
+                第 {s.n} 張{s.tested ? "・寫過" : ""}
               </span>
             </button>
           );
@@ -89,6 +90,7 @@ export default function MatchPicker({ theme }: { theme: MatchThemeId }) {
           style={{ width: "100%", height: "auto", display: "block" }}
         />
       </figure>
+      <TestedNote tested={sheet.tested} />
 
       <div style={actions}>
         <a href={sheetPdf(sheet.id)} download={`連連看_${T.name}_第${sheet.n}張.pdf`} style={primary}>下載 PDF</a>

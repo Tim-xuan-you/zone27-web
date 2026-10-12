@@ -132,6 +132,20 @@ export default function Home() {
         </figure>
       </section>
 
+      {/* 2026-10-12 Tim 定的規矩：孩子玩過、他看過才上。27 本是真的數字（他掃給我看的那一疊） */}
+      <p style={S.lbl}>為什麼是一張一張，不是一本</p>
+      <section style={S.box}>
+        <p style={{ margin: 0, fontSize: T.md, lineHeight: 2 }}>
+          從他兩歲到現在，家裡買了 27 本學習本，大部分翻開前幾頁就停了。他不懶。一本 48 頁對一個五歲的孩子太重，沒寫完的那一本會一直放在桌上提醒你。
+        </p>
+        <p style={{ margin: `${G.md}px 0 0`, fontSize: T.md, lineHeight: 2 }}>
+          所以這裡每一款都是一張 A4：想印哪一張就印哪一張，寫完再印下一張。
+        </p>
+        <p style={{ margin: `${G.md}px 0 0`, fontSize: T.md, lineHeight: 2 }}>
+          從現在起，新的學習單都是他玩過、我看過才放上來。他玩過的那一張，頁面上會寫日期；還沒玩過的，不會說玩過。
+        </p>
+      </section>
+
     </main>
   );
 }

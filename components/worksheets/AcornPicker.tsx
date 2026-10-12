@@ -9,6 +9,7 @@ import { acornSheetPages } from "@/lib/worksheets/acorn-sheet";
 import { acornSheetsOf } from "@/lib/worksheets/acorn-sheets";
 import { SHEET_IMG, levelPdf, sheetImg, sheetPdf } from "@/lib/worksheets/assets";
 import { PRINT_CSS } from "./SheetPrint";
+import TestedNote from "./TestedNote";
 
 /**
  * 撿松果回家某一關：挑一張、印出來或下載 PDF。
@@ -78,7 +79,7 @@ export default function AcornPicker({ level }: { level: number }) {
               />
               {/* 縮圖的底是白的（紙），字的顏色不跟深色模式走，不然選中的那張字會看不見 */}
               <span style={{ display: "block", fontSize: T.xs, fontWeight: on ? 700 : 500, color: on ? "#262B31" : "#565E68", padding: `${G.xs}px 0 0` }}>
-                第 {s.n} 張
+                第 {s.n} 張{s.tested ? "・寫過" : ""}
               </span>
             </button>
           );
@@ -95,6 +96,7 @@ export default function AcornPicker({ level }: { level: number }) {
           style={{ width: "100%", height: "auto", display: "block" }}
         />
       </figure>
+      <TestedNote tested={sheet.tested} />
 
       <div style={actions}>
         <a href={sheetPdf(sheet.id)} download={`撿松果回家_第${level}關第${sheet.n}張.pdf`} style={primary}>下載 PDF</a>

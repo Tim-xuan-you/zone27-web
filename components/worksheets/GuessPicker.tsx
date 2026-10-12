@@ -9,6 +9,7 @@ import { guessSheetPages } from "@/lib/worksheets/guess-sheet";
 import { guessSheetsOf } from "@/lib/worksheets/guess-sheets";
 import { SHEET_IMG, guessLevelPdf, guessSheetImg, guessSheetPdf } from "@/lib/worksheets/assets";
 import { PRINT_CSS } from "./SheetPrint";
+import TestedNote from "./TestedNote";
 
 /**
  * 注音猜猜看某一關：挑一張、挑玩法（圈圈看／寫寫看），下載 PDF 或印出來。
@@ -89,7 +90,7 @@ export default function GuessPicker({ level }: { level: number }) {
               />
               {/* 縮圖的底是白的（紙），字的顏色不跟深色模式走，不然選中的那張字會看不見 */}
               <span style={{ display: "block", fontSize: T.xs, fontWeight: on ? 700 : 500, color: on ? "#262B31" : "#565E68", padding: `${G.xs}px 0 0` }}>
-                第 {s.n} 張
+                第 {s.n} 張{s.tested ? "・寫過" : ""}
               </span>
             </button>
           );
@@ -106,6 +107,7 @@ export default function GuessPicker({ level }: { level: number }) {
           style={{ width: "100%", height: "auto", display: "block" }}
         />
       </figure>
+      <TestedNote tested={sheet.tested} />
 
       <div style={actions}>
         <a href={guessSheetPdf(sheet.id, mode)} download={`注音猜猜看_第${level}關第${sheet.n}張_${modeName}.pdf`} style={primary}>下載 PDF</a>
